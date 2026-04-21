@@ -34,4 +34,26 @@ class AppColors {
   static const Color cancelled = Color(0xFF93000A);
   static const Color cancelledBackground = Color(0xFFFFDAD6);
   static const Color sale = Color(0xFFE15D71);
+
+  // ===== gradient =====
+  static const Gradient goldGradient = LinearGradient(
+    colors: [gold, goldBrown],
+    stops: [0, 1],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+
+  static const Gradient darkBlueGradient = LinearGradient(
+    colors: [primary, darkBlueIcon],
+    stops: [0, 1],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+
+  static Gradient lightGoldGradient = LinearGradient(
+    colors: [goldBrown.withAlpha(0), goldBrown, goldBrown.withAlpha(0)],
+    stops: [0, 0.5, 1],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
 }
