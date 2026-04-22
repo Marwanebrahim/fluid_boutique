@@ -2,13 +2,12 @@ import 'package:fluid_boutique/core/app%20strings/app_string.dart';
 import 'package:fluid_boutique/core/error/exeptions.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-abstract class AppDataSource {
+abstract class AppLocalDataSource {
   Future<bool> isSeenOnBoarding();
-  Future<bool> isLoggedIn();
   Future<void> setSeenOnBoarding(bool isSeen);
 }
 
-class AppLocalDataSourceImpl implements AppDataSource {
+class AppLocalDataSourceImplWithHive implements AppLocalDataSource {
   @override
   Future<bool> isSeenOnBoarding() async {
     try {
@@ -19,12 +18,6 @@ class AppLocalDataSourceImpl implements AppDataSource {
     } catch (e) {
       throw CacheException();
     }
-  }
-
-  @override
-  Future<bool> isLoggedIn() {
-    // TODO: implement isLoggedIn
-    throw UnimplementedError();
   }
 
   @override

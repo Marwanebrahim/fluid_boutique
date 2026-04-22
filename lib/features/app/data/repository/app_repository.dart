@@ -1,7 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:fluid_boutique/core/error/exeptions.dart';
 import 'package:fluid_boutique/core/error/failures.dart';
-import 'package:fluid_boutique/features/app/data/datasource/app_data_source.dart';
+import 'package:fluid_boutique/features/app/data/datasource/app_local_data_source.dart';
+import 'package:fluid_boutique/features/app/data/datasource/app_remote_data_source.dart';
 
 abstract class AppRepository {
   Future<Either<Failure, bool>> isSeenOnBoarding();
@@ -10,13 +11,14 @@ abstract class AppRepository {
 }
 
 class AppRepositoryImpl implements AppRepository {
-  final AppDataSource appLocalDataSource;
-  AppRepositoryImpl({required this.appLocalDataSource});
+  final AppLocalDataSource appLocalDataSource;
+  final AppRemoteDataSource appRemoteDataSource;
+  AppRepositoryImpl({required this.appLocalDataSource, required this.appRemoteDataSource});
 
   @override
   Future<Either<Failure, bool>> isLoggedIn() async {
     try {
-      final result = await appLocalDataSource.isLoggedIn();
+      final result = await appRemoteDataSource.isLoggedIn();
       return Right(result);
     } on ServerException {
       return Left(ServerFailure());
