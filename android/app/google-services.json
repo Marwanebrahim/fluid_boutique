@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "252094113299",
+    "project_id": "fluid-boutique",
+    "storage_bucket": "fluid-boutique.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:252094113299:android:fd1710687ebe0b728401e6",
+        "android_client_info": {
+          "package_name": "com.example.fluid_boutique"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNXS2Z5f_BSnFslt8RHM1U6GGDcUromeg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

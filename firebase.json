@@ -1,0 +1,21 @@
+{
+    "flutter": {
+        "platforms": {
+            "android": {
+                "default": {
+                    "projectId": "fluid-boutique",
+                    "appId": "1:252094113299:android:fd1710687ebe0b728401e6",
+                    "fileOutput": "android/app/google-services.json"
+                }
+            },
+            "dart": {
+                "lib/firebase_options.dart": {
+                    "projectId": "fluid-boutique",
+                    "configurations": {
+                        "android": "1:252094113299:android:fd1710687ebe0b728401e6"
+                    }
+                }
+            }
+        }
+    }
+}
