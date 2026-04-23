@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fluid_boutique/core/helpers/hive_helper.dart';
 import 'package:fluid_boutique/features/app/data/datasource/app_local_data_source.dart';
@@ -17,7 +18,7 @@ Future<void> initDependencies() async {
     () => AppLocalDataSourceImplWithHive(),
   );
   sl.registerLazySingleton<AppRemoteDataSource>(
-    () => AppRemoteDataSourceImplWithFireBase(),
+    () => AppRemoteDataSourceImplWithFireBase(auth: FirebaseAuth.instance),
   );
   sl.registerLazySingleton<AppRepository>(
     () =>
