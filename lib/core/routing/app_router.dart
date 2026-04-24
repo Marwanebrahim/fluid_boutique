@@ -16,8 +16,10 @@ Route<dynamic> onGenerateRoute(RouteSettings setting) {
       );
     case AppRoutes.onBoarding:
       return MaterialPageRoute(
-        builder: (_) =>
-            BlocProvider.value(value: sl<AppBloc>(), child: OnBoardingScreen()),
+        builder: (_) => BlocProvider(
+          create: (_) => sl<AppBloc>(),
+          child: OnBoardingScreen(),
+        ),
       );
     case AppRoutes.login:
       return MaterialPageRoute(builder: (_) => LogInScreen());
