@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluid_boutique/core/app%20strings/app_string.dart';
@@ -55,6 +57,7 @@ class AuthRemoteDataSourceImplWithFireBase implements AuthRemoteDataSource {
         photoUrl: null,
       );
     } catch (e) {
+      log(e.toString());
       throw ServerException();
     }
   }

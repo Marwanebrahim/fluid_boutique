@@ -4,6 +4,7 @@ import 'package:fluid_boutique/features/app/presentation/screens/on_boarding_scr
 import 'package:fluid_boutique/features/app/presentation/screens/splash_screen.dart';
 import 'package:fluid_boutique/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:fluid_boutique/features/auth/presentation/screens/log_in_screen.dart';
+import 'package:fluid_boutique/features/auth/presentation/screens/sign_up_screen.dart';
 import 'package:fluid_boutique/injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,6 +27,11 @@ Route<dynamic> onGenerateRoute(RouteSettings setting) {
       return MaterialPageRoute(
         builder: (_) =>
             BlocProvider(create: (_) => sl<AuthBloc>(), child: LogInScreen()),
+      );
+    case AppRoutes.signUpScreen:
+      return MaterialPageRoute(
+        builder: (_) =>
+            BlocProvider(create: (_) => sl<AuthBloc>(), child: SignUpScreen()),
       );
     default:
       return MaterialPageRoute(

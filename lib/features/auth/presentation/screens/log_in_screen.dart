@@ -18,8 +18,8 @@ class _LogInScreenState extends State<LogInScreen> {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
-  void initState() {
-    super.initState();
+  void dispose() {
+    super.dispose();
     emailController.dispose();
     passwordController.dispose();
   }
