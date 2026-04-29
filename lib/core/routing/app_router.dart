@@ -2,6 +2,7 @@ import 'package:fluid_boutique/core/routing/app_routes.dart';
 import 'package:fluid_boutique/features/app/presentation/bloc/app_bloc.dart';
 import 'package:fluid_boutique/features/app/presentation/screens/on_boarding_screen.dart';
 import 'package:fluid_boutique/features/app/presentation/screens/splash_screen.dart';
+import 'package:fluid_boutique/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:fluid_boutique/features/auth/presentation/screens/log_in_screen.dart';
 import 'package:fluid_boutique/injection_container.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,10 @@ Route<dynamic> onGenerateRoute(RouteSettings setting) {
         ),
       );
     case AppRoutes.login:
-      return MaterialPageRoute(builder: (_) => LogInScreen());
+      return MaterialPageRoute(
+        builder: (_) =>
+            BlocProvider(create: (_) => sl<AuthBloc>(), child: LogInScreen()),
+      );
     default:
       return MaterialPageRoute(
         builder: (_) => Scaffold(body: Center(child: Text("No Route Found"))),

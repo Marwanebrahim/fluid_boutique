@@ -5,4 +5,5 @@ class ImageHelper {
       "assets/onBoarding images/onboarding2.png";
   static const String thirdOnboardingImage =
       "assets/onBoarding images/onboarding3.png";
+  static const String googleIcon = "assets/Icons/Google-Icon.svg";
 }

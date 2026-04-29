@@ -85,19 +85,26 @@ class AuthRemoteDataSourceImplWithFireBase implements AuthRemoteDataSource {
   Future<UserModel> logInWithGoogle() async {
     try {
       GoogleSignInAccount googleUser = await googleSignIn.authenticate();
-
       final GoogleSignInAuthentication googleAuth = googleUser.authentication;
       final credential = GoogleAuthProvider.credential(
         idToken: googleAuth.idToken,
       );
-
       final userCredential = await auth.signInWithCredential(credential);
-      final userData = await db
+      await db
           .collection(AppString.usersCollection)
           .doc(userCredential.user!.uid)
-          .get();
-      final UserModel user = UserModel.fromMap(userData.data()!);
-      return user;
+          .set({
+            'uid': userCredential.user!.uid,
+            'email': userCredential.user!.email,
+            'name': userCredential.user!.displayName,
+            'photoUrl': userCredential.user!.photoURL,
+          });
+      return UserModel(
+        uid: userCredential.user!.uid,
+        email: userCredential.user!.email!,
+        name: userCredential.user!.displayName!,
+        photoUrl: userCredential.user!.photoURL,
+      );
     } catch (e) {
       throw ServerException();
     }
