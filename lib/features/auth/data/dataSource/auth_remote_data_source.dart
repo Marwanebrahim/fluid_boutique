@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluid_boutique/core/app%20strings/app_string.dart';
@@ -25,11 +23,18 @@ class AuthRemoteDataSourceImplWithFireBase implements AuthRemoteDataSource {
   final FirebaseAuth auth;
   final FirebaseFirestore db;
   final GoogleSignIn googleSignIn;
+
   AuthRemoteDataSourceImplWithFireBase({
     required this.auth,
     required this.db,
     required this.googleSignIn,
   });
+
+  // ─── helper: كل Firestore operations في مكان واحد ───────────────────────────
+
+  CollectionReference get _usersCollection =>
+      db.collection(AppString.usersCollection);
+
   @override
   Future<UserModel> signUpWithEmail({
     required String email,
@@ -41,26 +46,30 @@ class AuthRemoteDataSourceImplWithFireBase implements AuthRemoteDataSource {
         email: email,
         password: password,
       );
-      await db
-          .collection(AppString.usersCollection)
-          .doc(userCredential.user!.uid)
-          .set({
-            'uid': userCredential.user!.uid,
-            'email': email,
-            'name': name,
-            'photoUrl': null,
-          });
-      return UserModel(
-        uid: userCredential.user!.uid,
+      final uid = userCredential.user!.uid;
+      final user = UserModel(
         email: email,
         name: name,
         photoUrl: null,
+        uid: uid,
       );
+      final userData = user.toMap();
+      await _usersCollection.doc(uid).set(userData);
+
+      return user;
+    } on FirebaseAuthException catch (e) {
+      switch (e.code) {
+        case 'email-already-in-use':
+          throw EmailAlreadyInUseException();
+        default:
+          throw ServerException();
+      }
     } catch (e) {
-      log(e.toString());
       throw ServerException();
     }
   }
+
+  // ─── logInWithEmail ──────────────────────────────────────────────────────────
 
   @override
   Future<UserModel> logInWithEmail({
@@ -72,17 +81,36 @@ class AuthRemoteDataSourceImplWithFireBase implements AuthRemoteDataSource {
         email: email,
         password: password,
       );
+      final uid = userCredential.user!.uid;
 
-      final userData = await db
-          .collection(AppString.usersCollection)
-          .doc(userCredential.user!.uid)
-          .get();
-      final UserModel user = UserModel.fromMap(userData.data()!);
-      return user;
+      final docSnapshot = await _usersCollection.doc(uid).get();
+      if (!docSnapshot.exists) {
+        final user = UserModel(
+          email: email,
+          name: userCredential.user!.displayName!,
+          photoUrl: userCredential.user!.photoURL,
+          uid: uid,
+        );
+        final userData = user.toMap();
+        await _usersCollection.doc(uid).set(userData);
+        return user;
+      }
+      return UserModel.fromMap(docSnapshot.data() as Map<String, dynamic>);
+    } on FirebaseAuthException catch (e) {
+      switch (e.code) {
+        case 'user-not-found':
+        case 'wrong-password':
+        case 'invalid-credential':
+          throw InvalidCredentialsException();
+        default:
+          throw ServerException();
+      }
     } catch (e) {
       throw ServerException();
     }
   }
+
+  // ─── logInWithGoogle ─────────────────────────────────────────────────────────
 
   @override
   Future<UserModel> logInWithGoogle() async {
@@ -93,30 +121,40 @@ class AuthRemoteDataSourceImplWithFireBase implements AuthRemoteDataSource {
         idToken: googleAuth.idToken,
       );
       final userCredential = await auth.signInWithCredential(credential);
-      await db
-          .collection(AppString.usersCollection)
+      final docSnapshot = await _usersCollection
           .doc(userCredential.user!.uid)
-          .set({
-            'uid': userCredential.user!.uid,
-            'email': userCredential.user!.email,
-            'name': userCredential.user!.displayName,
-            'photoUrl': userCredential.user!.photoURL,
-          });
-      return UserModel(
-        uid: userCredential.user!.uid,
-        email: userCredential.user!.email!,
-        name: userCredential.user!.displayName!,
-        photoUrl: userCredential.user!.photoURL,
-      );
+          .get();
+      if (!docSnapshot.exists) {
+        final user = UserModel(
+          email: userCredential.user!.email!,
+          name: userCredential.user!.displayName!,
+          photoUrl: userCredential.user!.photoURL,
+          uid: userCredential.user!.uid,
+        );
+        final userData = user.toMap();
+        await _usersCollection
+            .doc(userCredential.user!.uid)
+            .set(userData, SetOptions(merge: true));
+        return user;
+      }
+      return UserModel.fromMap(docSnapshot.data() as Map<String, dynamic>);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'account-exists-with-different-credential') {
+        throw AccountExistsWithDifferentCredentialException();
+      }
+      throw ServerException();
     } catch (e) {
       throw ServerException();
     }
   }
 
+  // ─── logOut ──────────────────────────────────────────────────────────────────
+
   @override
   Future<void> logOut() async {
     try {
-      await auth.signOut();
+      // نعمل signOut من الاتنين عشان الـ Google session ينتهي صح
+      await Future.wait([auth.signOut(), googleSignIn.signOut()]);
     } catch (e) {
       throw ServerException();
     }

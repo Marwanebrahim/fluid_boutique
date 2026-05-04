@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:fluid_boutique/core/configs/app_colors.dart';
 import 'package:fluid_boutique/core/configs/app_text_styles.dart';
 import 'package:fluid_boutique/core/routing/app_routes.dart';
@@ -314,10 +312,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   password: passwordController.text,
                                   name: nameController.text,
                                 ),
-                              );
-                              log("5");
-                              log(
-                                "email: ${emailController.value.text}, password: ${passwordController.text}, name: ${nameController.text}",
                               );
                             },
                             child: Center(

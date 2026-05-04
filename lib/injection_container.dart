@@ -32,15 +32,15 @@ Future<void> initDependencies() async {
   sl.registerFactory<AppBloc>(() => AppBloc(appRepository: sl()));
 
   /// auth features
-  GoogleSignIn googleSignIn = GoogleSignIn.instance;
-  await googleSignIn.initialize();
+  sl.registerLazySingleton<GoogleSignIn>(() => GoogleSignIn.instance);
+  await sl<GoogleSignIn>().initialize();
   sl.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
   sl.registerLazySingleton<FirebaseFirestore>(() => FirebaseFirestore.instance);
   sl.registerLazySingleton<AuthRemoteDataSource>(
     () => AuthRemoteDataSourceImplWithFireBase(
       auth: sl(),
       db: sl(),
-      googleSignIn: googleSignIn,
+      googleSignIn: sl(),
     ),
   );
   sl.registerLazySingleton<AuthRepository>(
