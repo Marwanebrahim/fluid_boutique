@@ -4,6 +4,7 @@ import 'package:fluid_boutique/core/helpers/image_helper.dart';
 import 'package:fluid_boutique/core/routing/app_routes.dart';
 import 'package:fluid_boutique/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:fluid_boutique/features/auth/presentation/bloc/auth_event.dart';
+import 'package:fluid_boutique/features/auth/presentation/bloc/auth_state.dart';
 import 'package:fluid_boutique/shared/widgets/custom_button_widget.dart';
 import 'package:fluid_boutique/shared/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +36,10 @@ class LoginContainer extends StatelessWidget {
           children: [
             Text(
               "Welcome Back",
-              style: AppTextStyles.bold(size: 24, color: AppColors.darkBlueIcon),
+              style: AppTextStyles.bold(
+                size: 24,
+                color: AppColors.darkBlueIcon,
+              ),
             ),
             Text(
               "Please enter your credentials to continue your curation.",
@@ -85,7 +89,7 @@ class LoginContainer extends StatelessWidget {
                 ).hasMatch(value)) {
                   return 'Please enter a valid email address';
                 }
-      
+
                 return null;
               },
             ),
@@ -101,10 +105,13 @@ class LoginContainer extends StatelessWidget {
                     font: AppFont.inter,
                   ),
                 ),
-      
+
                 TextButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, AppRoutes.forgetPasswordScreen);
+                    Navigator.pushNamed(
+                      context,
+                      AppRoutes.forgetPasswordScreen,
+                    );
                   },
                   child: Text(
                     "Forgot Password?",
@@ -122,7 +129,11 @@ class LoginContainer extends StatelessWidget {
               hintWidget: Row(
                 spacing: 4,
                 children: [
-                  Icon(Icons.lock_outline, size: 20, color: AppColors.dotsColor),
+                  Icon(
+                    Icons.lock_outline,
+                    size: 20,
+                    color: AppColors.dotsColor,
+                  ),
                   Text(
                     "••••••••",
                     style: AppTextStyles.regular(
@@ -160,16 +171,33 @@ class LoginContainer extends StatelessWidget {
                   ),
                 );
               },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                spacing: 4,
-                children: [
-                  Text(
-                    "Login",
-                    style: AppTextStyles.bold(size: 16, color: AppColors.white),
-                  ),
-                  Icon(Icons.arrow_forward, size: 10, color: AppColors.white),
-                ],
+              child: BlocBuilder<AuthBloc, AuthState>(
+                builder: (context, state) {
+                  if (state is AuthLoadingState) {
+                    return CircularProgressIndicator(
+                      color: AppColors.white,
+                      strokeWidth: 2,
+                    );
+                  }
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    spacing: 4,
+                    children: [
+                      Text(
+                        "Login",
+                        style: AppTextStyles.bold(
+                          size: 16,
+                          color: AppColors.white,
+                        ),
+                      ),
+                      Icon(
+                        Icons.arrow_forward,
+                        size: 10,
+                        color: AppColors.white,
+                      ),
+                    ],
+                  );
+                },
               ),
             ),
             const SizedBox(height: 30),

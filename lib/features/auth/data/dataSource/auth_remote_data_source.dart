@@ -16,7 +16,6 @@ abstract class AuthRemoteDataSource {
     required String password,
   });
   Future<UserModel> logInWithGoogle();
-  Future<void> logOut();
 }
 
 class AuthRemoteDataSourceImplWithFireBase implements AuthRemoteDataSource {
@@ -143,18 +142,6 @@ class AuthRemoteDataSourceImplWithFireBase implements AuthRemoteDataSource {
         throw AccountExistsWithDifferentCredentialException();
       }
       throw ServerException();
-    } catch (e) {
-      throw ServerException();
-    }
-  }
-
-  // ─── logOut ──────────────────────────────────────────────────────────────────
-
-  @override
-  Future<void> logOut() async {
-    try {
-      // نعمل signOut من الاتنين عشان الـ Google session ينتهي صح
-      await Future.wait([auth.signOut(), googleSignIn.signOut()]);
     } catch (e) {
       throw ServerException();
     }

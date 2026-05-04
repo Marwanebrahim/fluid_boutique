@@ -15,7 +15,6 @@ abstract class AuthRepository {
     required String password,
   });
   Future<Either<Failure, UserModel>> logInWithGoogle();
-  Future<Either<Failure, Unit>> logOut();
 }
 
 class AuthRepositoryImpl implements AuthRepository {
@@ -34,6 +33,8 @@ class AuthRepositoryImpl implements AuthRepository {
         password: password,
       );
       return Right(user);
+    } on InvalidCredentialsException {
+      return Left(InvalidCredentialsFailure());
     } on ServerException {
       return Left(ServerFailure());
     }
@@ -44,6 +45,8 @@ class AuthRepositoryImpl implements AuthRepository {
     try {
       final user = await remoteDataSource.logInWithGoogle();
       return Right(user);
+    } on AccountExistsWithDifferentCredentialException {
+      return Left(AccountExistsWithDifferentCredentialFailure());
     } on ServerException {
       return Left(ServerFailure());
     }
@@ -62,16 +65,8 @@ class AuthRepositoryImpl implements AuthRepository {
         name: name,
       );
       return Right(user);
-    } on ServerException {
-      return Left(ServerFailure());
-    }
-  }
-
-  @override
-  Future<Either<Failure, Unit>> logOut() async {
-    try {
-      await remoteDataSource.logOut();
-      return Right(unit);
+    } on EmailAlreadyInUseException {
+      return Left(EmailAlreadyInUseFailure());
     } on ServerException {
       return Left(ServerFailure());
     }

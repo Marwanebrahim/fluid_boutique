@@ -1,4 +1,3 @@
-import 'package:fluid_boutique/core/app%20strings/app_failures.dart';
 import 'package:fluid_boutique/features/auth/data/repositories/auth_repository.dart';
 import 'package:fluid_boutique/features/auth/presentation/bloc/auth_event.dart';
 import 'package:fluid_boutique/features/auth/presentation/bloc/auth_state.dart';
@@ -10,7 +9,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<SignUpWithEmailEvent>(_onSignUpWithEmailEvent);
     on<LogInWithEmailEvent>(_onLogInWithEmailEvent);
     on<LogInWithGoogleEvent>(_onLogInWithGoogleEvent);
-    on<LogOutEvent>(_onLogOutEvent);
   }
 
   Future<void> _onSignUpWithEmailEvent(
@@ -24,7 +22,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       name: event.name,
     );
     result.fold(
-      (failure) => emit(AuthFailureState(message: signUpFailureMassege)),
+      (failure) => emit(AuthFailureState(message: failure.message)),
       (user) => emit(AuthSuccessState(user: user)),
     );
   }
@@ -39,7 +37,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       password: event.password,
     );
     result.fold(
-      (failure) => emit(AuthFailureState(message: logInFailureMassege)),
+      (failure) => emit(AuthFailureState(message: failure.message)),
       (user) => emit(AuthSuccessState(user: user)),
     );
   }
@@ -51,20 +49,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(AuthLoadingState());
     final result = await authRepository.logInWithGoogle();
     result.fold(
-      (failure) => emit(AuthFailureState(message: googleSignInFailureMassege)),
+      (failure) => emit(AuthFailureState(message: failure.message)),
       (user) => emit(AuthSuccessState(user: user)),
-    );
-  }
-
-  Future<void> _onLogOutEvent(
-    LogOutEvent event,
-    Emitter<AuthState> emit,
-  ) async {
-    emit(AuthLoadingState());
-    final result = await authRepository.logOut();
-    result.fold(
-      (failure) => emit(AuthFailureState(message: logOutFailureMassege)),
-      (success) => emit(AuthLoggedOutState()),
     );
   }
 }
