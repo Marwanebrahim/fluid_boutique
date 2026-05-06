@@ -35,3 +35,8 @@ class AccountExistsWithDifferentCredentialFailure extends Failure {
   const AccountExistsWithDifferentCredentialFailure()
     : super(message: 'Account already exists with a different sign-in method');
 }
+
+class ForgetPasswordFailure extends Failure {
+  const ForgetPasswordFailure()
+    : super(message: 'Failed to send password reset email');
+}

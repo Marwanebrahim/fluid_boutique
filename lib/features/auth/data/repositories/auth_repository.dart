@@ -15,6 +15,7 @@ abstract class AuthRepository {
     required String password,
   });
   Future<Either<Failure, UserModel>> logInWithGoogle();
+  Future<Either<Failure, Unit>> forgetPassword({required String email});
 }
 
 class AuthRepositoryImpl implements AuthRepository {
@@ -69,6 +70,16 @@ class AuthRepositoryImpl implements AuthRepository {
       return Left(EmailAlreadyInUseFailure());
     } on ServerException {
       return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, Unit>> forgetPassword({required String email}) async {
+    try {
+      await remoteDataSource.forgetPassword(email: email);
+      return Right(unit);
+    } on ServerException {
+      return Left(ForgetPasswordFailure());
     }
   }
 }

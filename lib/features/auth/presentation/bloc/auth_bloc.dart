@@ -9,6 +9,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<SignUpWithEmailEvent>(_onSignUpWithEmailEvent);
     on<LogInWithEmailEvent>(_onLogInWithEmailEvent);
     on<LogInWithGoogleEvent>(_onLogInWithGoogleEvent);
+    on<ForgetPasswordEvent>(_onForgetPasswordEvent);
   }
 
   Future<void> _onSignUpWithEmailEvent(
@@ -51,6 +52,18 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     result.fold(
       (failure) => emit(AuthFailureState(message: failure.message)),
       (user) => emit(AuthSuccessState(user: user)),
+    );
+  }
+
+  Future<void> _onForgetPasswordEvent(
+    ForgetPasswordEvent event,
+    Emitter<AuthState> emit,
+  ) async {
+    emit(AuthLoadingState());
+    final result = await authRepository.forgetPassword(email: event.email);
+    result.fold(
+      (failure) => emit(AuthFailureState(message: failure.message)),
+      (_) => emit(AuthForgetPasswordSuccess()),
     );
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluid_boutique/core/app%20strings/app_string.dart';
@@ -16,6 +18,7 @@ abstract class AuthRemoteDataSource {
     required String password,
   });
   Future<UserModel> logInWithGoogle();
+  Future<void> forgetPassword({required String email});
 }
 
 class AuthRemoteDataSourceImplWithFireBase implements AuthRemoteDataSource {
@@ -143,6 +146,20 @@ class AuthRemoteDataSourceImplWithFireBase implements AuthRemoteDataSource {
       }
       throw ServerException();
     } catch (e) {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<void> forgetPassword({required String email}) async {
+    try {
+      log("1");
+      await auth.sendPasswordResetEmail(email: email);
+      log("2");
+    } on FirebaseAuthException {
+      throw ServerException();
+    } catch (e) {
+      log(e.toString());
       throw ServerException();
     }
   }

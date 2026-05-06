@@ -53,6 +53,7 @@ class _LogInScreenState extends State<LogInScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    const SizedBox(height: 36),
                     Text(
                       "Fluid Boutique",
                       style: AppTextStyles.bold(

@@ -19,4 +19,7 @@ class LogInWithEmailEvent extends AuthEvent {
 
 class LogInWithGoogleEvent extends AuthEvent {}
 
-class LogOutEvent extends AuthEvent {}
+class ForgetPasswordEvent extends AuthEvent {
+  final String email;
+  ForgetPasswordEvent({required this.email});
+}

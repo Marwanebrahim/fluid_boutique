@@ -3,6 +3,7 @@ import 'package:fluid_boutique/features/app/presentation/bloc/app_bloc.dart';
 import 'package:fluid_boutique/features/app/presentation/screens/on_boarding_screen.dart';
 import 'package:fluid_boutique/features/app/presentation/screens/splash_screen.dart';
 import 'package:fluid_boutique/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:fluid_boutique/features/auth/presentation/screens/forget_password_screen.dart';
 import 'package:fluid_boutique/features/auth/presentation/screens/log_in_screen.dart';
 import 'package:fluid_boutique/features/auth/presentation/screens/sign_up_screen.dart';
 import 'package:fluid_boutique/injection_container.dart';
@@ -32,6 +33,13 @@ Route<dynamic> onGenerateRoute(RouteSettings setting) {
       return MaterialPageRoute(
         builder: (_) =>
             BlocProvider(create: (_) => sl<AuthBloc>(), child: SignUpScreen()),
+      );
+    case AppRoutes.forgetPasswordScreen:
+      return MaterialPageRoute(
+        builder: (_) => BlocProvider(
+          create: (_) => sl<AuthBloc>(),
+          child: ForgetPasswordScreen(),
+        ),
       );
     default:
       return MaterialPageRoute(
