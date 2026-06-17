@@ -171,33 +171,39 @@ class LoginContainer extends StatelessWidget {
                   ),
                 );
               },
-              child: BlocBuilder<AuthBloc, AuthState>(
-                builder: (context, state) {
-                  if (state is AuthLoadingState) {
-                    return CircularProgressIndicator(
-                      color: AppColors.white,
-                      strokeWidth: 2,
-                    );
-                  }
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    spacing: 4,
-                    children: [
-                      Text(
-                        "Login",
-                        style: AppTextStyles.bold(
-                          size: 16,
+              child: Center(
+                child: BlocBuilder<AuthBloc, AuthState>(
+                  builder: (context, state) {
+                    if (state is AuthLoadingState) {
+                      return const SizedBox(
+                        height: 24,
+                        width: 24,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
                           color: AppColors.white,
                         ),
-                      ),
-                      Icon(
-                        Icons.arrow_forward,
-                        size: 10,
-                        color: AppColors.white,
-                      ),
-                    ],
-                  );
-                },
+                      );
+                    }
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      spacing: 4,
+                      children: [
+                        Text(
+                          "Login",
+                          style: AppTextStyles.bold(
+                            size: 16,
+                            color: AppColors.white,
+                          ),
+                        ),
+                        Icon(
+                          Icons.arrow_forward,
+                          size: 10,
+                          color: AppColors.white,
+                        ),
+                      ],
+                    );
+                  },
+                ),
               ),
             ),
             const SizedBox(height: 30),
