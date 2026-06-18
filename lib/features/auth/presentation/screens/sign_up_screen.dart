@@ -45,7 +45,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 if (state is AuthSuccessState) {
                   Navigator.pushNamedAndRemoveUntil(
                     context,
-                    AppRoutes.home,
+                    AppRoutes.appWrapper,
                     (route) => false,
                   );
                 }

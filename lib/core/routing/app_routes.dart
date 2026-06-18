@@ -1,8 +1,12 @@
 class AppRoutes {
+  // App Screens
   static const String splashScreen = "/";
   static const String onBoarding = "/onBoarding";
+  // Auth Screens
   static const String login = "/login";
-  static const String home = "/home";
   static const String forgetPasswordScreen = "/forgetPasswordScreen";
   static const String signUpScreen = "/signUpScreen";
+  // Main Screens
+  static const String appWrapper = "/appWrapper";
+  static const String home = "/home";
 }

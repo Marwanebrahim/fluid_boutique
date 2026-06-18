@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:fluid_boutique/core/routing/app_routes.dart';
 import 'package:fluid_boutique/features/app/presentation/bloc/app_bloc.dart';
+import 'package:fluid_boutique/features/app/presentation/screens/app_wrapper.dart';
 import 'package:fluid_boutique/features/app/presentation/screens/on_boarding_screen.dart';
 import 'package:fluid_boutique/features/app/presentation/screens/splash_screen.dart';
 import 'package:fluid_boutique/features/auth/presentation/bloc/auth_bloc.dart';
@@ -41,7 +44,10 @@ Route<dynamic> onGenerateRoute(RouteSettings setting) {
           child: ForgetPasswordScreen(),
         ),
       );
+    case AppRoutes.appWrapper:
+      return MaterialPageRoute(builder: (_) => const AppWrapper());
     default:
+      log(setting.name.toString());
       return MaterialPageRoute(
         builder: (_) => Scaffold(body: Center(child: Text("No Route Found"))),
       );
