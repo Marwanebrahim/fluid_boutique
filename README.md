@@ -4,29 +4,44 @@
 
 ---
 
+## 📸 Screenshots
+
+<!-- Add your screenshots here -->
+
+| Splash                                                | Onboarding                                                | Login                                                | Sign Up                                               | Forgot Password                                                |
+| ----------------------------------------------------- | --------------------------------------------------------- | ---------------------------------------------------- | ----------------------------------------------------- | -------------------------------------------------------------- |
+| <img src="assets/screenshots/splash.png" width="200"> | <img src="assets/screenshots/onBoarding.png" width="200"> | <img src="assets/screenshots/login.png" width="200"> | <img src="assets/screenshots/signup.png" width="200"> | <img src="assets/screenshots/forget_password.png" width="200"> |
+
+| Home                                                | Search        | Cart          | Wishlist      | Profile       |
+| --------------------------------------------------- | ------------- | ------------- | ------------- | ------------- |
+| <img src="assets/screenshots/home.png" width="200"> | `coming soon` | `coming soon` | `coming soon` | `coming soon` |
+
+---
+
 ## 🧱 Tech Stack
 
-| Layer | Technology |
-|---|---|
-| Framework | Flutter + Dart |
-| State Management | BLoC |
-| Architecture | Clean Architecture |
-| Auth + DB | Firebase (Auth + Firestore) |
-| Push Notifications | FCM |
-| Products API | [DummyJSON](https://dummyjson.com) |
-| Navigation | `onGenerateRoute` |
-| Dependency Injection | GetIt |
-| HTTP Client | Dio |
-| Local Storage | Hive |
-| Functional Programming | dartz (`Either`, `Unit`) |
-| Icons | Flutter Material Icons |
-| Fonts | Google Fonts (Manrope + Inter) |
+| Layer                  | Technology                         |
+| ---------------------- | ---------------------------------- |
+| Framework              | Flutter + Dart                     |
+| State Management       | BLoC                               |
+| Architecture           | Clean Architecture                 |
+| Auth + DB              | Firebase (Auth + Firestore)        |
+| Push Notifications     | FCM                                |
+| Products API           | [DummyJSON](https://dummyjson.com) |
+| Navigation             | `onGenerateRoute`                  |
+| Dependency Injection   | GetIt                              |
+| HTTP Client            | Dio                                |
+| Local Storage          | Hive                               |
+| Functional Programming | dartz (`Either`, `Unit`)           |
+| Icons                  | Flutter Material Icons             |
+| Fonts                  | Google Fonts (Manrope + Inter)     |
 
 ---
 
 ## ✅ Features
 
 ### User App
+
 - [x] Splash Screen with animated loader
 - [x] Onboarding Flow (3 screens, seen-once logic)
 - [x] Email + Password Sign Up / Login
@@ -43,6 +58,7 @@
 - [ ] Profile + Edit Profile
 
 ### Admin Panel
+
 - [ ] Admin Login
 - [ ] Dashboard (revenue, orders, users)
 - [ ] All Orders viewer + status update
@@ -109,34 +125,38 @@ UI          →  listens to State      →  shows error / success
 
 Registration order — always **DataSource → Repository → UseCase → BLoC**
 
-| Type | Method | Reason |
-|---|---|---|
-| DataSource | `registerLazySingleton` | One instance is enough |
-| Repository | `registerLazySingleton` | One instance is enough |
-| UseCase | `registerLazySingleton` | Stateless |
-| BLoC | `registerFactory` | New instance per screen |
+| Type       | Method                  | Reason                  |
+| ---------- | ----------------------- | ----------------------- |
+| DataSource | `registerLazySingleton` | One instance is enough  |
+| Repository | `registerLazySingleton` | One instance is enough  |
+| UseCase    | `registerLazySingleton` | Stateless               |
+| BLoC       | `registerFactory`       | New instance per screen |
 
 ---
 
 ## 🔑 Environment Setup
 
 1. Clone the repo
+
 ```bash
 git clone https://github.com/your-username/fluid-boutique.git
 cd fluid-boutique
 ```
 
 2. Install dependencies
+
 ```bash
 flutter pub get
 ```
 
 3. Add Firebase config
+
 ```
 Place your google-services.json in android/app/
 ```
 
 4. Run the app
+
 ```bash
 flutter run
 ```
@@ -145,10 +165,7 @@ flutter run
 
 ## 👤 Developer
 
-**Marwan** — 2nd year Software & Multimedia, Alexandria University
-Target: Flutter Developer Internship @ Instabug / Paymob / Rabbit / Breadfast
-
----
+## **Marwan**
 
 ## 📄 License
 
