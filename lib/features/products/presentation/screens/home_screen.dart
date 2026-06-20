@@ -1,0 +1,66 @@
+import 'package:fluid_boutique/core/helpers/image_helper.dart';
+import 'package:fluid_boutique/features/products/domain/entity/category_entity.dart';
+import 'package:fluid_boutique/features/products/presentation/bloc/product_bloc/product_bloc.dart';
+import 'package:fluid_boutique/features/products/presentation/bloc/product_bloc/product_event.dart';
+import 'package:fluid_boutique/features/products/presentation/widgets/all_categouries_widget.dart';
+import 'package:fluid_boutique/features/products/presentation/widgets/home_carousel_widget.dart';
+import 'package:fluid_boutique/features/products/presentation/widgets/new_arrival_widget.dart';
+import 'package:fluid_boutique/features/products/presentation/widgets/product_list_widget.dart';
+import 'package:fluid_boutique/injection_container.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final PageController _pageController = PageController(initialPage: 0);
+  final List<String> carouselImages = [ImageHelper.carouselImage1];
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider<ProductBloc>(
+      create: (_) => sl<ProductBloc>()
+        ..add(GetAllCategoriesEvent())
+        ..add(
+          GetSpecificProductEvent(
+            productCategory: CategoryEntity(
+              slug: 'mens-shirts',
+              name: 'Mens Shirts',
+            ),
+          ),
+        )
+        ..add(
+          GetSpecialProductsByCategory(
+            productCategory: CategoryEntity(
+              slug: 'furniture',
+              name: 'Furniture',
+            ),
+          ),
+        ),
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 6),
+          child: Column(
+            children: [
+              HomeCarouselWidget(
+                images: carouselImages,
+                pageController: _pageController,
+              ),
+              const SizedBox(height: 16),
+              AllCategouriesWidget(),
+              const SizedBox(height: 16),
+              ProductListWidget(),
+              const SizedBox(height: 16),
+              NewArrivalWidget(),
+              const SizedBox(height: 90),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

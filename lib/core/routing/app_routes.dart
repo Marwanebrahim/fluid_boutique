@@ -8,5 +8,6 @@ class AppRoutes {
   static const String signUpScreen = "/signUpScreen";
   // Main Screens
   static const String appWrapper = "/appWrapper";
-  static const String home = "/home";
+  static const String allProducts = "/allProducts";
+  static const String productDetails = "/productDetails";
 }

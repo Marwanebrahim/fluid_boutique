@@ -1,5 +1,7 @@
 import 'package:fluid_boutique/core/configs/app_colors.dart';
 import 'package:fluid_boutique/features/app/presentation/widgets/custom_app_bar.dart';
+import 'package:fluid_boutique/features/products/presentation/screens/home_screen.dart';
+import 'package:fluid_boutique/features/products/presentation/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:liquid_glass_nav/liquid_glass_nav.dart';
 
@@ -41,11 +43,10 @@ class _AppWrapperState extends State<AppWrapper> {
     ),
   ];
   final List<Widget> _screens = [
-    Center(child: Text('Home Screen')),
-    Center(child: Text('Search Screen')),
+    HomeScreen(),
+    SearchScreen(),
     Center(child: Text('Cart Screen')),
     Center(child: Text('Wishlist Screen')),
-    Center(child: Text('Profile Screen')),
     Center(child: Text('Profile Screen')),
   ];
   List<CustomAppBar> get _appBarItems => [
@@ -87,14 +88,14 @@ class _AppWrapperState extends State<AppWrapper> {
             items: _items,
             currentIndex: _currentIndex,
             onTap: onTap,
-            backgroundColor: AppColors.white.withValues(alpha: 0.6),
+            backgroundColor: AppColors.white,
             activeColor: AppColors.navSelected,
             inactiveColor: AppColors.navIcon,
-            shadowColor: AppColors.primary.withValues(alpha: 0.1),
+            shadowColor: AppColors.primary,
             shadowOffset: const Offset(0, 12),
-            shadowBlurRadius: 40,
+            shadowBlurRadius: 32,
             enableShadow: true,
-            rippleColor: AppColors.primary.withValues(alpha: 0.1),
+            rippleColor: AppColors.primary,
             borderRadius: 24,
             borderWidth: 1.5,
           ),

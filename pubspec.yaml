@@ -39,6 +39,8 @@ dependencies:
   # state management packages
   flutter_bloc: ^9.1.1
   equatable: ^2.0.8
+  # Network packages
+  dio: ^5.9.2
   # functional programming packages
   dartz: ^0.10.1
   # dependency injection
@@ -52,6 +54,8 @@ dependencies:
   cloud_firestore: ^6.3.0
   # social media packages
   google_sign_in: ^7.2.0
+  # internet connection packages
+  internet_connection_checker: ^3.0.1
 
 dev_dependencies:
   flutter_lints: ^6.0.0
@@ -70,6 +74,7 @@ flutter:
   assets:
     - assets/onBoarding images/
     - assets/Icons/
+    - assets/carousel/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
   # For details regarding adding assets from package dependencies, see
