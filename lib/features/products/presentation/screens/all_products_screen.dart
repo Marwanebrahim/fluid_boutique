@@ -1,9 +1,119 @@
+import 'package:fluid_boutique/core/configs/app_colors.dart';
+import 'package:fluid_boutique/core/configs/app_text_styles.dart';
+import 'package:fluid_boutique/core/routing/app_routes.dart';
+import 'package:fluid_boutique/features/products/domain/entity/category_entity.dart';
+import 'package:fluid_boutique/features/products/presentation/bloc/product_bloc/product_bloc.dart';
+import 'package:fluid_boutique/features/products/presentation/bloc/product_bloc/product_event.dart';
+import 'package:fluid_boutique/features/products/presentation/bloc/product_bloc/product_state.dart';
+import 'package:fluid_boutique/features/products/presentation/widgets/product_card_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class AllProuductsScreen extends StatelessWidget {
-  const AllProuductsScreen({super.key});
+class AllProductsScreen extends StatelessWidget {
+  const AllProductsScreen({super.key, required this.category});
+  final CategoryEntity? category;
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: AppColors.background,
+        elevation: 0,
+        scrolledUnderElevation: 0,
+        title: Text(
+          category?.name ?? 'All Products',
+          style: AppTextStyles.bold(size: 18, color: AppColors.darkBlueIcon),
+        ),
+        centerTitle: true,
+        // TODO: Filter
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 16),
+            child: Icon(Icons.filter_list, color: AppColors.darkBlueIcon),
+          ),
+        ],
+      ),
+      body: BlocBuilder<ProductBloc, ProductState>(
+        buildWhen: (previous, current) =>
+            current is ProductLoadingState ||
+            current is ProductSuccessState ||
+            current is ProductErrorState,
+        builder: (context, state) {
+          // Success
+          if (state is ProductSuccessState) {
+            return GridView.builder(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+              physics: const BouncingScrollPhysics(),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 16,
+                mainAxisSpacing: 16,
+                childAspectRatio: 0.62,
+              ),
+              itemCount: state.products.length,
+              itemBuilder: (context, index) {
+                return ProductCardWidget(
+                  product: state.products[index],
+                  onTap: () => Navigator.pushNamed(
+                    context,
+                    AppRoutes.productDetails,
+                    arguments: state.products[index],
+                  ),
+                );
+              },
+            );
+          }
+          // Loading
+          else if (state is ProductLoadingState) {
+            return const Center(
+              child: CircularProgressIndicator(color: AppColors.primary),
+            );
+          }
+          // Error
+          else if (state is ProductErrorState) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.error_outline, size: 48, color: AppColors.red),
+                  const SizedBox(height: 16),
+                  Text(
+                    state.message,
+                    style: AppTextStyles.semibold(
+                      size: 16,
+                      color: AppColors.darkBlueIcon,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 24),
+                  GestureDetector(
+                    onTap: () =>
+                        context.read<ProductBloc>().add(GetAllProductsEvent()),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 24,
+                        vertical: 12,
+                      ),
+                      decoration: BoxDecoration(
+                        color: AppColors.primary,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Text(
+                        'Try Again',
+                        style: AppTextStyles.semibold(
+                          size: 14,
+                          color: AppColors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }
+
+          return const SizedBox.shrink();
+        },
+      ),
+    );
   }
 }

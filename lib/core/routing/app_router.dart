@@ -9,6 +9,7 @@ import 'package:fluid_boutique/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:fluid_boutique/features/auth/presentation/screens/forget_password_screen.dart';
 import 'package:fluid_boutique/features/auth/presentation/screens/log_in_screen.dart';
 import 'package:fluid_boutique/features/auth/presentation/screens/sign_up_screen.dart';
+import 'package:fluid_boutique/features/products/domain/entity/all_products_args.dart';
 import 'package:fluid_boutique/features/products/presentation/screens/all_products_screen.dart';
 import 'package:fluid_boutique/injection_container.dart';
 import 'package:flutter/material.dart';
@@ -48,7 +49,13 @@ Route<dynamic> onGenerateRoute(RouteSettings setting) {
     case AppRoutes.appWrapper:
       return MaterialPageRoute(builder: (_) => const AppWrapper());
     case AppRoutes.allProducts:
-      return MaterialPageRoute(builder: (_) => AllProuductsScreen());
+      final args = setting.arguments as AllProductsArgs;
+      return MaterialPageRoute(
+        builder: (_) => BlocProvider.value(
+          value: args.productBloc,
+          child: AllProductsScreen(category: args.category),
+        ),
+      );
     default:
       log(setting.name.toString());
       return MaterialPageRoute(

@@ -1,8 +1,7 @@
-import 'dart:developer';
-
 import 'package:fluid_boutique/core/configs/app_colors.dart';
 import 'package:fluid_boutique/core/configs/app_text_styles.dart';
 import 'package:fluid_boutique/core/routing/app_routes.dart';
+import 'package:fluid_boutique/features/products/domain/entity/all_products_args.dart';
 import 'package:fluid_boutique/features/products/presentation/bloc/product_bloc/product_bloc.dart';
 import 'package:fluid_boutique/features/products/presentation/bloc/product_bloc/product_event.dart';
 import 'package:fluid_boutique/features/products/presentation/bloc/product_bloc/product_state.dart';
@@ -37,7 +36,14 @@ class ProductListWidget extends StatelessWidget {
             TextButton(
               onPressed: () {
                 context.read<ProductBloc>().add(GetAllProductsEvent());
-                Navigator.pushNamed(context, AppRoutes.allProducts);
+                Navigator.pushNamed(
+                  context,
+                  AppRoutes.allProducts,
+                  arguments: AllProductsArgs(
+                    category: null,
+                    productBloc: context.read<ProductBloc>(),
+                  ),
+                );
               },
               child: Text(
                 "View All",
@@ -55,7 +61,6 @@ class ProductListWidget extends StatelessWidget {
               current is SpecificProductErrorState ||
               current is SpecificProductLoadingState,
           builder: (BuildContext context, ProductState state) {
-            log(state.toString());
             if (state is SpecificProductSuccessState) {
               return SizedBox(
                 height: 300,

@@ -1,4 +1,3 @@
-// features/products/presentation/widgets/product_card_widget.dart
 import 'package:fluid_boutique/core/configs/app_colors.dart';
 import 'package:fluid_boutique/core/configs/app_text_styles.dart';
 import 'package:fluid_boutique/features/products/domain/entity/product_entity.dart';

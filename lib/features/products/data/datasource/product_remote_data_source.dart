@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:fluid_boutique/core/app%20strings/app_string.dart';
 import 'package:fluid_boutique/core/error/exeptions.dart';
@@ -26,6 +24,8 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
           .map((e) => ProductModel.fromJson(json: e as Map<String, dynamic>))
           .toList();
       return products;
+    } on DioException {
+      rethrow;
     } catch (e) {
       throw ServerException();
     }
@@ -40,6 +40,8 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
           .map((e) => CategoryModel.fromJson(json: e as Map<String, dynamic>))
           .toList();
       return categories;
+    } on DioException {
+      rethrow; 
     } catch (e) {
       throw ServerException();
     }
@@ -54,8 +56,9 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
           .map((e) => ProductModel.fromJson(json: e as Map<String, dynamic>))
           .toList();
       return products;
+    } on DioException {
+      rethrow;
     } catch (e) {
-      log(e.toString());
       throw ServerException();
     }
   }

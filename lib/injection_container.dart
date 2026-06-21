@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fluid_boutique/core/app%20strings/app_string.dart';
 import 'package:fluid_boutique/core/helpers/hive_helper.dart';
-import 'package:fluid_boutique/core/network/network_info.dart';
 import 'package:fluid_boutique/features/app/data/datasource/app_local_data_source.dart';
 import 'package:fluid_boutique/features/app/data/datasource/app_remote_data_source.dart';
 import 'package:fluid_boutique/features/app/data/repository/app_repository.dart';
@@ -72,15 +71,12 @@ Future<void> initDependencies() async {
   sl.registerLazySingleton<InternetConnectionChecker>(
     () => InternetConnectionChecker.instance,
   );
-  sl.registerLazySingleton<NetworkInfo>(
-    () => NetworkInfo(connectionChecker: sl()),
-  );
+
   sl.registerLazySingleton<ProductRemoteDataSource>(
     () => ProductRemoteDataSourceImpl(dio: sl()),
   );
   sl.registerLazySingleton<ProductRepository>(
-    () =>
-        ProductRepositoryImp(productRemoteDataSource: sl(), networkInfo: sl()),
+    () => ProductRepositoryImp(productRemoteDataSource: sl()),
   );
   sl.registerLazySingleton<GetAllProductsUseCase>(
     () => GetAllProductsUseCase(productRepository: sl()),
