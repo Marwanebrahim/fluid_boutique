@@ -20,6 +20,13 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final PageController _pageController = PageController(initialPage: 0);
   final List<String> carouselImages = [ImageHelper.carouselImage1];
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider<ProductBloc>(

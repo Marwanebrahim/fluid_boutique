@@ -10,6 +10,7 @@ import 'package:fluid_boutique/features/auth/presentation/screens/forget_passwor
 import 'package:fluid_boutique/features/auth/presentation/screens/log_in_screen.dart';
 import 'package:fluid_boutique/features/auth/presentation/screens/sign_up_screen.dart';
 import 'package:fluid_boutique/features/products/domain/entity/all_products_args.dart';
+import 'package:fluid_boutique/features/products/domain/entity/product_entity.dart';
 import 'package:fluid_boutique/features/products/presentation/screens/all_products_screen.dart';
 import 'package:fluid_boutique/features/products/presentation/screens/product_details.dart';
 import 'package:fluid_boutique/injection_container.dart';
@@ -64,7 +65,10 @@ Route<dynamic> onGenerateRoute(RouteSettings setting) {
         ),
       );
     case AppRoutes.productDetails:
-      return MaterialPageRoute(builder: (_) => const ProductDetails());
+      final product = setting.arguments as ProductEntity;
+      return MaterialPageRoute(
+        builder: (_) => ProductDetailsScreen(product: product),
+      );
     default:
       log(setting.name.toString());
       return MaterialPageRoute(
