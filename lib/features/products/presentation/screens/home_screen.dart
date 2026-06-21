@@ -27,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ..add(GetAllCategoriesEvent())
         ..add(
           GetSpecificProductEvent(
-            productCategory: CategoryEntity(
+            productCategory: const CategoryEntity(
               slug: 'mens-shirts',
               name: 'Mens Shirts',
             ),
@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
         )
         ..add(
           GetSpecialProductsByCategory(
-            productCategory: CategoryEntity(
+            productCategory: const CategoryEntity(
               slug: 'furniture',
               name: 'Furniture',
             ),
@@ -51,11 +51,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 pageController: _pageController,
               ),
               const SizedBox(height: 16),
-              AllCategouriesWidget(),
+              const AllCategouriesWidget(),
               const SizedBox(height: 16),
-              ProductListWidget(),
+              const ProductListWidget(),
               const SizedBox(height: 16),
-              NewArrivalWidget(),
+              const NewArrivalWidget(),
               const SizedBox(height: 90),
             ],
           ),

@@ -25,7 +25,7 @@ class AllCategouriesWidget extends StatelessWidget {
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               itemCount: 10,
-              separatorBuilder: (context, index) => const SizedBox(width: 24),
+              separatorBuilder: (_, _) => const SizedBox(width: 24),
               itemBuilder: (context, index) {
                 final category = state.categories[index];
                 return Column(
@@ -38,7 +38,10 @@ class AllCategouriesWidget extends StatelessWidget {
                         Navigator.pushNamed(
                           context,
                           AppRoutes.allProducts,
-                          arguments: AllProductsArgs(category: category, productBloc: context.read<ProductBloc>()),
+                          arguments: AllProductsArgs(
+                            category: category,
+                            productBloc: context.read<ProductBloc>(),
+                          ),
                         );
                       },
                       child: CircleAvatar(

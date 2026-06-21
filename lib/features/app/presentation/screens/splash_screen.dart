@@ -59,7 +59,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   gradient: AppColors.goldGradient,
                   borderRadius: BorderRadius.circular(32),
                 ),
-                child: Icon(
+                child: const Icon(
                   Icons.water_drop_rounded,
                   color: AppColors.darkBlueIcon,
                   size: 50,

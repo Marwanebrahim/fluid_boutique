@@ -11,6 +11,7 @@ import 'package:fluid_boutique/features/auth/presentation/screens/log_in_screen.
 import 'package:fluid_boutique/features/auth/presentation/screens/sign_up_screen.dart';
 import 'package:fluid_boutique/features/products/domain/entity/all_products_args.dart';
 import 'package:fluid_boutique/features/products/presentation/screens/all_products_screen.dart';
+import 'package:fluid_boutique/features/products/presentation/screens/product_details.dart';
 import 'package:fluid_boutique/injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,25 +20,31 @@ Route<dynamic> onGenerateRoute(RouteSettings setting) {
   switch (setting.name) {
     case AppRoutes.splashScreen:
       return MaterialPageRoute(
-        builder: (_) =>
-            BlocProvider(create: (_) => sl<AppBloc>(), child: SplashScreen()),
+        builder: (_) => BlocProvider(
+          create: (_) => sl<AppBloc>(),
+          child: const SplashScreen(),
+        ),
       );
     case AppRoutes.onBoarding:
       return MaterialPageRoute(
         builder: (_) => BlocProvider(
           create: (_) => sl<AppBloc>(),
-          child: OnBoardingScreen(),
+          child: const OnBoardingScreen(),
         ),
       );
     case AppRoutes.login:
       return MaterialPageRoute(
-        builder: (_) =>
-            BlocProvider(create: (_) => sl<AuthBloc>(), child: LogInScreen()),
+        builder: (_) => BlocProvider(
+          create: (_) => sl<AuthBloc>(),
+          child: const LogInScreen(),
+        ),
       );
     case AppRoutes.signUpScreen:
       return MaterialPageRoute(
-        builder: (_) =>
-            BlocProvider(create: (_) => sl<AuthBloc>(), child: SignUpScreen()),
+        builder: (_) => BlocProvider(
+          create: (_) => sl<AuthBloc>(),
+          child: const SignUpScreen(),
+        ),
       );
     case AppRoutes.forgetPasswordScreen:
       return MaterialPageRoute(
@@ -56,10 +63,13 @@ Route<dynamic> onGenerateRoute(RouteSettings setting) {
           child: AllProductsScreen(category: args.category),
         ),
       );
+    case AppRoutes.productDetails:
+      return MaterialPageRoute(builder: (_) => const ProductDetails());
     default:
       log(setting.name.toString());
       return MaterialPageRoute(
-        builder: (_) => Scaffold(body: Center(child: Text("No Route Found"))),
+        builder: (_) =>
+            Scaffold(body: Center(child: const Text("No Route Found"))),
       );
   }
 }

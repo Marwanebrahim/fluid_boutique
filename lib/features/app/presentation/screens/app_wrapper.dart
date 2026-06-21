@@ -15,39 +15,39 @@ class AppWrapper extends StatefulWidget {
 class _AppWrapperState extends State<AppWrapper> {
   int _currentIndex = 0;
   final _items = [
-    LiquidGlassNavItem(
+    const LiquidGlassNavItem(
       icon: Icons.home_filled,
       label: 'Home',
       tooltip: 'Home Screen',
     ),
-    LiquidGlassNavItem(
+    const LiquidGlassNavItem(
       icon: Icons.search_outlined,
       label: 'Search',
       tooltip: 'Search Screen',
     ),
-    LiquidGlassNavItem(
+    const LiquidGlassNavItem(
       icon: Icons.shopping_cart_outlined,
       label: 'Cart',
       tooltip: 'Cart Screen',
     ),
-    LiquidGlassNavItem(
+    const LiquidGlassNavItem(
       icon: Icons.favorite_outline_outlined,
       label: 'Wishlist',
       tooltip: 'Wishlist Screen',
     ),
 
-    LiquidGlassNavItem(
+    const LiquidGlassNavItem(
       icon: Icons.person_outlined,
       label: 'Profile',
       tooltip: 'Profile Screen',
     ),
   ];
   final List<Widget> _screens = [
-    HomeScreen(),
-    SearchScreen(),
-    Center(child: Text('Cart Screen')),
-    Center(child: Text('Wishlist Screen')),
-    Center(child: Text('Profile Screen')),
+    const HomeScreen(),
+    const SearchScreen(),
+    const Center(child: Text('Cart Screen')),
+    const Center(child: Text('Wishlist Screen')),
+    const Center(child: Text('Profile Screen')),
   ];
   List<CustomAppBar> get _appBarItems => [
     CustomAppBar(
@@ -62,10 +62,10 @@ class _AppWrapperState extends State<AppWrapper> {
         ),
       ],
     ),
-    CustomAppBar(title: 'Fluid Boutique'),
-    CustomAppBar(title: 'Fluid Boutique'),
-    CustomAppBar(title: 'Fluid Boutique'),
-    CustomAppBar(title: 'Fluid Boutique'),
+    const CustomAppBar(title: 'Fluid Boutique'),
+    const CustomAppBar(title: 'Fluid Boutique'),
+    const CustomAppBar(title: 'Fluid Boutique'),
+    const CustomAppBar(title: 'Fluid Boutique'),
   ];
   void onTap(int index) {
     setState(() {

@@ -32,7 +32,7 @@ class _SignUpContainerState extends State<SignUpContainer> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 32, horizontal: 24),
+      padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
       decoration: BoxDecoration(
         color: AppColors.white,
         borderRadius: BorderRadius.circular(12),
@@ -66,7 +66,7 @@ class _SignUpContainerState extends State<SignUpContainer> {
             hintWidget: Row(
               spacing: 4,
               children: [
-                Icon(
+                const Icon(
                   Icons.person_outline_rounded,
                   size: 20,
                   color: AppColors.dotsColor,
@@ -111,7 +111,7 @@ class _SignUpContainerState extends State<SignUpContainer> {
             hintWidget: Row(
               spacing: 4,
               children: [
-                Icon(
+                const Icon(
                   Icons.email_outlined,
                   size: 20,
                   color: AppColors.dotsColor,
@@ -155,7 +155,7 @@ class _SignUpContainerState extends State<SignUpContainer> {
             hintWidget: Row(
               spacing: 4,
               children: [
-                Icon(
+                const Icon(
                   Icons.lock_outline_rounded,
                   size: 20,
                   color: AppColors.dotsColor,
@@ -195,7 +195,7 @@ class _SignUpContainerState extends State<SignUpContainer> {
             hintWidget: Row(
               spacing: 4,
               children: [
-                Icon(
+                const Icon(
                   Icons.lock_reset_outlined,
                   size: 20,
                   color: AppColors.dotsColor,

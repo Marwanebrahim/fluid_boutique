@@ -26,7 +26,7 @@ class LoginContainer extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 32, horizontal: 32),
+        padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 32),
         decoration: BoxDecoration(
           color: AppColors.white,
           borderRadius: BorderRadius.circular(12),
@@ -63,7 +63,7 @@ class LoginContainer extends StatelessWidget {
               hintWidget: Row(
                 spacing: 4,
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.email_outlined,
                     size: 20,
                     color: AppColors.dotsColor,
@@ -129,7 +129,7 @@ class LoginContainer extends StatelessWidget {
               hintWidget: Row(
                 spacing: 4,
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.lock_outline,
                     size: 20,
                     color: AppColors.dotsColor,
@@ -195,7 +195,7 @@ class LoginContainer extends StatelessWidget {
                             color: AppColors.white,
                           ),
                         ),
-                        Icon(
+                        const Icon(
                           Icons.arrow_forward,
                           size: 10,
                           color: AppColors.white,

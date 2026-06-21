@@ -20,7 +20,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         size: 20,
         color: AppColors.navSelected,
       ),
-      leading: Icon(Icons.list_rounded, color: AppColors.navSelected, size: 24),
+      leading: const Icon(
+        Icons.list_rounded,
+        color: AppColors.navSelected,
+        size: 24,
+      ),
     );
   }
 }

@@ -26,8 +26,8 @@ class AllProductsScreen extends StatelessWidget {
         centerTitle: true,
         // TODO: Filter
         actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16),
+          const Padding(
+            padding: EdgeInsets.only(right: 16),
             child: Icon(Icons.filter_list, color: AppColors.darkBlueIcon),
           ),
         ],
@@ -74,7 +74,11 @@ class AllProductsScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.error_outline, size: 48, color: AppColors.red),
+                  const Icon(
+                    Icons.error_outline,
+                    size: 48,
+                    color: AppColors.red,
+                  ),
                   const SizedBox(height: 16),
                   Text(
                     state.message,
