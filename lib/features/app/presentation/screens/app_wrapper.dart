@@ -1,8 +1,11 @@
 import 'package:fluid_boutique/core/configs/app_colors.dart';
 import 'package:fluid_boutique/features/app/presentation/widgets/custom_app_bar.dart';
+import 'package:fluid_boutique/features/products/presentation/bloc/search_bloc/search_bloc.dart';
 import 'package:fluid_boutique/features/products/presentation/screens/home_screen.dart';
 import 'package:fluid_boutique/features/products/presentation/screens/search_screen.dart';
+import 'package:fluid_boutique/injection_container.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:liquid_glass_nav/liquid_glass_nav.dart';
 
 class AppWrapper extends StatefulWidget {
@@ -44,7 +47,10 @@ class _AppWrapperState extends State<AppWrapper> {
   ];
   final List<Widget> _screens = [
     const HomeScreen(),
-    const SearchScreen(),
+    BlocProvider(
+      create: (context) => sl<SearchBloc>(),
+      child: const SearchScreen(),
+    ),
     const Center(child: Text('Cart Screen')),
     const Center(child: Text('Wishlist Screen')),
     const Center(child: Text('Profile Screen')),
@@ -76,6 +82,7 @@ class _AppWrapperState extends State<AppWrapper> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: _appBarItems[_currentIndex],
       body: Stack(
         children: [

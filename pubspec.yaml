@@ -54,9 +54,8 @@ dependencies:
   cloud_firestore: ^6.3.0
   # social media packages
   google_sign_in: ^7.2.0
-  # internet connection packages
-  internet_connection_checker: ^3.0.1
-
+  # utils packages
+  rxdart: ^0.28.0
 dev_dependencies:
   flutter_lints: ^6.0.0
   flutter_test:
@@ -72,6 +71,7 @@ flutter:
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
   assets:
+    - assets/
     - assets/onBoarding images/
     - assets/Icons/
     - assets/carousel/

@@ -5,5 +5,6 @@ class HiveHelper {
   static Future<void> init() async {
     await Hive.initFlutter();
     await Hive.openBox(AppString.utilsBoxName);
+    await Hive.openBox(AppString.searchHistoryBoxName);
   }
 }

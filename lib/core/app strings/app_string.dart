@@ -3,6 +3,8 @@ class AppString {
   static const String utilsBoxName = "utils";
   static const String isLoggedInKey = "isLoggedIn";
   static const String isSeenOnboarding = "isSeenOnboarding";
+  static const String searchHistoryBoxName = "search_history";
+  static const String searchHistoryKey = "history";
 
   /// Firebase
   static const String usersCollection = "users";
@@ -14,4 +16,5 @@ class AppString {
   static const String productsPath = "/products";
   static const String categoriesPath = "$productsPath/categories";
   static const String categoryPath = "$productsPath/category";
+  static const String searchPath = "$productsPath/search";
 }
