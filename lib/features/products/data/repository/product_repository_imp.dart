@@ -112,7 +112,7 @@ class ProductRepositoryImp implements ProductRepository {
   @override
   Future<Either<Failure, Unit>> clearSearchHistory() async {
     try {
-      await searchLocalDataSource.clearSearchHistory();
+       searchLocalDataSource.clearSearchHistory();
       return Right(unit);
     } catch (e) {
       return Left(CacheFailure());

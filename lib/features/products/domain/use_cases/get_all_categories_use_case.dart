@@ -7,6 +7,6 @@ class GetAllCategoriesUseCase {
   final ProductRepository repository;
   GetAllCategoriesUseCase({required this.repository});
 
-  Future<Either<Failure, List<CategoryEntity>>> call() async =>
-      await repository.getAllCategories();
+  Future<Either<Failure, List<CategoryEntity>>> call() =>
+      repository.getAllCategories();
 }

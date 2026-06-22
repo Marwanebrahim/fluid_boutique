@@ -7,6 +7,6 @@ class GetAllProductsUseCase {
   final ProductRepository productRepository;
   GetAllProductsUseCase({required this.productRepository});
 
-  Future<Either<Failure, List<ProductEntity>>> call() async =>
-      await productRepository.getAllProducts();
+  Future<Either<Failure, List<ProductEntity>>> call() =>
+      productRepository.getAllProducts();
 }

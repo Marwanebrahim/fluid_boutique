@@ -5,7 +5,7 @@ import 'package:fluid_boutique/features/products/domain/repository/product_repos
 class GetSearchHistoryUseCase {
   final ProductRepository repository;
   GetSearchHistoryUseCase({required this.repository});
-  Future<Either<Failure, List<String>>> call() async {
-    return await repository.getSearchHistory();
+  Future<Either<Failure, List<String>>> call() {
+    return repository.getSearchHistory();
   }
 }

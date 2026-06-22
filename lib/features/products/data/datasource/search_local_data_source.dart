@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:fluid_boutique/core/app%20strings/app_string.dart';
 import 'package:fluid_boutique/core/error/exeptions.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -24,7 +22,6 @@ class SearchLocalDataSourceImpl implements SearchLocalDataSource {
       ).put(AppString.searchHistoryKey, searchHistory);
       return searchHistory;
     } catch (e) {
-      log(e.toString());
       throw CacheException();
     }
   }

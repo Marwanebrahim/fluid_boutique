@@ -6,7 +6,7 @@ class AddSearchHistoryUseCase {
   final ProductRepository repository;
 
   AddSearchHistoryUseCase({required this.repository});
-  Future<Either<Failure, List<String>>> call(String query) async {
-    return await repository.addSearchHistory(query);
+  Future<Either<Failure, List<String>>> call(String query) {
+    return repository.addSearchHistory(query);
   }
 }

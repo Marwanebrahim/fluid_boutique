@@ -9,10 +9,8 @@ class GetProductsByCategoryUseCase {
 
   GetProductsByCategoryUseCase({required this.productRepository});
 
-  Future<Either<Failure, List<ProductEntity>>> call(
-    CategoryEntity category,
-  ) async {
+  Future<Either<Failure, List<ProductEntity>>> call(CategoryEntity category) {
     final categoryName = category.slug;
-    return await productRepository.getProductsByCategory(categoryName);
+    return productRepository.getProductsByCategory(categoryName);
   }
 }
