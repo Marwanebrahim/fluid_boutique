@@ -8,6 +8,6 @@ class ClearSearchHistoryUseCase {
   ClearSearchHistoryUseCase({required this.repository});
 
   Future<Either<Failure, Unit>> call() async {
-    return repository.clearSearchHistory();
+    return await repository.clearSearchHistory();
   }
 }

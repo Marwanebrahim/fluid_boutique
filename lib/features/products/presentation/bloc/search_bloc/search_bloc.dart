@@ -42,7 +42,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       return;
     }
     final products = searchResult.getOrElse(() => []);
-  final searchHistoryResult =  await addSearchHistoryUseCase(event.query);
+    final searchHistoryResult = await addSearchHistoryUseCase(event.query);
     if (searchHistoryResult.isLeft()) {
       searchHistoryResult.fold(
         (failure) => emit(SearchErrorState(message: failure.message)),
@@ -66,7 +66,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     result.fold(
       (failure) => emit(SearchHistoryErrorState(message: failure.message)),
       (searchHistory) => searchHistory.isEmpty
-          ? emit(SearchHistortyEmptyState())
+          ? emit(SearchHistoryEmptyState())
           : emit(SearchHistorySuccessState(searchHistory: searchHistory)),
     );
   }
@@ -78,7 +78,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     final result = await clearSearchHistoryUseCase();
     result.fold(
       (failure) => emit(SearchHistoryErrorState(message: failure.message)),
-      (_) => emit(SearchHistortyEmptyState()),
+      (_) => emit(SearchHistoryEmptyState()),
     );
   }
 }

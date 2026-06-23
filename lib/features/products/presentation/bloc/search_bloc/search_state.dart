@@ -51,7 +51,7 @@ class SearchHistoryLoadingState extends SearchState {
   List<Object?> get props => [];
 }
 
-class SearchHistortyEmptyState extends SearchState {
+class SearchHistoryEmptyState extends SearchState {
   @override
   List<Object?> get props => [];
 }

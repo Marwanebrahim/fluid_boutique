@@ -13,7 +13,6 @@ class ProductListWidget extends StatelessWidget {
   const ProductListWidget({super.key});
 
   @override
-  @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
