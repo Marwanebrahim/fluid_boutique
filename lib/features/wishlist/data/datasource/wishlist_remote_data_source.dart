@@ -41,7 +41,7 @@ class WishlistRemoteDataSourceImp implements WishlistRemoteDataSource {
   @override
   Future<List<WishlistModel>> getWishlist() async {
     try {
-      final uId = firebaseAuth.currentUser!.uid;
+      final uId = await getUserId();
       final docSnapshot = await _usersCollection.doc(uId).get();
       if (!docSnapshot.exists) return [];
       final wishlistData = docSnapshot.data() as Map<String, dynamic>;
@@ -57,7 +57,7 @@ class WishlistRemoteDataSourceImp implements WishlistRemoteDataSource {
   @override
   Future<bool> removeFromWishlist(int productId) async {
     try {
-      final uId = firebaseAuth.currentUser!.uid;
+      final uId = await getUserId();
       await _usersCollection.doc(uId).update({
         productId.toString(): FieldValue.delete(),
       });
