@@ -5,9 +5,9 @@ import 'package:fluid_boutique/core/error/exeptions.dart';
 import 'package:fluid_boutique/features/cart/data/model/cart_model.dart';
 
 abstract class CartRemoteDataSource {
-  Future<bool> addToCart(CartModel product);
-  Future<bool> removeFromCart(int productId);
-  Future<bool> clearCart();
+  Future<void> addToCart({required CartModel product});
+  Future<void> removeFromCart({required int productId});
+  Future<void> clearCart();
   Future<List<CartModel>> getCart();
 }
 
@@ -25,24 +25,22 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource {
   Future<String> getUserId() async => firebaseAuth.currentUser!.uid;
 
   @override
-  Future<bool> addToCart(CartModel product) async {
+  Future<void> addToCart({required CartModel product}) async {
     try {
       final uId = await getUserId();
       await _usersCollection.doc(uId).set({
         product.id.toString(): product.toJson(),
       }, SetOptions(merge: true));
-      return true;
     } catch (e) {
       throw ServerException();
     }
   }
 
   @override
-  Future<bool> clearCart() async {
+  Future<void> clearCart() async {
     try {
       final uId = await getUserId();
       await _usersCollection.doc(uId).delete();
-      return true;
     } catch (e) {
       throw ServerException();
     }
@@ -65,13 +63,12 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource {
   }
 
   @override
-  Future<bool> removeFromCart(int productId) async {
+  Future<void> removeFromCart({required int productId}) async {
     try {
       final uId = await getUserId();
       await _usersCollection.doc(uId).update({
         productId.toString(): FieldValue.delete(),
       });
-      return true;
     } catch (e) {
       throw ServerException();
     }
