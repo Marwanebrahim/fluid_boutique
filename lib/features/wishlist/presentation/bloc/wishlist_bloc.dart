@@ -12,7 +12,7 @@ class WishlistBloc extends Bloc<WishlistEvent, WishlistState> {
     required this.addToWishlistUseCase,
     required this.removeFromWishlistUseCase,
     required this.getProductDataUseCase,
-  }) : super(WishlistLoadingState()) {
+  }) : super(WishlistInitialState()) {
     on<GetWishlistEvent>(_onGetWishlistEvent);
     on<AddToWishlistEvent>(_onAddToWishlistEvent);
     on<RemoveFromWishlistEvent>(_onRemoveFromWishlistEvent);

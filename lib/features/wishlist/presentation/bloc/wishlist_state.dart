@@ -28,16 +28,6 @@ class WishlistSuccessState extends WishlistState {
   List<Object?> get props => [wishlist];
 }
 
-class ProductAddedSuccessState extends WishlistState {
-  @override
-  List<Object?> get props => [];
-}
-
-class ProductRemovedSuccessState extends WishlistState {
-  @override
-  List<Object?> get props => [];
-}
-
 class GetProductDataSuccessState extends WishlistState {
   final ProductEntity productData;
   GetProductDataSuccessState({required this.productData});
