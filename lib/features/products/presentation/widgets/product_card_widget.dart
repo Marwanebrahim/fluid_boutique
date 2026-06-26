@@ -1,7 +1,12 @@
 import 'package:fluid_boutique/core/configs/app_colors.dart';
 import 'package:fluid_boutique/core/configs/app_text_styles.dart';
 import 'package:fluid_boutique/features/products/domain/entity/product_entity.dart';
+import 'package:fluid_boutique/features/wishlist/domain/entity/wishlist_entity.dart';
+import 'package:fluid_boutique/features/wishlist/presentation/bloc/wishlist_bloc.dart';
+import 'package:fluid_boutique/features/wishlist/presentation/bloc/wishlist_event.dart';
+import 'package:fluid_boutique/features/wishlist/presentation/bloc/wishlist_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductCardWidget extends StatelessWidget {
   final ProductEntity product;
@@ -76,15 +81,49 @@ class ProductCardWidget extends StatelessWidget {
                       color: AppColors.white.withValues(alpha: 0.9),
                       shape: BoxShape.circle,
                     ),
-                    child: IconButton(
-                      onPressed: () {
-                        // TODO: Add to wishlist
+                    child: BlocBuilder<WishlistBloc, WishlistState>(
+                      buildWhen: (previous, current) =>
+                          current is WishlistSuccessState,
+                      builder: (context, state) {
+                        final isWishlisted = state is WishlistSuccessState
+                            ? state.wishlist.any(
+                                (item) => item.id == product.id,
+                              )
+                            : false;
+                        return IconButton(
+                          onPressed: () {
+                            if (isWishlisted) {
+                              context.read<WishlistBloc>().add(
+                                RemoveFromWishlistEvent(productID: product.id),
+                              );
+                            } else {
+                              context.read<WishlistBloc>().add(
+                                AddToWishlistEvent(
+                                  product: WishlistEntity(
+                                    id: product.id,
+                                    title: product.title,
+                                    price: product.price,
+                                    discountPercentage:
+                                        product.discountPercentage,
+                                    availabilityStatus:
+                                        product.availabilityStatus,
+                                    thumbnail: product.thumbnail,
+                                  ),
+                                ),
+                              );
+                            }
+                          },
+                          icon: Icon(
+                            isWishlisted
+                                ? Icons.favorite
+                                : Icons.favorite_border,
+                            color: isWishlisted
+                                ? AppColors.sale
+                                : AppColors.darkBlueIcon,
+                            size: 16,
+                          ),
+                        );
                       },
-                      icon: const Icon(
-                        Icons.favorite_border,
-                        size: 16,
-                        color: AppColors.darkBlueIcon,
-                      ),
                     ),
                   ),
                 ),

@@ -4,7 +4,12 @@ import 'package:fluid_boutique/features/products/domain/entity/product_entity.da
 import 'package:fluid_boutique/features/products/presentation/widgets/bottom_bar_widget.dart';
 import 'package:fluid_boutique/features/products/presentation/widgets/image_carousel.dart';
 import 'package:fluid_boutique/features/products/presentation/widgets/specs_grid.dart';
+import 'package:fluid_boutique/features/wishlist/domain/entity/wishlist_entity.dart';
+import 'package:fluid_boutique/features/wishlist/presentation/bloc/wishlist_bloc.dart';
+import 'package:fluid_boutique/features/wishlist/presentation/bloc/wishlist_event.dart';
+import 'package:fluid_boutique/features/wishlist/presentation/bloc/wishlist_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   final ProductEntity product;
@@ -19,7 +24,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   int _selectedColorIndex = 0;
   int _selectedSizeIndex = 1;
   bool _isDescriptionExpanded = true;
-  bool _isWishlisted = false;
 
   final List<Color> _palette = [
     const Color(0xFF1B2A4A),
@@ -336,14 +340,34 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           ),
 
           // ===== Bottom Bar (Wishlist + Add to Cart) =====
-          BottomBarWidget(
-            isWishlisted: _isWishlisted,
-            addToWishlist: () {
-              setState(() => _isWishlisted = !_isWishlisted);
-              // TODO: Add to wishlist
-            },
-            addToCart: () {
-              // TODO: Add to cart
+          BlocBuilder<WishlistBloc, WishlistState>(
+            buildWhen: (previous, current) => current is WishlistSuccessState,
+            builder: (context, state) {
+              final isWishlisted = state is WishlistSuccessState
+                  ? state.wishlist.any((item) => item.id == product.id)
+                  : false;
+              return BottomBarWidget(
+                isWishlisted: isWishlisted,
+                addToWishlist: () {
+                  context.read<WishlistBloc>().add(
+                    isWishlisted
+                        ? RemoveFromWishlistEvent(productID: product.id)
+                        : AddToWishlistEvent(
+                            product: WishlistEntity(
+                              id: product.id,
+                              title: product.title,
+                              price: product.price,
+                              discountPercentage: product.discountPercentage,
+                              availabilityStatus: product.availabilityStatus,
+                              thumbnail: product.thumbnail,
+                            ),
+                          ),
+                  );
+                },
+                addToCart: () {
+                  // TODO: Add to cart
+                },
+              );
             },
           ),
         ],

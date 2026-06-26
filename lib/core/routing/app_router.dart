@@ -9,10 +9,12 @@ import 'package:fluid_boutique/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:fluid_boutique/features/auth/presentation/screens/forget_password_screen.dart';
 import 'package:fluid_boutique/features/auth/presentation/screens/log_in_screen.dart';
 import 'package:fluid_boutique/features/auth/presentation/screens/sign_up_screen.dart';
-import 'package:fluid_boutique/features/products/domain/entity/all_products_args.dart';
-import 'package:fluid_boutique/features/products/domain/entity/product_entity.dart';
+import 'package:fluid_boutique/core/routing/args/all_products_args.dart';
+import 'package:fluid_boutique/core/routing/args/product_details_args.dart';
 import 'package:fluid_boutique/features/products/presentation/screens/all_products_screen.dart';
 import 'package:fluid_boutique/features/products/presentation/screens/product_details.dart';
+import 'package:fluid_boutique/features/wishlist/presentation/bloc/wishlist_bloc.dart';
+import 'package:fluid_boutique/features/wishlist/presentation/bloc/wishlist_event.dart';
 import 'package:fluid_boutique/injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -55,19 +57,30 @@ Route<dynamic> onGenerateRoute(RouteSettings setting) {
         ),
       );
     case AppRoutes.appWrapper:
-      return MaterialPageRoute(builder: (_) => const AppWrapper());
+      return MaterialPageRoute(
+        builder: (context) => BlocProvider(
+          create: (context) => sl<WishlistBloc>()..add(GetWishlistEvent()),
+          child: const AppWrapper(),
+        ),
+      );
     case AppRoutes.allProducts:
       final args = setting.arguments as AllProductsArgs;
       return MaterialPageRoute(
-        builder: (_) => BlocProvider.value(
-          value: args.productBloc,
+        builder: (_) => MultiBlocProvider(
+          providers: [
+            BlocProvider.value(value: args.productBloc),
+            BlocProvider.value(value: args.wishlistBloc),
+          ],
           child: AllProductsScreen(category: args.category),
         ),
       );
     case AppRoutes.productDetails:
-      final product = setting.arguments as ProductEntity;
+      final args = setting.arguments as ProductDetailsArgs;
       return MaterialPageRoute(
-        builder: (_) => ProductDetailsScreen(product: product),
+        builder: (context) => BlocProvider.value(
+          value: args.wishlistBloc,
+          child: ProductDetailsScreen(product: args.product),
+        ),
       );
     default:
       log(setting.name.toString());

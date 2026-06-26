@@ -3,6 +3,7 @@ import 'package:fluid_boutique/features/app/presentation/widgets/custom_app_bar.
 import 'package:fluid_boutique/features/products/presentation/bloc/search_bloc/search_bloc.dart';
 import 'package:fluid_boutique/features/products/presentation/screens/home_screen.dart';
 import 'package:fluid_boutique/features/products/presentation/screens/search_screen.dart';
+import 'package:fluid_boutique/features/wishlist/presentation/screens/wishlist_screen.dart';
 import 'package:fluid_boutique/injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -52,7 +53,7 @@ class _AppWrapperState extends State<AppWrapper> {
       child: const SearchScreen(),
     ),
     const Center(child: Text('Cart Screen')),
-    const Center(child: Text('Wishlist Screen')),
+    const WishlistScreen(),
     const Center(child: Text('Profile Screen')),
   ];
   List<CustomAppBar> get _appBarItems => [

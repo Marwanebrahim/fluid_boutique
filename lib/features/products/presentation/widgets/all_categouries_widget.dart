@@ -2,10 +2,11 @@ import 'package:fluid_boutique/core/configs/app_colors.dart';
 import 'package:fluid_boutique/core/configs/app_text_styles.dart';
 import 'package:fluid_boutique/core/configs/category_icon.dart';
 import 'package:fluid_boutique/core/routing/app_routes.dart';
-import 'package:fluid_boutique/features/products/domain/entity/all_products_args.dart';
+import 'package:fluid_boutique/core/routing/args/all_products_args.dart';
 import 'package:fluid_boutique/features/products/presentation/bloc/product_bloc/product_bloc.dart';
 import 'package:fluid_boutique/features/products/presentation/bloc/product_bloc/product_event.dart';
 import 'package:fluid_boutique/features/products/presentation/bloc/product_bloc/product_state.dart';
+import 'package:fluid_boutique/features/wishlist/presentation/bloc/wishlist_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -41,6 +42,7 @@ class AllCategouriesWidget extends StatelessWidget {
                           arguments: AllProductsArgs(
                             category: category,
                             productBloc: context.read<ProductBloc>(),
+                            wishlistBloc: context.read<WishlistBloc>(),
                           ),
                         );
                       },

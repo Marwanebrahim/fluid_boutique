@@ -1,11 +1,13 @@
 import 'package:fluid_boutique/core/configs/app_colors.dart';
 import 'package:fluid_boutique/core/configs/app_text_styles.dart';
 import 'package:fluid_boutique/core/routing/app_routes.dart';
-import 'package:fluid_boutique/features/products/domain/entity/all_products_args.dart';
+import 'package:fluid_boutique/core/routing/args/all_products_args.dart';
+import 'package:fluid_boutique/core/routing/args/product_details_args.dart';
 import 'package:fluid_boutique/features/products/presentation/bloc/product_bloc/product_bloc.dart';
 import 'package:fluid_boutique/features/products/presentation/bloc/product_bloc/product_event.dart';
 import 'package:fluid_boutique/features/products/presentation/bloc/product_bloc/product_state.dart';
 import 'package:fluid_boutique/features/products/presentation/widgets/product_card_widget.dart';
+import 'package:fluid_boutique/features/wishlist/presentation/bloc/wishlist_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -33,7 +35,11 @@ class NewArrivalWidget extends StatelessWidget {
                 Navigator.pushNamed(
                   context,
                   AppRoutes.allProducts,
-                  arguments: AllProductsArgs(category: null, productBloc: context.read<ProductBloc>()),
+                  arguments: AllProductsArgs(
+                    category: null,
+                    productBloc: context.read<ProductBloc>(),
+                    wishlistBloc: context.read<WishlistBloc>(),
+                  ),
                 );
               },
               child: Text(
@@ -86,7 +92,10 @@ class NewArrivalWidget extends StatelessWidget {
                     onTap: () => Navigator.pushNamed(
                       context,
                       AppRoutes.productDetails,
-                      arguments: state.products[index],
+                      arguments: ProductDetailsArgs(
+                        product: state.products[index],
+                        wishlistBloc: context.read<WishlistBloc>(),
+                      ),
                     ),
                   );
                 },

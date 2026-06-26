@@ -24,6 +24,14 @@ import 'package:fluid_boutique/features/products/domain/use_cases/get_search_his
 import 'package:fluid_boutique/features/products/domain/use_cases/search_product_use_case.dart';
 import 'package:fluid_boutique/features/products/presentation/bloc/product_bloc/product_bloc.dart';
 import 'package:fluid_boutique/features/products/presentation/bloc/search_bloc/search_bloc.dart';
+import 'package:fluid_boutique/features/wishlist/data/datasource/wishlist_remote_data_source.dart';
+import 'package:fluid_boutique/features/wishlist/data/repository/wishlist_repository_imp.dart';
+import 'package:fluid_boutique/features/wishlist/domain/repository/wishlist_repository.dart';
+import 'package:fluid_boutique/features/wishlist/domain/use_cases/add_to_wishlist_use_case.dart';
+import 'package:fluid_boutique/features/wishlist/domain/use_cases/get_product_data_use_case.dart';
+import 'package:fluid_boutique/features/wishlist/domain/use_cases/get_wishlist_use_case.dart';
+import 'package:fluid_boutique/features/wishlist/domain/use_cases/remove_from_wishlist_use_case.dart';
+import 'package:fluid_boutique/features/wishlist/presentation/bloc/wishlist_bloc.dart';
 import 'package:fluid_boutique/firebase_options.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -121,6 +129,38 @@ Future<void> initDependencies() async {
       getSearchHistoryUseCase: sl(),
       addSearchHistoryUseCase: sl(),
       clearSearchHistoryUseCase: sl(),
+    ),
+  );
+
+  /// wishlist features
+  sl.registerLazySingleton<WishlistRemoteDataSource>(
+    () => WishlistRemoteDataSourceImp(
+      firebaseFirestore: sl(),
+      firebaseAuth: sl(),
+      dio: sl(),
+    ),
+  );
+  sl.registerLazySingleton<WishlistRepository>(
+    () => WishlistRepositoryImp(remoteWishlistDataSource: sl()),
+  );
+  sl.registerLazySingleton<GetWishlistUseCase>(
+    () => GetWishlistUseCase(repository: sl()),
+  );
+  sl.registerLazySingleton<AddToWishlistUseCase>(
+    () => AddToWishlistUseCase(wishlistRepository: sl()),
+  );
+  sl.registerLazySingleton<RemoveFromWishlistUseCase>(
+    () => RemoveFromWishlistUseCase(wishlistRepository: sl()),
+  );
+  sl.registerLazySingleton<GetProductDataUseCase>(
+    () => GetProductDataUseCase(wishlistRepository: sl()),
+  );
+  sl.registerFactory<WishlistBloc>(
+    () => WishlistBloc(
+      getWishlistUseCase: sl(),
+      addToWishlistUseCase: sl(),
+      removeFromWishlistUseCase: sl(),
+      getProductDataUseCase: sl(),
     ),
   );
 }

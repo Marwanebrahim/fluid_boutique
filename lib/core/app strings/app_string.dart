@@ -8,6 +8,7 @@ class AppString {
 
   /// Firebase
   static const String usersCollection = "users";
+  static const String whishListCollection = "wishlist";
 
   /// Api endpoint
   static const String baseUrl = "https://dummyjson.com";

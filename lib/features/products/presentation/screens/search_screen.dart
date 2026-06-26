@@ -2,11 +2,13 @@ import 'package:fluid_boutique/core/configs/app_colors.dart';
 import 'package:fluid_boutique/core/configs/app_text_styles.dart';
 import 'package:fluid_boutique/core/helpers/image_helper.dart';
 import 'package:fluid_boutique/core/routing/app_routes.dart';
+import 'package:fluid_boutique/core/routing/args/product_details_args.dart';
 import 'package:fluid_boutique/features/products/domain/entity/product_entity.dart';
 import 'package:fluid_boutique/features/products/presentation/bloc/search_bloc/search_bloc.dart';
 import 'package:fluid_boutique/features/products/presentation/bloc/search_bloc/search_event.dart';
 import 'package:fluid_boutique/features/products/presentation/bloc/search_bloc/search_state.dart';
 import 'package:fluid_boutique/features/products/presentation/widgets/product_card_widget.dart';
+import 'package:fluid_boutique/features/wishlist/presentation/bloc/wishlist_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -309,7 +311,10 @@ class _SearchScreenState extends State<SearchScreen> {
           onTap: () => Navigator.pushNamed(
             context,
             AppRoutes.productDetails,
-            arguments: products[index],
+            arguments: ProductDetailsArgs(
+              product: products[index],
+              wishlistBloc: context.read<WishlistBloc>(),
+            ),
           ),
         );
       },
