@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:fluid_boutique/core/error/failures.dart';
 import 'package:fluid_boutique/features/cart/data/datasource/cart_remote_data_source.dart';
+import 'package:fluid_boutique/features/cart/data/mapper/cart_entity_mapper.dart';
 import 'package:fluid_boutique/features/cart/data/mapper/cart_model_mapper.dart';
-import 'package:fluid_boutique/features/cart/data/model/cart_model.dart';
 import 'package:fluid_boutique/features/cart/domain/entity/cart_entity.dart';
 import 'package:fluid_boutique/features/cart/domain/repository/cart_repository.dart';
 
@@ -11,9 +11,9 @@ class CartRepositoryImp implements CartRepository {
 
   CartRepositoryImp({required this.cartRemoteDataSource});
   @override
-  Future<Either<Failure, Unit>> addToCart({required CartModel product}) async {
+  Future<Either<Failure, Unit>> addToCart({required CartEntity product}) async {
     try {
-      await cartRemoteDataSource.addToCart(product: product);
+      await cartRemoteDataSource.addToCart(product: product.toModel());
       return Right(unit);
     } catch (e) {
       return Left(ServerFailure());

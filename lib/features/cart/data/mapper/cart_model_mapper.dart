@@ -11,5 +11,6 @@ extension CartModelMapper on CartModel {
     stock: stock,
     color: color,
     size: size,
+    quantity: quantity,
   );
 }

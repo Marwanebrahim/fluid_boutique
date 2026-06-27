@@ -7,7 +7,7 @@ class CartEntity {
   final int stock;
   final String color;
   final String size;
-
+  final int quantity;
   CartEntity({
     required this.id,
     required this.title,
@@ -17,5 +17,6 @@ class CartEntity {
     required this.stock,
     required this.color,
     required this.size,
+    required this.quantity,
   });
 }

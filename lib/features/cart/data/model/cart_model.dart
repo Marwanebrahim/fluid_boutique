@@ -7,6 +7,7 @@ class CartModel {
   final int stock;
   final String color;
   final String size;
+  final int quantity;
 
   CartModel({
     required this.id,
@@ -17,6 +18,7 @@ class CartModel {
     required this.stock,
     required this.color,
     required this.size,
+    required this.quantity,
   });
 
   factory CartModel.fromJson(Map<String, dynamic> json) {
@@ -24,11 +26,12 @@ class CartModel {
       id: json['id'],
       title: json['title'],
       thumbnail: json['thumbnail'],
-      price: json['price'],
-      discountPercentage: json['discountPercentage'],
+      price: (json['price'] as num).toDouble(),
+      discountPercentage: (json['discountPercentage'] as num).toDouble(),
       stock: json['stock'],
       color: json['color'],
       size: json['size'],
+      quantity: json['quantity'],
     );
   }
 
@@ -41,5 +44,6 @@ class CartModel {
     'stock': stock,
     'color': color,
     'size': size,
+    'quantity': quantity,
   };
 }
