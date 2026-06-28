@@ -10,4 +10,5 @@ class AppRoutes {
   static const String appWrapper = "/appWrapper";
   static const String allProducts = "/allProducts";
   static const String productDetails = "/productDetails";
+  static const String checkout = "/checkout";
 }

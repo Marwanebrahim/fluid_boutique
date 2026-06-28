@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:fluid_boutique/core/routing/app_routes.dart';
+import 'package:fluid_boutique/core/routing/args/checkout_args.dart';
 import 'package:fluid_boutique/features/app/presentation/bloc/app_bloc.dart';
 import 'package:fluid_boutique/features/app/presentation/screens/app_wrapper.dart';
 import 'package:fluid_boutique/features/app/presentation/screens/on_boarding_screen.dart';
@@ -11,6 +12,9 @@ import 'package:fluid_boutique/features/auth/presentation/screens/log_in_screen.
 import 'package:fluid_boutique/features/auth/presentation/screens/sign_up_screen.dart';
 import 'package:fluid_boutique/core/routing/args/all_products_args.dart';
 import 'package:fluid_boutique/core/routing/args/product_details_args.dart';
+import 'package:fluid_boutique/features/cart/presentation/bloc/cart_bloc.dart';
+import 'package:fluid_boutique/features/cart/presentation/bloc/cart_event.dart';
+import 'package:fluid_boutique/features/cart/presentation/screens/checkout_screen.dart';
 import 'package:fluid_boutique/features/products/presentation/screens/all_products_screen.dart';
 import 'package:fluid_boutique/features/products/presentation/screens/product_details.dart';
 import 'package:fluid_boutique/features/wishlist/presentation/bloc/wishlist_bloc.dart';
@@ -58,8 +62,15 @@ Route<dynamic> onGenerateRoute(RouteSettings setting) {
       );
     case AppRoutes.appWrapper:
       return MaterialPageRoute(
-        builder: (context) => BlocProvider(
-          create: (context) => sl<WishlistBloc>()..add(GetWishlistEvent()),
+        builder: (context) => MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => sl<WishlistBloc>()..add(GetWishlistEvent()),
+            ),
+            BlocProvider(
+              create: (context) => sl<CartBloc>()..add(GetCartEvent()),
+            ),
+          ],
           child: const AppWrapper(),
         ),
       );
@@ -70,6 +81,7 @@ Route<dynamic> onGenerateRoute(RouteSettings setting) {
           providers: [
             BlocProvider.value(value: args.productBloc),
             BlocProvider.value(value: args.wishlistBloc),
+            BlocProvider.value(value: args.cartBloc),
           ],
           child: AllProductsScreen(category: args.category),
         ),
@@ -77,9 +89,20 @@ Route<dynamic> onGenerateRoute(RouteSettings setting) {
     case AppRoutes.productDetails:
       final args = setting.arguments as ProductDetailsArgs;
       return MaterialPageRoute(
-        builder: (context) => BlocProvider.value(
-          value: args.wishlistBloc,
+        builder: (context) => MultiBlocProvider(
+          providers: [
+            BlocProvider.value(value: args.wishlistBloc),
+            BlocProvider.value(value: args.cartBloc),
+          ],
           child: ProductDetailsScreen(product: args.product),
+        ),
+      );
+    case AppRoutes.checkout:
+      final args = setting.arguments as CheckoutArgs;
+      return MaterialPageRoute(
+        builder: (context) => BlocProvider.value(
+          value: args.cartBloc,
+          child: CheckoutScreen(cartItems: args.cartItems),
         ),
       );
     default:

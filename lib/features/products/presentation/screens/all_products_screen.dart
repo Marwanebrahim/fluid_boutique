@@ -1,6 +1,7 @@
 import 'package:fluid_boutique/core/configs/app_colors.dart';
 import 'package:fluid_boutique/core/configs/app_text_styles.dart';
 import 'package:fluid_boutique/core/routing/app_routes.dart';
+import 'package:fluid_boutique/features/cart/presentation/bloc/cart_bloc.dart';
 import 'package:fluid_boutique/features/products/domain/entity/category_entity.dart';
 import 'package:fluid_boutique/core/routing/args/product_details_args.dart';
 import 'package:fluid_boutique/features/products/presentation/bloc/product_bloc/product_bloc.dart';
@@ -8,6 +9,7 @@ import 'package:fluid_boutique/features/products/presentation/bloc/product_bloc/
 import 'package:fluid_boutique/features/products/presentation/bloc/product_bloc/product_state.dart';
 import 'package:fluid_boutique/features/products/presentation/widgets/product_card_widget.dart';
 import 'package:fluid_boutique/features/wishlist/presentation/bloc/wishlist_bloc.dart';
+import 'package:fluid_boutique/shared/widgets/custom_error_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -61,6 +63,7 @@ class AllProductsScreen extends StatelessWidget {
                     arguments: ProductDetailsArgs(
                       product: state.products[index],
                       wishlistBloc: context.read<WishlistBloc>(),
+                      cartBloc: context.read<CartBloc>(),
                     ),
                   ),
                 );
@@ -75,48 +78,10 @@ class AllProductsScreen extends StatelessWidget {
           }
           // Error
           else if (state is ProductErrorState) {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(
-                    Icons.error_outline,
-                    size: 48,
-                    color: AppColors.red,
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    state.message,
-                    style: AppTextStyles.semibold(
-                      size: 16,
-                      color: AppColors.darkBlueIcon,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 24),
-                  GestureDetector(
-                    onTap: () =>
-                        context.read<ProductBloc>().add(GetAllProductsEvent()),
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 24,
-                        vertical: 12,
-                      ),
-                      decoration: BoxDecoration(
-                        color: AppColors.primary,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Text(
-                        'Try Again',
-                        style: AppTextStyles.semibold(
-                          size: 14,
-                          color: AppColors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+            return CustomErrorWidget(
+              message: state.message,
+              onRetry: () =>
+                  context.read<ProductBloc>().add(GetAllProductsEvent()),
             );
           }
 

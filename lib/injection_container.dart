@@ -11,6 +11,14 @@ import 'package:fluid_boutique/features/app/presentation/bloc/app_bloc.dart';
 import 'package:fluid_boutique/features/auth/data/dataSource/auth_remote_data_source.dart';
 import 'package:fluid_boutique/features/auth/data/repositories/auth_repository.dart';
 import 'package:fluid_boutique/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:fluid_boutique/features/cart/data/datasource/cart_remote_data_source.dart';
+import 'package:fluid_boutique/features/cart/data/repository/cart_repository_imp.dart';
+import 'package:fluid_boutique/features/cart/domain/repository/cart_repository.dart';
+import 'package:fluid_boutique/features/cart/domain/use_cases/add_to_cart_use_case.dart';
+import 'package:fluid_boutique/features/cart/domain/use_cases/clear_cart_use_case.dart';
+import 'package:fluid_boutique/features/cart/domain/use_cases/get_cart_use_case.dart';
+import 'package:fluid_boutique/features/cart/domain/use_cases/remove_from_cart_use_case.dart';
+import 'package:fluid_boutique/features/cart/presentation/bloc/cart_bloc.dart';
 import 'package:fluid_boutique/features/products/data/datasource/product_remote_data_source.dart';
 import 'package:fluid_boutique/features/products/data/datasource/search_local_data_source.dart';
 import 'package:fluid_boutique/features/products/data/repository/product_repository_imp.dart';
@@ -161,6 +169,34 @@ Future<void> initDependencies() async {
       addToWishlistUseCase: sl(),
       removeFromWishlistUseCase: sl(),
       getProductDataUseCase: sl(),
+    ),
+  );
+  // cart features
+  sl.registerLazySingleton<CartRemoteDataSource>(
+    () => CartRemoteDataSourceImpl(firebaseFirestore: sl(), firebaseAuth: sl()),
+  );
+  sl.registerLazySingleton<CartRepository>(
+    () => CartRepositoryImp(cartRemoteDataSource: sl()),
+  );
+  sl.registerLazySingleton<GetCartUseCase>(
+    () => GetCartUseCase(cartRepository: sl()),
+  );
+  sl.registerLazySingleton<AddToCartUseCase>(
+    () => AddToCartUseCase(cartRepository: sl()),
+  );
+  sl.registerLazySingleton<RemoveFromCartUseCase>(
+    () => RemoveFromCartUseCase(cartRepository: sl()),
+  );
+  sl.registerLazySingleton<ClearCartUseCase>(
+    () => ClearCartUseCase(cartRepository: sl()),
+  );
+
+  sl.registerFactory<CartBloc>(
+    () => CartBloc(
+      getCartUseCase: sl(),
+      addToCartUseCase: sl(),
+      removeFromCartUseCase: sl(),
+      clearCartUseCase: sl(),
     ),
   );
 }

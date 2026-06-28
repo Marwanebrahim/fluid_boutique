@@ -1,3 +1,4 @@
+import 'package:fluid_boutique/features/cart/domain/entity/cart_entity.dart';
 import 'package:fluid_boutique/features/cart/domain/use_cases/add_to_cart_use_case.dart';
 import 'package:fluid_boutique/features/cart/domain/use_cases/clear_cart_use_case.dart';
 import 'package:fluid_boutique/features/cart/domain/use_cases/get_cart_use_case.dart';
@@ -69,7 +70,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     final result = await clearCartUseCase();
     result.fold(
       (failure) => emit(CartErrorState(message: failure.message)),
-      (_) => emit(CartClearState()),
+      (_) => emit(CartEmptyState()),
     );
   }
 
@@ -80,7 +81,21 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     final result = await addToCartUseCase(product: event.product);
     result.fold(
       (failure) => emit(CartErrorState(message: failure.message)),
-      (_) => add(GetCartEvent()),
+      (_) => add(
+        AddToCartEvent(
+          product: CartEntity(
+            id: event.product.id,
+            title: event.product.title,
+            thumbnail: event.product.thumbnail,
+            price: event.product.price,
+            discountPercentage: event.product.discountPercentage,
+            stock: event.product.stock,
+            color: event.product.color,
+            size: event.product.size,
+            quantity: event.quantity,
+          ),
+        ),
+      ),
     );
   }
 }

@@ -1,5 +1,8 @@
 import 'package:fluid_boutique/core/configs/app_colors.dart';
 import 'package:fluid_boutique/core/configs/app_text_styles.dart';
+import 'package:fluid_boutique/features/cart/domain/entity/cart_entity.dart';
+import 'package:fluid_boutique/features/cart/presentation/bloc/cart_bloc.dart';
+import 'package:fluid_boutique/features/cart/presentation/bloc/cart_event.dart';
 import 'package:fluid_boutique/features/products/domain/entity/product_entity.dart';
 import 'package:fluid_boutique/features/products/presentation/widgets/bottom_bar_widget.dart';
 import 'package:fluid_boutique/features/products/presentation/widgets/image_carousel.dart';
@@ -365,7 +368,33 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   );
                 },
                 addToCart: () {
-                  // TODO: Add to cart
+                  final selectedColor = [
+                    'Navy',
+                    'Burgundy',
+                    'Gray',
+                  ][_selectedColorIndex];
+                  final selectedSize = _sizes[_selectedSizeIndex];
+                  final cartItem = CartEntity(
+                    id: product.id,
+                    title: product.title,
+                    thumbnail: product.thumbnail,
+                    price: product.price,
+                    discountPercentage: product.discountPercentage,
+                    stock: product.stock,
+                    color: selectedColor,
+                    size: selectedSize,
+                    quantity: 1,
+                  );
+                  context.read<CartBloc>().add(
+                    AddToCartEvent(product: cartItem),
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Added to cart!'),
+                      backgroundColor: AppColors.primary,
+                      duration: Duration(seconds: 2),
+                    ),
+                  );
                 },
               );
             },

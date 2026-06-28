@@ -1,5 +1,6 @@
 import 'package:fluid_boutique/core/configs/app_colors.dart';
 import 'package:fluid_boutique/features/app/presentation/widgets/custom_app_bar.dart';
+import 'package:fluid_boutique/features/cart/presentation/screens/cart_screen.dart';
 import 'package:fluid_boutique/features/products/presentation/bloc/search_bloc/search_bloc.dart';
 import 'package:fluid_boutique/features/products/presentation/screens/home_screen.dart';
 import 'package:fluid_boutique/features/products/presentation/screens/search_screen.dart';
@@ -52,7 +53,7 @@ class _AppWrapperState extends State<AppWrapper> {
       create: (context) => sl<SearchBloc>(),
       child: const SearchScreen(),
     ),
-    const Center(child: Text('Cart Screen')),
+    const CartScreen(),
     const WishlistScreen(),
     const Center(child: Text('Profile Screen')),
   ];

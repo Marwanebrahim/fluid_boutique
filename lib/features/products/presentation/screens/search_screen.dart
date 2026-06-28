@@ -3,12 +3,14 @@ import 'package:fluid_boutique/core/configs/app_text_styles.dart';
 import 'package:fluid_boutique/core/helpers/image_helper.dart';
 import 'package:fluid_boutique/core/routing/app_routes.dart';
 import 'package:fluid_boutique/core/routing/args/product_details_args.dart';
+import 'package:fluid_boutique/features/cart/presentation/bloc/cart_bloc.dart';
 import 'package:fluid_boutique/features/products/domain/entity/product_entity.dart';
 import 'package:fluid_boutique/features/products/presentation/bloc/search_bloc/search_bloc.dart';
 import 'package:fluid_boutique/features/products/presentation/bloc/search_bloc/search_event.dart';
 import 'package:fluid_boutique/features/products/presentation/bloc/search_bloc/search_state.dart';
 import 'package:fluid_boutique/features/products/presentation/widgets/product_card_widget.dart';
 import 'package:fluid_boutique/features/wishlist/presentation/bloc/wishlist_bloc.dart';
+import 'package:fluid_boutique/shared/widgets/custom_error_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -136,7 +138,16 @@ class _SearchScreenState extends State<SearchScreen> {
                 }
 
                 if (state is SearchErrorState) {
-                  return _buildError(state.message);
+                  return CustomErrorWidget(
+                    message: state.message,
+                    onRetry: () {
+                      if (_controller.text.isNotEmpty) {
+                        context.read<SearchBloc>().add(
+                          SearchProductsEvent(query: _controller.text),
+                        );
+                      }
+                    },
+                  );
                 }
 
                 return _buildEmptyDiscovery();
@@ -314,6 +325,7 @@ class _SearchScreenState extends State<SearchScreen> {
             arguments: ProductDetailsArgs(
               product: products[index],
               wishlistBloc: context.read<WishlistBloc>(),
+              cartBloc: context.read<CartBloc>(),
             ),
           ),
         );
@@ -344,48 +356,6 @@ class _SearchScreenState extends State<SearchScreen> {
               size: 14,
               color: AppColors.textSecondary,
               font: AppFont.inter,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  // ===== Error =====
-  Widget _buildError(String message) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Icon(Icons.error_outline, size: 48, color: AppColors.red),
-          const SizedBox(height: 16),
-          Text(
-            message,
-            style: AppTextStyles.semibold(
-              size: 14,
-              color: AppColors.darkBlueIcon,
-            ),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 16),
-          GestureDetector(
-            onTap: () {
-              if (_controller.text.isNotEmpty) {
-                context.read<SearchBloc>().add(
-                  SearchProductsEvent(query: _controller.text),
-                );
-              }
-            },
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-              decoration: BoxDecoration(
-                color: AppColors.primary,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Text(
-                'Try Again',
-                style: AppTextStyles.semibold(size: 14, color: AppColors.white),
-              ),
             ),
           ),
         ],

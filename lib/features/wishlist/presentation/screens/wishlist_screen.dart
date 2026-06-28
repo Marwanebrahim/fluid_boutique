@@ -2,11 +2,13 @@ import 'package:fluid_boutique/core/configs/app_colors.dart';
 import 'package:fluid_boutique/core/configs/app_text_styles.dart';
 import 'package:fluid_boutique/core/routing/app_routes.dart';
 import 'package:fluid_boutique/core/routing/args/product_details_args.dart';
+import 'package:fluid_boutique/features/cart/presentation/bloc/cart_bloc.dart';
 import 'package:fluid_boutique/features/wishlist/presentation/bloc/wishlist_bloc.dart';
 import 'package:fluid_boutique/features/wishlist/presentation/bloc/wishlist_event.dart';
 import 'package:fluid_boutique/features/wishlist/presentation/bloc/wishlist_state.dart';
 import 'package:fluid_boutique/features/wishlist/presentation/widgets/empty_wishlist_widget.dart';
 import 'package:fluid_boutique/features/wishlist/presentation/widgets/wishlist_card_widget.dart';
+import 'package:fluid_boutique/shared/widgets/custom_error_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -25,6 +27,7 @@ class WishlistScreen extends StatelessWidget {
             arguments: ProductDetailsArgs(
               product: state.productData,
               wishlistBloc: context.read<WishlistBloc>(),
+              cartBloc: context.read<CartBloc>(),
             ),
           );
         }
@@ -41,45 +44,11 @@ class WishlistScreen extends StatelessWidget {
         }
 
         if (state is WishlistErrorState) {
-          // TODO: Make it in a reusable widget
-          return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(Icons.error_outline, size: 48, color: AppColors.red),
-                const SizedBox(height: 16),
-                Text(
-                  state.message,
-                  style: AppTextStyles.semibold(
-                    size: 16,
-                    color: AppColors.darkBlueIcon,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 24),
-                GestureDetector(
-                  onTap: () =>
-                      context.read<WishlistBloc>().add(GetWishlistEvent()),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 24,
-                      vertical: 12,
-                    ),
-                    decoration: BoxDecoration(
-                      color: AppColors.primary,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Text(
-                      'Try Again',
-                      style: AppTextStyles.semibold(
-                        size: 14,
-                        color: AppColors.white,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+          CustomErrorWidget(
+            message: state.message,
+            onRetry: () {
+              context.read<WishlistBloc>().add(GetWishlistEvent());
+            },
           );
         }
 
