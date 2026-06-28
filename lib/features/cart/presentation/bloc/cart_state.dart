@@ -8,10 +8,10 @@ class CartInitialState extends CartState {
   List<Object?> get props => [];
 }
 
-class CartLoadingState extends CartState {
-  @override
-  List<Object?> get props => [];
-}
+// class CartLoadingState extends CartState {
+//   @override
+//   List<Object?> get props => [];
+// }
 
 class CartErrorState extends CartState {
   final String message;
@@ -31,12 +31,3 @@ class CartEmptyState extends CartState {
   @override
   List<Object?> get props => [];
 }
-
-class CartClearState extends CartState {
-  @override
-  List<Object?> get props => [];
-}
-
-
-
-

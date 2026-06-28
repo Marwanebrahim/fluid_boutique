@@ -40,7 +40,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     GetCartEvent event,
     Emitter<CartState> emit,
   ) async {
-    emit(CartLoadingState());
     final result = await getCartUseCase();
     result.fold(
       (failure) => emit(CartErrorState(message: failure.message)),
