@@ -48,7 +48,7 @@ class _AppWrapperState extends State<AppWrapper> {
       tooltip: 'Profile Screen',
     ),
   ];
-  final List<Widget> _screens = [
+  List<Widget> get _screens => [
     const HomeScreen(),
     BlocProvider(
       create: (context) => sl<SearchBloc>(),
@@ -56,7 +56,7 @@ class _AppWrapperState extends State<AppWrapper> {
     ),
     const CartScreen(),
     const WishlistScreen(),
-    const ProfileScreen(),
+    ProfileScreen(onGoToWishlist: () => onTap(3)),
   ];
   List<CustomAppBar> get _appBarItems => [
     CustomAppBar(

@@ -15,8 +15,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
-
+  const ProfileScreen({super.key, required this.onGoToWishlist});
+  final VoidCallback onGoToWishlist;
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
@@ -263,7 +263,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ProfileMenuTile(
             icon: Icons.favorite_border_rounded,
             title: 'Wishlist',
-            onTap: () {},
+            onTap: widget.onGoToWishlist,
           ),
           ProfileMenuTile(
             icon: Icons.notifications_outlined,
