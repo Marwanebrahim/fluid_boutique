@@ -38,6 +38,12 @@ import 'package:fluid_boutique/features/products/domain/use_cases/get_search_his
 import 'package:fluid_boutique/features/products/domain/use_cases/search_product_use_case.dart';
 import 'package:fluid_boutique/features/products/presentation/bloc/product_bloc/product_bloc.dart';
 import 'package:fluid_boutique/features/products/presentation/bloc/search_bloc/search_bloc.dart';
+import 'package:fluid_boutique/features/profile/data/datasource/profile_remote_data_source.dart';
+import 'package:fluid_boutique/features/profile/data/repository/profile_repository_imp.dart';
+import 'package:fluid_boutique/features/profile/domain/repository/profile_repository.dart';
+import 'package:fluid_boutique/features/profile/domain/use_case/get_profile_use_case.dart';
+import 'package:fluid_boutique/features/profile/domain/use_case/log_out_use_case.dart';
+import 'package:fluid_boutique/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:fluid_boutique/features/wishlist/data/datasource/wishlist_remote_data_source.dart';
 import 'package:fluid_boutique/features/wishlist/data/repository/wishlist_repository_imp.dart';
 import 'package:fluid_boutique/features/wishlist/domain/repository/wishlist_repository.dart';
@@ -222,5 +228,25 @@ Future<void> initDependencies() async {
   );
   sl.registerFactory<OrdersBloc>(
     () => OrdersBloc(getUserOrdersUseCase: sl(), placeOrderUseCase: sl()),
+  );
+
+  /// Profile feature
+  sl.registerLazySingleton<ProfileRemoteDataSource>(
+    () => ProfileRemoteDataSourceImpl(
+      firebaseAuth: sl(),
+      googleSignIn: sl(), 
+    ),
+  );
+  sl.registerLazySingleton<ProfileRepository>(
+    () => ProfileRepositoryImpl(profileRemoteDataSource: sl()),
+  );
+  sl.registerLazySingleton<GetProfileUseCase>(
+    () => GetProfileUseCase(profileRepository: sl()),
+  );
+  sl.registerLazySingleton<LogOutUseCase>(
+    () => LogOutUseCase(profileRepository: sl()),
+  );
+  sl.registerFactory<ProfileBloc>(
+    () => ProfileBloc(getProfileUseCase: sl(), logOutUseCase: sl()),
   );
 }

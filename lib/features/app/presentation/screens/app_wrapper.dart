@@ -4,6 +4,7 @@ import 'package:fluid_boutique/features/cart/presentation/screens/cart_screen.da
 import 'package:fluid_boutique/features/products/presentation/bloc/search_bloc/search_bloc.dart';
 import 'package:fluid_boutique/features/products/presentation/screens/home_screen.dart';
 import 'package:fluid_boutique/features/products/presentation/screens/search_screen.dart';
+import 'package:fluid_boutique/features/profile/presentation/screens/profile_screen.dart';
 import 'package:fluid_boutique/features/wishlist/presentation/screens/wishlist_screen.dart';
 import 'package:fluid_boutique/injection_container.dart';
 import 'package:flutter/material.dart';
@@ -55,7 +56,7 @@ class _AppWrapperState extends State<AppWrapper> {
     ),
     const CartScreen(),
     const WishlistScreen(),
-    const Center(child: Text('Profile Screen')),
+    const ProfileScreen(),
   ];
   List<CustomAppBar> get _appBarItems => [
     CustomAppBar(

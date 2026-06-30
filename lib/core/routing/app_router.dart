@@ -20,6 +20,7 @@ import 'package:fluid_boutique/features/orders/presentation/bloc/orders_event.da
 import 'package:fluid_boutique/features/orders/presentation/screens/orders_screen.dart';
 import 'package:fluid_boutique/features/products/presentation/screens/all_products_screen.dart';
 import 'package:fluid_boutique/features/products/presentation/screens/product_details.dart';
+import 'package:fluid_boutique/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:fluid_boutique/features/wishlist/presentation/bloc/wishlist_bloc.dart';
 import 'package:fluid_boutique/features/wishlist/presentation/bloc/wishlist_event.dart';
 import 'package:fluid_boutique/injection_container.dart';
@@ -76,6 +77,7 @@ Route<dynamic> onGenerateRoute(RouteSettings setting) {
             BlocProvider(
               create: (context) => sl<OrdersBloc>()..add(GetUserOrdersEvent()),
             ),
+            BlocProvider(create: (context) => sl<ProfileBloc>()),
           ],
           child: const AppWrapper(),
         ),
