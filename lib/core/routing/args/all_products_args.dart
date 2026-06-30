@@ -8,7 +8,7 @@ class AllProductsArgs {
   final ProductBloc productBloc;
   final WishlistBloc wishlistBloc;
   final CartBloc cartBloc;
-
+  
   const AllProductsArgs({
     required this.category,
     required this.productBloc,

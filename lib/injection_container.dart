@@ -19,6 +19,12 @@ import 'package:fluid_boutique/features/cart/domain/use_cases/clear_cart_use_cas
 import 'package:fluid_boutique/features/cart/domain/use_cases/get_cart_use_case.dart';
 import 'package:fluid_boutique/features/cart/domain/use_cases/remove_from_cart_use_case.dart';
 import 'package:fluid_boutique/features/cart/presentation/bloc/cart_bloc.dart';
+import 'package:fluid_boutique/features/orders/data/datasource/orders_remote_data_source.dart';
+import 'package:fluid_boutique/features/orders/data/repository/orders_repository_imp.dart';
+import 'package:fluid_boutique/features/orders/domain/repository/order_repository.dart';
+import 'package:fluid_boutique/features/orders/domain/use_case/get_user_orders_use_case.dart';
+import 'package:fluid_boutique/features/orders/domain/use_case/place_order_use_case.dart';
+import 'package:fluid_boutique/features/orders/presentation/bloc/orders_bloc.dart';
 import 'package:fluid_boutique/features/products/data/datasource/product_remote_data_source.dart';
 import 'package:fluid_boutique/features/products/data/datasource/search_local_data_source.dart';
 import 'package:fluid_boutique/features/products/data/repository/product_repository_imp.dart';
@@ -171,7 +177,8 @@ Future<void> initDependencies() async {
       getProductDataUseCase: sl(),
     ),
   );
-  // cart features
+
+  /// cart features
   sl.registerLazySingleton<CartRemoteDataSource>(
     () => CartRemoteDataSourceImpl(firebaseFirestore: sl(), firebaseAuth: sl()),
   );
@@ -198,5 +205,22 @@ Future<void> initDependencies() async {
       removeFromCartUseCase: sl(),
       clearCartUseCase: sl(),
     ),
+  );
+
+  /// Orders
+  sl.registerLazySingleton<OrdersRemoteDataSource>(
+    () => OrdersRemoteDataSourceImpl(firestore: sl(), firebaseAuth: sl()),
+  );
+  sl.registerLazySingleton<OrdersRepository>(
+    () => OrdersRepositoryImpl(ordersRemoteDataSource: sl()),
+  );
+  sl.registerLazySingleton<GetUserOrdersUseCase>(
+    () => GetUserOrdersUseCase(ordersRepository: sl()),
+  );
+  sl.registerLazySingleton<PlaceOrderUseCase>(
+    () => PlaceOrderUseCase(ordersRepository: sl()),
+  );
+  sl.registerFactory<OrdersBloc>(
+    () => OrdersBloc(getUserOrdersUseCase: sl(), placeOrderUseCase: sl()),
   );
 }

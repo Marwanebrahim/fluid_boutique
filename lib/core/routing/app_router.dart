@@ -15,6 +15,9 @@ import 'package:fluid_boutique/core/routing/args/product_details_args.dart';
 import 'package:fluid_boutique/features/cart/presentation/bloc/cart_bloc.dart';
 import 'package:fluid_boutique/features/cart/presentation/bloc/cart_event.dart';
 import 'package:fluid_boutique/features/cart/presentation/screens/checkout_screen.dart';
+import 'package:fluid_boutique/features/orders/presentation/bloc/orders_bloc.dart';
+import 'package:fluid_boutique/features/orders/presentation/bloc/orders_event.dart';
+import 'package:fluid_boutique/features/orders/presentation/screens/orders_screen.dart';
 import 'package:fluid_boutique/features/products/presentation/screens/all_products_screen.dart';
 import 'package:fluid_boutique/features/products/presentation/screens/product_details.dart';
 import 'package:fluid_boutique/features/wishlist/presentation/bloc/wishlist_bloc.dart';
@@ -70,6 +73,9 @@ Route<dynamic> onGenerateRoute(RouteSettings setting) {
             BlocProvider(
               create: (context) => sl<CartBloc>()..add(GetCartEvent()),
             ),
+            BlocProvider(
+              create: (context) => sl<OrdersBloc>()..add(GetUserOrdersEvent()),
+            ),
           ],
           child: const AppWrapper(),
         ),
@@ -100,9 +106,19 @@ Route<dynamic> onGenerateRoute(RouteSettings setting) {
     case AppRoutes.checkout:
       final args = setting.arguments as CheckoutArgs;
       return MaterialPageRoute(
-        builder: (context) => BlocProvider.value(
-          value: args.cartBloc,
+        builder: (context) => MultiBlocProvider(
+          providers: [
+            BlocProvider.value(value: args.cartBloc),
+            BlocProvider.value(value: args.ordersBloc),
+          ],
           child: CheckoutScreen(cartItems: args.cartItems),
+        ),
+      );
+    case AppRoutes.orders:
+      return MaterialPageRoute(
+        builder: (_) => BlocProvider(
+          create: (_) => sl<OrdersBloc>()..add(GetUserOrdersEvent()),
+          child: const OrdersScreen(),
         ),
       );
     default:

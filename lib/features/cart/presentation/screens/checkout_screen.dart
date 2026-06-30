@@ -1,10 +1,17 @@
 import 'package:fluid_boutique/core/configs/app_colors.dart';
 import 'package:fluid_boutique/core/configs/app_text_styles.dart';
+import 'package:fluid_boutique/core/routing/app_routes.dart';
 import 'package:fluid_boutique/features/cart/domain/entity/cart_entity.dart';
+import 'package:fluid_boutique/features/cart/presentation/bloc/cart_bloc.dart';
+import 'package:fluid_boutique/features/cart/presentation/bloc/cart_event.dart';
 import 'package:fluid_boutique/features/cart/presentation/widgets/review_item.dart';
 import 'package:fluid_boutique/features/cart/presentation/widgets/section_header.dart';
+import 'package:fluid_boutique/features/orders/presentation/bloc/orders_bloc.dart';
+import 'package:fluid_boutique/features/orders/presentation/bloc/orders_event.dart';
+import 'package:fluid_boutique/features/orders/presentation/bloc/orders_state.dart';
 import 'package:fluid_boutique/shared/widgets/custom_button_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CheckoutScreen extends StatefulWidget {
   final List<CartEntity> cartItems;
@@ -162,31 +169,52 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             ),
             child: Column(
               children: [
-                CustomButtonWidget(
-                  hieght: 56,
-                  width: double.infinity,
-                  gradient: AppColors.goldGradient,
-                  borderRadius: 16,
-                  onTap: () {
-                    // TODO: Place Order → Orders feature
-                  },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Place Order',
-                        style: AppTextStyles.bold(
-                          size: 15,
-                          color: AppColors.white,
+                BlocListener<OrdersBloc, OrdersState>(
+                  listener: (context, state) {
+                    if (state is OrderPlacedSuccessState) {
+                      context.read<CartBloc>().add(ClearCartEvent());
+                      Navigator.pushNamed(context, AppRoutes.orders);
+                    }
+                    if (state is OrderPlacedErrorState) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(state.message),
+                          backgroundColor: AppColors.red,
                         ),
-                      ),
-                      const SizedBox(width: 8),
-                      const Icon(
-                        Icons.arrow_forward_rounded,
-                        color: AppColors.white,
-                        size: 18,
-                      ),
-                    ],
+                      );
+                    }
+                  },
+                  child: CustomButtonWidget(
+                    hieght: 56,
+                    width: double.infinity,
+                    gradient: AppColors.goldGradient,
+                    borderRadius: 16,
+                    onTap: () {
+                      context.read<OrdersBloc>().add(
+                        PlaceOrderEvent(
+                          cartItems: widget.cartItems,
+                          total: total,
+                        ),
+                      );
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Place Order',
+                          style: AppTextStyles.bold(
+                            size: 15,
+                            color: AppColors.white,
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        const Icon(
+                          Icons.arrow_forward_rounded,
+                          color: AppColors.white,
+                          size: 18,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 const SizedBox(height: 12),

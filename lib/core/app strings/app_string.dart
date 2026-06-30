@@ -10,6 +10,7 @@ class AppString {
   static const String usersCollection = "users";
   static const String whishListCollection = "wishlist";
   static const String cartCollection = "cart";
+  static const String ordersCollection = "orders";
 
   /// Api endpoint
   static const String baseUrl = "https://dummyjson.com";

@@ -7,6 +7,8 @@ import 'package:fluid_boutique/features/cart/presentation/bloc/cart_bloc.dart';
 import 'package:fluid_boutique/features/cart/presentation/bloc/cart_event.dart';
 import 'package:fluid_boutique/features/cart/presentation/bloc/cart_state.dart';
 import 'package:fluid_boutique/features/cart/presentation/widgets/cart_item_widget.dart';
+import 'package:fluid_boutique/features/orders/presentation/bloc/orders_bloc.dart';
+import 'package:fluid_boutique/injection_container.dart';
 import 'package:fluid_boutique/shared/widgets/custom_button_widget.dart';
 import 'package:fluid_boutique/shared/widgets/custom_error_widget.dart';
 import 'package:flutter/material.dart';
@@ -208,33 +210,37 @@ class CartScreen extends StatelessWidget {
               ),
             ],
           ),
-          child: CustomButtonWidget(
-            hieght: 56,
-            width: double.infinity,
-            gradient: AppColors.darkBlueGradient,
-            borderRadius: 16,
-            onTap: () => Navigator.pushNamed(
-              context,
-              AppRoutes.checkout,
-              arguments: CheckoutArgs(
-                cartItems: items,
-                cartBloc: context.read<CartBloc>(),
+          child: BlocProvider(
+            create: (_) => sl<CartBloc>(),
+            child: CustomButtonWidget(
+              hieght: 56,
+              width: double.infinity,
+              gradient: AppColors.darkBlueGradient,
+              borderRadius: 16,
+              onTap: () => Navigator.pushNamed(
+                context,
+                AppRoutes.checkout,
+                arguments: CheckoutArgs(
+                  cartItems: items,
+                  cartBloc: context.read<CartBloc>(),
+                  ordersBloc: context.read<OrdersBloc>(),
+                ),
               ),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Proceed to Checkout',
-                  style: AppTextStyles.bold(size: 15, color: AppColors.white),
-                ),
-                const SizedBox(width: 8),
-                const Icon(
-                  Icons.arrow_forward_rounded,
-                  color: AppColors.white,
-                  size: 18,
-                ),
-              ],
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Proceed to Checkout',
+                    style: AppTextStyles.bold(size: 15, color: AppColors.white),
+                  ),
+                  const SizedBox(width: 8),
+                  const Icon(
+                    Icons.arrow_forward_rounded,
+                    color: AppColors.white,
+                    size: 18,
+                  ),
+                ],
+              ),
             ),
           ),
         ),
