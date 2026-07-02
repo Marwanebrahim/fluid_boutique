@@ -8,6 +8,7 @@ import 'package:fluid_boutique/shared/widgets/custom_button_widget.dart';
 import 'package:fluid_boutique/shared/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SignUpContainer extends StatefulWidget {
   const SignUpContainer({
@@ -32,10 +33,10 @@ class _SignUpContainerState extends State<SignUpContainer> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
+      padding: EdgeInsets.symmetric(vertical: 32.h, horizontal: 24.w),
       decoration: BoxDecoration(
         color: AppColors.white,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(12.r),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,7 +53,7 @@ class _SignUpContainerState extends State<SignUpContainer> {
               color: AppColors.textSecondary,
             ),
           ),
-          const SizedBox(height: 36),
+          SizedBox(height: 36.h),
           Text(
             "Full Name",
             style: AppTextStyles.semibold(
@@ -61,14 +62,14 @@ class _SignUpContainerState extends State<SignUpContainer> {
               font: AppFont.inter,
             ),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8.h),
           CustomTextFormField(
             hintWidget: Row(
-              spacing: 4,
+              spacing: 4.w,
               children: [
-                const Icon(
+                Icon(
                   Icons.person_outline_rounded,
-                  size: 20,
+                  size: 20.w,
                   color: AppColors.dotsColor,
                 ),
                 Text(
@@ -97,7 +98,7 @@ class _SignUpContainerState extends State<SignUpContainer> {
               return null;
             },
           ),
-          const SizedBox(height: 18),
+          SizedBox(height: 18.h),
           Text(
             "EMAIL ADDRESS",
             style: AppTextStyles.semibold(
@@ -106,14 +107,14 @@ class _SignUpContainerState extends State<SignUpContainer> {
               font: AppFont.inter,
             ),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8.h),
           CustomTextFormField(
             hintWidget: Row(
-              spacing: 4,
+              spacing: 4.w,
               children: [
-                const Icon(
+                Icon(
                   Icons.email_outlined,
-                  size: 20,
+                  size: 20.w,
                   color: AppColors.dotsColor,
                 ),
                 Text(
@@ -141,7 +142,7 @@ class _SignUpContainerState extends State<SignUpContainer> {
               return null;
             },
           ),
-          const SizedBox(height: 18),
+          SizedBox(height: 18.h),
           Text(
             "PASSWORD",
             style: AppTextStyles.semibold(
@@ -150,14 +151,14 @@ class _SignUpContainerState extends State<SignUpContainer> {
               font: AppFont.inter,
             ),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8.h),
           CustomTextFormField(
             hintWidget: Row(
-              spacing: 4,
+              spacing: 4.w,
               children: [
-                const Icon(
+                Icon(
                   Icons.lock_outline_rounded,
-                  size: 20,
+                  size: 20.w,
                   color: AppColors.dotsColor,
                 ),
                 Text(
@@ -190,14 +191,14 @@ class _SignUpContainerState extends State<SignUpContainer> {
               font: AppFont.inter,
             ),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8.h),
           CustomTextFormField(
             hintWidget: Row(
-              spacing: 4,
+              spacing: 4.w,
               children: [
-                const Icon(
+                Icon(
                   Icons.lock_reset_outlined,
-                  size: 20,
+                  size: 20.w,
                   color: AppColors.dotsColor,
                 ),
                 Text(
@@ -224,7 +225,7 @@ class _SignUpContainerState extends State<SignUpContainer> {
               return null;
             },
           ),
-          const SizedBox(height: 24),
+          SizedBox(height: 24.h),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -232,9 +233,9 @@ class _SignUpContainerState extends State<SignUpContainer> {
                 shape: RoundedRectangleBorder(
                   side: BorderSide(
                     color: AppColors.dotsColor.withValues(alpha: 0.5),
-                    width: 1.5,
+                    width: 1.5.w,
                   ),
-                  borderRadius: BorderRadius.circular(4),
+                  borderRadius: BorderRadius.circular(4.r),
                 ),
                 value: _termsAccepted,
                 onChanged: (value) {
@@ -256,11 +257,11 @@ class _SignUpContainerState extends State<SignUpContainer> {
               ),
             ],
           ),
-          const SizedBox(height: 18),
+          SizedBox(height: 18.h),
           CustomButtonWidget(
             gradient: AppColors.darkBlueGradient,
             hieght: 64,
-            width: 278,
+            width: double.infinity,
             borderRadius: 12,
             onTap: () {
               if (!widget.formKey.currentState!.validate()) return;
@@ -277,11 +278,11 @@ class _SignUpContainerState extends State<SignUpContainer> {
               child: BlocBuilder<AuthBloc, AuthState>(
                 builder: (context, state) {
                   if (state is AuthLoadingState) {
-                    return const SizedBox(
-                      height: 24,
-                      width: 24,
+                    return SizedBox(
+                      height: 24.h,
+                      width: 24.w,
                       child: CircularProgressIndicator(
-                        strokeWidth: 2,
+                        strokeWidth: 2.w,
                         color: AppColors.white,
                       ),
                     );
@@ -294,7 +295,7 @@ class _SignUpContainerState extends State<SignUpContainer> {
               ),
             ),
           ),
-          const SizedBox(height: 24),
+          SizedBox(height: 24.h),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [

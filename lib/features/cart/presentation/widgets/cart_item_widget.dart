@@ -5,6 +5,7 @@ import 'package:fluid_boutique/features/cart/presentation/bloc/cart_bloc.dart';
 import 'package:fluid_boutique/features/cart/presentation/bloc/cart_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CartItemWidget extends StatelessWidget {
   final CartEntity item;
@@ -21,38 +22,34 @@ class CartItemWidget extends StatelessWidget {
           context.read<CartBloc>().add(RemoveFromCartEvent(product: item)),
       background: Container(
         alignment: Alignment.centerRight,
-        padding: const EdgeInsets.only(right: 20),
-        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+        padding: EdgeInsets.only(right: 20.w),
+        margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
         decoration: BoxDecoration(
           color: AppColors.sale,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(16.r),
         ),
-        child: const Icon(
-          Icons.delete_outline,
-          color: AppColors.white,
-          size: 24,
-        ),
+        child: Icon(Icons.delete_outline, color: AppColors.white, size: 24.w),
       ),
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-        padding: const EdgeInsets.all(12),
+        margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
+        padding: EdgeInsets.all(12.w),
         decoration: BoxDecoration(
           color: AppColors.white,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(16.r),
         ),
         child: Row(
           children: [
             // Image
             ClipRRect(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(12.r),
               child: Image.network(
                 item.thumbnail,
-                width: 80,
-                height: 80,
+                width: 80.w,
+                height: 80.h,
                 fit: BoxFit.cover,
                 errorBuilder: (_, _, _) => Container(
-                  width: 80,
-                  height: 80,
+                  width: 80.w,
+                  height: 80.h,
                   color: AppColors.dotsColor,
                   child: const Icon(
                     Icons.image_not_supported,
@@ -61,7 +58,7 @@ class CartItemWidget extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(width: 12),
+            SizedBox(width: 12.w),
 
             // Info
             Expanded(
@@ -86,15 +83,15 @@ class CartItemWidget extends StatelessWidget {
                         onTap: () => context.read<CartBloc>().add(
                           RemoveFromCartEvent(product: item),
                         ),
-                        child: const Icon(
+                        child: Icon(
                           Icons.delete_outline,
-                          size: 18,
+                          size: 18.w,
                           color: AppColors.textTertiary,
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 4),
+                  SizedBox(height: 4.h),
 
                   // Color + Size
                   Text(
@@ -105,7 +102,7 @@ class CartItemWidget extends StatelessWidget {
                       font: AppFont.inter,
                     ),
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8.h),
 
                   // Price + Quantity
                   Row(
@@ -122,7 +119,7 @@ class CartItemWidget extends StatelessWidget {
                       Container(
                         decoration: BoxDecoration(
                           border: Border.all(color: AppColors.dotsColor),
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius: BorderRadius.circular(8.r),
                         ),
                         child: Row(
                           children: [
@@ -144,9 +141,7 @@ class CartItemWidget extends StatelessWidget {
                               },
                             ),
                             Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 10,
-                              ),
+                              padding: EdgeInsets.symmetric(horizontal: 10.w),
                               child: Text(
                                 '${item.quantity}',
                                 style: AppTextStyles.bold(
@@ -186,10 +181,10 @@ class CartItemWidget extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 28,
-        height: 28,
+        width: 28.w,
+        height: 28.h,
         alignment: Alignment.center,
-        child: Icon(icon, size: 14, color: AppColors.darkBlueIcon),
+        child: Icon(icon, size: 14.w, color: AppColors.darkBlueIcon),
       ),
     );
   }

@@ -2,6 +2,7 @@ import 'package:fluid_boutique/core/configs/app_colors.dart';
 import 'package:fluid_boutique/core/configs/app_text_styles.dart';
 import 'package:fluid_boutique/features/cart/domain/entity/cart_entity.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ReviewItem extends StatelessWidget {
   const ReviewItem({super.key, required this.item});
@@ -10,34 +11,34 @@ class ReviewItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final discounted = item.price * (1 - item.discountPercentage / 100);
     return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(12),
+      margin: EdgeInsets.only(bottom: 12.h),
+      padding: EdgeInsets.all(12.w),
       decoration: BoxDecoration(
         color: AppColors.white,
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(14.r),
       ),
       child: Row(
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(10.r),
             child: Image.network(
               item.thumbnail,
-              width: 64,
-              height: 64,
+              width: 64.w,
+              height: 64.h,
               fit: BoxFit.cover,
               errorBuilder: (_, _, _) => Container(
-                width: 64,
-                height: 64,
+                width: 64.w,
+                height: 64.h,
                 color: AppColors.dotsColor,
-                child: const Icon(
+                child: Icon(
                   Icons.image_not_supported,
                   color: AppColors.textTertiary,
-                  size: 20,
+                  size: 20.w,
                 ),
               ),
             ),
           ),
-          const SizedBox(width: 12),
+          SizedBox(width: 12.w),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,7 +52,7 @@ class ReviewItem extends StatelessWidget {
                     color: AppColors.darkBlueIcon,
                   ),
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4.h),
                 Text(
                   'Color: ${item.color}\nSize: ${item.size}',
                   style: AppTextStyles.regular(
@@ -60,7 +61,7 @@ class ReviewItem extends StatelessWidget {
                     font: AppFont.inter,
                   ),
                 ),
-                const SizedBox(height: 6),
+                SizedBox(height: 6.h),
                 Text(
                   '\$${(discounted * item.quantity).toStringAsFixed(2)}',
                   style: AppTextStyles.bold(

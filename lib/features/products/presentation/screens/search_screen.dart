@@ -13,6 +13,7 @@ import 'package:fluid_boutique/features/wishlist/presentation/bloc/wishlist_bloc
 import 'package:fluid_boutique/shared/widgets/custom_error_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -65,12 +66,12 @@ class _SearchScreenState extends State<SearchScreen> {
         children: [
           // ===== Search Bar =====
           Padding(
-            padding: const EdgeInsets.fromLTRB(20, 8, 20, 16),
+            padding: EdgeInsets.fromLTRB(20.w, 8.h, 20.w, 16.h),
             child: Container(
               decoration: BoxDecoration(
                 color: AppColors.white,
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: AppColors.primary, width: 1.5),
+                borderRadius: BorderRadius.circular(16.r),
+                border: Border.all(color: AppColors.primary, width: 1.5.w),
               ),
               child: TextField(
                 controller: _controller,
@@ -87,9 +88,10 @@ class _SearchScreenState extends State<SearchScreen> {
                     color: AppColors.textTertiary,
                     font: AppFont.inter,
                   ),
-                  prefixIcon: const Icon(
+                  prefixIcon: Icon(
                     Icons.search,
                     color: AppColors.textTertiary,
+                    size: 18.w,
                   ),
                   suffixIcon: _controller.text.isNotEmpty
                       ? GestureDetector(
@@ -97,12 +99,12 @@ class _SearchScreenState extends State<SearchScreen> {
                           child: Icon(
                             Icons.close,
                             color: AppColors.textTertiary,
-                            size: 18,
+                            size: 18.w,
                           ),
                         )
                       : null,
                   border: InputBorder.none,
-                  contentPadding: const EdgeInsets.symmetric(vertical: 14),
+                  contentPadding: EdgeInsets.symmetric(vertical: 14.h),
                 ),
               ),
             ),
@@ -168,7 +170,7 @@ class _SearchScreenState extends State<SearchScreen> {
       children: [
         // Header
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: EdgeInsets.symmetric(horizontal: 20.w),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -196,35 +198,32 @@ class _SearchScreenState extends State<SearchScreen> {
             ],
           ),
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: 12.h),
 
         // History List
         ListView.separated(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: EdgeInsets.symmetric(horizontal: 20.w),
           itemCount: history.length,
-          separatorBuilder: (_, _) => const SizedBox(height: 4),
+          separatorBuilder: (_, _) => SizedBox(height: 4.h),
           itemBuilder: (context, index) {
             return GestureDetector(
               onTap: () => _onHistoryItemTap(history[index]),
               child: Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 14,
-                ),
+                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
                 decoration: BoxDecoration(
                   color: AppColors.white,
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(12.r),
                 ),
                 child: Row(
                   children: [
-                    const Icon(
+                    Icon(
                       Icons.history_rounded,
-                      size: 18,
+                      size: 18.w,
                       color: AppColors.textTertiary,
                     ),
-                    const SizedBox(width: 12),
+                    SizedBox(width: 12.w),
                     Expanded(
                       child: Text(
                         history[index],
@@ -242,7 +241,7 @@ class _SearchScreenState extends State<SearchScreen> {
           },
         ),
 
-        const SizedBox(height: 24),
+        SizedBox(height: 24.h),
         _buildEmptyDiscovery(),
       ],
     );
@@ -251,45 +250,45 @@ class _SearchScreenState extends State<SearchScreen> {
   // ===== Discovery Widget (Initial State) =====
   Widget _buildEmptyDiscovery() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 40),
+      padding: EdgeInsets.symmetric(horizontal: 40.w),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           // Image
           Container(
-            width: 200,
-            height: 200,
+            width: 200.w,
+            height: 200.h,
             decoration: BoxDecoration(
               color: AppColors.white,
-              borderRadius: BorderRadius.circular(24),
+              borderRadius: BorderRadius.circular(24.r),
               boxShadow: [
                 BoxShadow(
                   color: AppColors.primary.withValues(alpha: 0.08),
-                  blurRadius: 20,
+                  blurRadius: 20.r,
                   offset: const Offset(0, 4),
                 ),
               ],
             ),
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(24),
+              borderRadius: BorderRadius.circular(24.r),
               child: Image.asset(
                 ImageHelper.searchImage,
                 fit: BoxFit.cover,
-                errorBuilder: (_, _, _) => const Icon(
+                errorBuilder: (_, _, _) => Icon(
                   Icons.shopping_bag_outlined,
-                  size: 48,
+                  size: 48.w,
                   color: AppColors.textTertiary,
                 ),
               ),
             ),
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: 20.h),
           Text(
             'Begin Your Discovery',
             style: AppTextStyles.bold(size: 18, color: AppColors.darkBlueIcon),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8.h),
           Text(
             'Explore our curated collection of artisanal goods and luxury essentials designed for the modern home.',
             style: AppTextStyles.regular(
@@ -307,12 +306,12 @@ class _SearchScreenState extends State<SearchScreen> {
   // ===== Results Grid =====
   Widget _buildResults(List<ProductEntity> products) {
     return GridView.builder(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
       physics: const BouncingScrollPhysics(),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        crossAxisSpacing: 16,
-        mainAxisSpacing: 16,
+        crossAxisSpacing: 16.w,
+        mainAxisSpacing: 16.h,
         childAspectRatio: 0.62,
       ),
       itemCount: products.length,
@@ -339,17 +338,17 @@ class _SearchScreenState extends State<SearchScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(
+          Icon(
             Icons.search_off_rounded,
-            size: 64,
+            size: 64.w,
             color: AppColors.textTertiary,
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16.h),
           Text(
             'No results found',
             style: AppTextStyles.bold(size: 18, color: AppColors.darkBlueIcon),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8.h),
           Text(
             'Try a different keyword',
             style: AppTextStyles.regular(

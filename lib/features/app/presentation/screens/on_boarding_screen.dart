@@ -7,6 +7,7 @@ import 'package:fluid_boutique/features/app/presentation/helper/onboarding_helpe
 import 'package:fluid_boutique/shared/widgets/custom_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnBoardingScreen extends StatefulWidget {
@@ -49,7 +50,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     return Scaffold(
       appBar: _buildAppBar(),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: EdgeInsets.symmetric(horizontal: 16.w),
         child: Column(
           children: [
             // ── PageView ──
@@ -63,17 +64,17 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       SizedBox(
-                        height: 390,
+                        height: 390.h,
                         child: Image.asset(onboardingImages[index]),
                       ),
-                      const SizedBox(height: 30),
+                      SizedBox(height: 30.h),
                       Text(
                         onboardingTitles[index],
                         style: AppTextStyles.bold(
                           size: 30,
                         ).copyWith(color: AppColors.darkBlueIcon),
                       ),
-                      const SizedBox(height: 16),
+                      SizedBox(height: 16.h),
                       Text(
                         onboardingBody[index],
                         style: AppTextStyles.regular(
@@ -93,13 +94,13 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               controller: _pageController,
               count: onboardingImages.length,
               effect: ExpandingDotsEffect(
-                dotHeight: 8,
+                dotHeight: 8.h,
                 dotColor: AppColors.dotsColor,
                 activeDotColor: AppColors.darkBlueIcon,
               ),
             ),
 
-            const SizedBox(height: 24),
+            SizedBox(height: 24.h),
 
             // ── Button ──
             CustomButtonWidget(
@@ -118,7 +119,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               ),
             ),
 
-            const SizedBox(height: 24),
+            SizedBox(height: 24.h),
           ],
         ),
       ),

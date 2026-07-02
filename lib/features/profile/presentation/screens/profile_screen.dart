@@ -17,6 +17,7 @@ import 'package:fluid_boutique/injection_container.dart';
 import 'package:fluid_boutique/shared/widgets/custom_error_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key, required this.onGoToWishlist});
@@ -37,7 +38,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
       context: context,
       builder: (dialogContext) => AlertDialog(
         backgroundColor: AppColors.white,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16.r),
+        ),
         title: Text(
           'Log Out',
           style: AppTextStyles.bold(size: 18, color: AppColors.darkBlueIcon),
@@ -138,7 +141,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
-      padding: const EdgeInsets.fromLTRB(20, 8, 20, 140),
+      padding: EdgeInsets.fromLTRB(20.w, 8.h, 20.w, 140.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -149,15 +152,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Stack(
                   children: [
                     CircleAvatar(
-                      radius: 40,
+                      radius: 40.r,
                       backgroundColor: AppColors.dotsColor,
                       backgroundImage: profile.photoUrl != null
                           ? NetworkImage(profile.photoUrl!)
                           : null,
                       child: profile.photoUrl == null
-                          ? const Icon(
+                          ? Icon(
                               Icons.person,
-                              size: 36,
+                              size: 36.w,
                               color: AppColors.textTertiary,
                             )
                           : null,
@@ -166,21 +169,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       right: 0,
                       bottom: 0,
                       child: Container(
-                        width: 18,
-                        height: 18,
+                        width: 18.w,
+                        height: 18.h,
                         decoration: BoxDecoration(
                           color: Colors.green,
                           shape: BoxShape.circle,
                           border: Border.all(
                             color: AppColors.background,
-                            width: 2,
+                            width: 2.w,
                           ),
                         ),
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 12),
+                SizedBox(height: 12.h),
                 Text(
                   profile.name,
                   style: AppTextStyles.bold(
@@ -188,7 +191,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     color: AppColors.darkBlueIcon,
                   ),
                 ),
-                const SizedBox(height: 2),
+                SizedBox(height: 2.h),
                 Text(
                   profile.email,
                   style: AppTextStyles.regular(
@@ -201,14 +204,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ),
 
-          const SizedBox(height: 20),
+          SizedBox(height: 20.h),
 
           // ===== Stats Card =====
           Container(
-            padding: const EdgeInsets.symmetric(vertical: 16),
+            padding: EdgeInsets.symmetric(vertical: 16.h),
             decoration: BoxDecoration(
               color: AppColors.white,
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(16.r),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -227,7 +230,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     return ProfileStateItem(value: '$count', label: 'ORDERS');
                   },
                 ),
-                Container(width: 1, height: 32, color: AppColors.dotsColor),
+                Container(width: 1.w, height: 32.h, color: AppColors.dotsColor),
                 // Wishlist Count
                 BlocBuilder<WishlistBloc, WishlistState>(
                   buildWhen: (previous, current) =>
@@ -240,14 +243,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     return ProfileStateItem(value: '$count', label: 'WISHLIST');
                   },
                 ),
-                Container(width: 1, height: 32, color: AppColors.dotsColor),
+                Container(width: 1.w, height: 32.h, color: AppColors.dotsColor),
                 // Points (static)
                 const ProfileStateItem(value: '450', label: 'POINTS'),
               ],
             ),
           ),
 
-          const SizedBox(height: 24),
+          SizedBox(height: 24.h),
 
           // ===== Account Settings =====
           Text(
@@ -258,7 +261,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               font: AppFont.inter,
             ),
           ),
-          const SizedBox(height: 10),
+          SizedBox(height: 10.h),
           ProfileMenuTile(
             icon: Icons.receipt_long_outlined,
             title: 'My Orders',
@@ -282,14 +285,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   title: 'Notifications',
                   trailing: unreadCount > 0
                       ? Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 2,
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 8.w,
+                            vertical: 2.h,
                           ),
-                          margin: const EdgeInsets.only(right: 8),
+                          margin: EdgeInsets.only(right: 8.w),
                           decoration: BoxDecoration(
                             color: AppColors.sale,
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(10.r),
                           ),
                           child: Text(
                             '$unreadCount',
@@ -307,7 +310,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ),
 
-          const SizedBox(height: 24),
+          SizedBox(height: 24.h),
 
           // ===== Preference & Security =====
           Text(
@@ -318,7 +321,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               font: AppFont.inter,
             ),
           ),
-          const SizedBox(height: 10),
+          SizedBox(height: 10.h),
           ProfileMenuTile(
             icon: Icons.location_on_outlined,
             title: 'Shipping Addresses',
@@ -330,7 +333,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             onTap: () {},
           ),
 
-          const SizedBox(height: 24),
+          SizedBox(height: 24.h),
 
           // ===== Support =====
           Text(
@@ -341,7 +344,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               font: AppFont.inter,
             ),
           ),
-          const SizedBox(height: 10),
+          SizedBox(height: 10.h),
           ProfileMenuTile(
             icon: Icons.headset_mic_outlined,
             title: 'Support',

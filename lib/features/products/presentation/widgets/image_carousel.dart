@@ -2,6 +2,7 @@ import 'package:fluid_boutique/core/configs/app_colors.dart';
 import 'package:fluid_boutique/core/configs/app_text_styles.dart';
 import 'package:fluid_boutique/features/products/domain/entity/product_entity.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class ImageCarousel extends StatefulWidget {
@@ -22,13 +23,13 @@ class _ImageCarouselState extends State<ImageCarousel> {
   Widget build(BuildContext context) {
     final product = widget.product;
     return SliverAppBar(
-      expandedHeight: 480,
+      expandedHeight: 480.h,
       pinned: true,
       backgroundColor: AppColors.background,
       elevation: 0,
       scrolledUnderElevation: 0,
       leading: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(8.w),
         child: GestureDetector(
           onTap: () => Navigator.pop(context),
           child: Container(
@@ -38,15 +39,15 @@ class _ImageCarouselState extends State<ImageCarousel> {
               boxShadow: [
                 BoxShadow(
                   color: AppColors.primary.withValues(alpha: 0.1),
-                  blurRadius: 8,
+                  blurRadius: 8.r,
                   offset: const Offset(0, 2),
                 ),
               ],
             ),
-            child: const Icon(
+            child: Icon(
               Icons.arrow_back_ios_new,
               color: AppColors.darkBlueIcon,
-              size: 18,
+              size: 18.w,
             ),
           ),
         ),
@@ -72,10 +73,10 @@ class _ImageCarouselState extends State<ImageCarousel> {
                   fit: BoxFit.cover,
                   errorBuilder: (_, error, _) => Container(
                     color: AppColors.white,
-                    child: const Icon(
+                    child: Icon(
                       Icons.image_not_supported,
                       color: AppColors.textTertiary,
-                      size: 48,
+                      size: 48.w,
                     ),
                   ),
                 );
@@ -93,8 +94,8 @@ class _ImageCarouselState extends State<ImageCarousel> {
                     count: product.images.length,
                     effect: ExpandingDotsEffect(
                       expansionFactor: 2,
-                      dotWidth: 15,
-                      dotHeight: 6,
+                      dotWidth: 15.w,
+                      dotHeight: 6.h,
                       dotColor: AppColors.dotsColor,
                       activeDotColor: AppColors.darkBlueIcon,
                     ),

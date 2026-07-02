@@ -11,6 +11,7 @@ import 'package:fluid_boutique/features/wishlist/presentation/widgets/wishlist_c
 import 'package:fluid_boutique/shared/widgets/custom_error_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class WishlistScreen extends StatelessWidget {
   const WishlistScreen({super.key});
@@ -63,9 +64,9 @@ class WishlistScreen extends StatelessWidget {
               // Header
               SliverToBoxAdapter(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 16,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 20.w,
+                    vertical: 16.h,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -80,7 +81,7 @@ class WishlistScreen extends StatelessWidget {
                               color: AppColors.darkBlueIcon,
                             ),
                           ),
-                          const SizedBox(height: 4),
+                          SizedBox(height: 4.h),
                           Text(
                             '${state.wishlist.length} ${state.wishlist.length == 1 ? 'Item' : 'Items'} in your collection',
                             style: AppTextStyles.regular(
@@ -92,23 +93,23 @@ class WishlistScreen extends StatelessWidget {
                         ],
                       ),
                       Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 14,
-                          vertical: 8,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 14.w,
+                          vertical: 8.h,
                         ),
                         decoration: BoxDecoration(
                           color: AppColors.white,
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(12.r),
                           border: Border.all(color: AppColors.dotsColor),
                         ),
                         child: Row(
                           children: [
-                            const Icon(
+                            Icon(
                               Icons.tune_rounded,
-                              size: 16,
+                              size: 16.w,
                               color: AppColors.darkBlueIcon,
                             ),
-                            const SizedBox(width: 6),
+                            SizedBox(width: 6.w),
                             Text(
                               'Filter',
                               style: AppTextStyles.semibold(
@@ -125,12 +126,12 @@ class WishlistScreen extends StatelessWidget {
               ),
               // Grid
               SliverPadding(
-                padding: const EdgeInsets.fromLTRB(20, 0, 20, 100),
+                padding: EdgeInsets.fromLTRB(20.w, 0, 20.w, 100.h),
                 sliver: SliverGrid(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    crossAxisSpacing: 16,
-                    mainAxisSpacing: 16,
+                    crossAxisSpacing: 16.w,
+                    mainAxisSpacing: 16.h,
                     childAspectRatio: 0.6,
                   ),
                   delegate: SliverChildBuilderDelegate(

@@ -8,6 +8,7 @@ import 'package:fluid_boutique/shared/widgets/custom_button_widget.dart';
 import 'package:fluid_boutique/shared/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ForgetPasswordScreen extends StatelessWidget {
   ForgetPasswordScreen({super.key});
@@ -19,7 +20,7 @@ class ForgetPasswordScreen extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 32),
+          padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 32.h),
           child: Form(
             key: _formKey,
             child: BlocListener<AuthBloc, AuthState>(
@@ -32,10 +33,10 @@ class ForgetPasswordScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    height: 52,
-                    width: 64,
+                    height: 52.h,
+                    width: 64.w,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
+                      borderRadius: BorderRadius.circular(16.r),
                       color: AppColors.darkBlueIcon,
                     ),
                     child: const Icon(
@@ -43,7 +44,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                       color: AppColors.white,
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16.h),
                   Text(
                     "Reset Password",
                     style: AppTextStyles.bold(
@@ -58,15 +59,15 @@ class ForgetPasswordScreen extends StatelessWidget {
                       color: AppColors.textSecondary,
                     ),
                   ),
-                  const SizedBox(height: 40),
+                  SizedBox(height: 40.h),
                   Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 18,
-                      vertical: 12,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 18.w,
+                      vertical: 12.h,
                     ),
                     decoration: BoxDecoration(
                       color: AppColors.white,
-                      borderRadius: BorderRadius.circular(28),
+                      borderRadius: BorderRadius.circular(28.r),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,7 +79,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                             color: AppColors.darkBlueIcon,
                           ),
                         ),
-                        const SizedBox(height: 16),
+                        SizedBox(height: 16.h),
                         CustomTextFormField(
                           hintWidget: Row(
                             children: [
@@ -113,7 +114,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                           controller: emailController,
                         ),
 
-                        const SizedBox(height: 24),
+                        SizedBox(height: 24.h),
                         CustomButtonWidget(
                           hieght: 56,
                           width: 276,
@@ -136,27 +137,24 @@ class ForgetPasswordScreen extends StatelessWidget {
                                   font: AppFont.inter,
                                 ),
                               ),
-                              const SizedBox(width: 8),
-                              const Icon(
-                                Icons.arrow_forward,
-                                color: AppColors.white,
-                              ),
+                              SizedBox(width: 8.w),
+                              Icon(Icons.arrow_forward, color: AppColors.white),
                             ],
                           ),
                         ),
 
-                        const SizedBox(height: 32),
+                        SizedBox(height: 32.h),
                         BlocBuilder<AuthBloc, AuthState>(
                           builder: (context, state) {
                             if (state is AuthForgetPasswordSuccess) {
                               return Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 14,
-                                  vertical: 8,
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 14.w,
+                                  vertical: 8.h,
                                 ),
                                 decoration: BoxDecoration(
                                   color: AppColors.gold.withValues(alpha: 0.1),
-                                  borderRadius: BorderRadius.circular(12),
+                                  borderRadius: BorderRadius.circular(12.r),
                                   border: Border.all(
                                     color: AppColors.gold.withValues(
                                       alpha: 0.2,
@@ -167,12 +165,12 @@ class ForgetPasswordScreen extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Icon(
+                                    Icon(
                                       Icons.info_outline,
                                       color: AppColors.goldBrown,
-                                      size: 20,
+                                      size: 20.w,
                                     ),
-                                    const SizedBox(width: 8),
+                                    SizedBox(width: 8.w),
                                     Expanded(
                                       child: Column(
                                         crossAxisAlignment:
@@ -209,7 +207,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 40),
+                  SizedBox(height: 40.h),
                   TextButton(
                     onPressed: () {
                       Navigator.pop(context);
@@ -218,10 +216,10 @@ class ForgetPasswordScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Icon(
+                        Icon(
                           Icons.arrow_back_ios_new_outlined,
                           color: AppColors.darkBlueIcon,
-                          size: 14,
+                          size: 14.w,
                         ),
                         Text(
                           "Back to Login",

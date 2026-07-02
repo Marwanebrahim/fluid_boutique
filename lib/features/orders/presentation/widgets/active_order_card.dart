@@ -4,6 +4,7 @@ import 'package:fluid_boutique/features/orders/domain/entity/order_entity.dart';
 import 'package:fluid_boutique/features/orders/presentation/widgets/order_item_row.dart';
 import 'package:fluid_boutique/features/orders/presentation/widgets/order_status_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
 class ActiveOrderCard extends StatelessWidget {
@@ -15,15 +16,15 @@ class ActiveOrderCard extends StatelessWidget {
     final stepIndex = OrderStatusHelper.getStepIndex(order.status);
 
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: EdgeInsets.all(20.w),
       decoration: BoxDecoration(
         color: AppColors.white,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
             color: AppColors.primary.withValues(alpha: 0.06),
-            blurRadius: 16,
-            offset: const Offset(0, 4),
+            blurRadius: 16.r,
+            offset: Offset(0, 4),
           ),
         ],
       ),
@@ -35,13 +36,10 @@ class ActiveOrderCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 4,
-                ),
+                padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
                 decoration: BoxDecoration(
                   color: AppColors.primary.withValues(alpha: 0.08),
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(8.r),
                 ),
                 child: Text(
                   'ACTIVE ORDER',
@@ -53,15 +51,12 @@ class ActiveOrderCard extends StatelessWidget {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 4,
-                ),
+                padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
                 decoration: BoxDecoration(
                   color: OrderStatusHelper.getColor(
                     order.status,
                   ).withValues(alpha: 0.1),
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(8.r),
                 ),
                 child: Text(
                   OrderStatusHelper.getLabel(order.status).toUpperCase(),
@@ -75,14 +70,14 @@ class ActiveOrderCard extends StatelessWidget {
             ],
           ),
 
-          const SizedBox(height: 12),
+          SizedBox(height: 12.h),
 
           // Order ID
           Text(
             '#${order.id.substring(0, 8).toUpperCase()}-X',
             style: AppTextStyles.bold(size: 18, color: AppColors.darkBlueIcon),
           ),
-          const SizedBox(height: 4),
+          SizedBox(height: 4.h),
           Text(
             'Placed on ${DateFormat('MMMM dd, yyyy').format(order.createdAt)}',
             style: AppTextStyles.regular(
@@ -92,7 +87,7 @@ class ActiveOrderCard extends StatelessWidget {
             ),
           ),
 
-          const SizedBox(height: 20),
+          SizedBox(height: 20.h),
 
           // Progress Tracker
           Row(
@@ -108,8 +103,8 @@ class ActiveOrderCard extends StatelessWidget {
                         children: [
                           // Icon
                           Container(
-                            width: 36,
-                            height: 36,
+                            width: 36.w,
+                            height: 36.w,
                             decoration: BoxDecoration(
                               color: isCompleted
                                   ? AppColors.primary
@@ -118,13 +113,13 @@ class ActiveOrderCard extends StatelessWidget {
                             ),
                             child: Icon(
                               OrderStatusHelper.stepIcons[index],
-                              size: 16,
+                              size: 16.w,
                               color: isCompleted
                                   ? AppColors.white
                                   : AppColors.textTertiary,
                             ),
                           ),
-                          const SizedBox(height: 6),
+                          SizedBox(height: 6.h),
                           // Label
                           Text(
                             OrderStatusHelper.steps[index],
@@ -144,8 +139,8 @@ class ActiveOrderCard extends StatelessWidget {
                     if (!isLast)
                       Expanded(
                         child: Container(
-                          height: 2,
-                          margin: const EdgeInsets.only(bottom: 22),
+                          height: 2.h,
+                          margin: EdgeInsets.only(bottom: 22.h),
                           color: index < stepIndex
                               ? AppColors.primary
                               : AppColors.dotsColor.withValues(alpha: 0.4),
@@ -157,22 +152,22 @@ class ActiveOrderCard extends StatelessWidget {
             }),
           ),
 
-          const SizedBox(height: 20),
-          Container(height: 1, color: AppColors.dotsColor),
-          const SizedBox(height: 16),
+          SizedBox(height: 20.h),
+          Container(height: 1.h, color: AppColors.dotsColor),
+          SizedBox(height: 16.h),
 
           // Package Details
           Text(
             'Package Details',
             style: AppTextStyles.bold(size: 14, color: AppColors.darkBlueIcon),
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: 12.h),
 
           ...order.items.map((item) => OrderItemRow(item: item)),
 
-          const SizedBox(height: 16),
-          Container(height: 1, color: AppColors.dotsColor),
-          const SizedBox(height: 16),
+          SizedBox(height: 16.h),
+          Container(height: 1.h, color: AppColors.dotsColor),
+          SizedBox(height: 16.h),
 
           // Total
           Row(

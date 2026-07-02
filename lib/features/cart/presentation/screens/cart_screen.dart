@@ -13,6 +13,7 @@ import 'package:fluid_boutique/shared/widgets/custom_button_widget.dart';
 import 'package:fluid_boutique/shared/widgets/custom_error_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
@@ -59,7 +60,7 @@ class CartScreen extends StatelessWidget {
               // ===== Header =====
               SliverToBoxAdapter(
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 8, 20, 16),
+                  padding: EdgeInsets.fromLTRB(20.w, 8.h, 20.w, 16.h),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -73,7 +74,7 @@ class CartScreen extends StatelessWidget {
                               color: AppColors.darkBlueIcon,
                             ),
                           ),
-                          const SizedBox(height: 4),
+                          SizedBox(height: 4.h),
                           Text(
                             '${items.length} ${items.length == 1 ? 'item' : 'items'} selected',
                             style: AppTextStyles.regular(
@@ -113,9 +114,9 @@ class CartScreen extends StatelessWidget {
               // ===== Hint =====
               SliverToBoxAdapter(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 8,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 20.w,
+                    vertical: 8.h,
                   ),
                   child: Text(
                     'Swipe items left to remove',
@@ -129,12 +130,12 @@ class CartScreen extends StatelessWidget {
                 ),
               ),
 
-              const SliverToBoxAdapter(child: SizedBox(height: 16)),
+              SliverToBoxAdapter(child: SizedBox(height: 16.h)),
 
               // ===== Order Summary =====
               SliverToBoxAdapter(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  padding: EdgeInsets.symmetric(horizontal: 20.w),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -145,25 +146,25 @@ class CartScreen extends StatelessWidget {
                           color: AppColors.darkBlueIcon,
                         ),
                       ),
-                      const SizedBox(height: 16),
+                      SizedBox(height: 16.h),
                       _summaryRow(
                         'Subtotal',
                         '\$${subtotal.toStringAsFixed(2)}',
                       ),
-                      const SizedBox(height: 10),
+                      SizedBox(height: 10.h),
                       _summaryRow(
                         'Shipping',
                         'Calculated at checkout',
                         valueColor: AppColors.gold,
                       ),
-                      const SizedBox(height: 10),
+                      SizedBox(height: 10.h),
                       _summaryRow(
                         'Estimated Tax',
                         '\$${tax.toStringAsFixed(2)}',
                       ),
-                      const SizedBox(height: 16),
-                      Container(height: 1, color: AppColors.dotsColor),
-                      const SizedBox(height: 16),
+                      SizedBox(height: 16.h),
+                      Container(height: 1.h, color: AppColors.dotsColor),
+                      SizedBox(height: 16.h),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -183,7 +184,7 @@ class CartScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 120),
+                      SizedBox(height: 120.h),
                     ],
                   ),
                 ),
@@ -195,17 +196,17 @@ class CartScreen extends StatelessWidget {
         // ===== Bottom Button =====
         Container(
           padding: EdgeInsets.fromLTRB(
-            20,
-            16,
-            20,
-            MediaQuery.of(context).padding.bottom + 130,
+            20.w,
+            16.h,
+            20.w,
+            MediaQuery.of(context).padding.bottom + 130.h,
           ),
           decoration: BoxDecoration(
             color: AppColors.background,
             boxShadow: [
               BoxShadow(
                 color: AppColors.primary.withValues(alpha: 0.08),
-                blurRadius: 16,
+                blurRadius: 16.r,
                 offset: const Offset(0, -4),
               ),
             ],
@@ -233,11 +234,11 @@ class CartScreen extends StatelessWidget {
                     'Proceed to Checkout',
                     style: AppTextStyles.bold(size: 15, color: AppColors.white),
                   ),
-                  const SizedBox(width: 8),
-                  const Icon(
+                  SizedBox(width: 8.w),
+                  Icon(
                     Icons.arrow_forward_rounded,
                     color: AppColors.white,
-                    size: 18,
+                    size: 18.w,
                   ),
                 ],
               ),
@@ -281,15 +282,15 @@ class CartScreen extends StatelessWidget {
         children: [
           Icon(
             Icons.shopping_cart_outlined,
-            size: 72,
+            size: 72.w,
             color: AppColors.dotsColor,
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16.h),
           Text(
             'Your Cart is Empty',
             style: AppTextStyles.bold(size: 18, color: AppColors.darkBlueIcon),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8.h),
           Text(
             'Add items to get started.',
             style: AppTextStyles.regular(

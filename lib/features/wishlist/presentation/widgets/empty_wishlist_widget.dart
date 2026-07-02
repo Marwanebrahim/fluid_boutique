@@ -1,6 +1,7 @@
 import 'package:fluid_boutique/core/configs/app_colors.dart';
 import 'package:fluid_boutique/core/configs/app_text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class EmptyWishlistWidget extends StatelessWidget {
   const EmptyWishlistWidget({super.key});
@@ -11,17 +12,17 @@ class EmptyWishlistWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(
+          Icon(
             Icons.favorite_border_rounded,
-            size: 72,
+            size: 72.w,
             color: AppColors.dotsColor,
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16.h),
           Text(
             'No Saved Gems Yet',
             style: AppTextStyles.bold(size: 18, color: AppColors.darkBlueIcon),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8.h),
           Text(
             'Items you wishlist will appear here.',
             style: AppTextStyles.regular(

@@ -4,11 +4,12 @@ import 'package:fluid_boutique/features/notification/domain/entity/notification_
 import 'package:fluid_boutique/features/notification/presentation/bloc/notification_bloc.dart';
 import 'package:fluid_boutique/features/notification/presentation/bloc/notification_event.dart';
 import 'package:fluid_boutique/features/notification/presentation/bloc/notification_state.dart';
-import 'package:fluid_boutique/features/notification/presentation/notification_tile_helper.dart';
+import 'package:fluid_boutique/features/notification/presentation/widgets/notification_tile_helper.dart';
 import 'package:fluid_boutique/features/notification/presentation/widgets/notification_tile.dart';
 import 'package:fluid_boutique/shared/widgets/custom_error_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class NotificationsScreen extends StatefulWidget {
   const NotificationsScreen({super.key});
@@ -45,7 +46,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                   state is NotificationsSuccessState && state.unreadCount > 0;
               if (!hasUnread) return const SizedBox.shrink();
               return Padding(
-                padding: const EdgeInsets.only(right: 16),
+                padding: EdgeInsets.only(right: 16.w),
                 child: GestureDetector(
                   onTap: () => context.read<NotificationBloc>().add(
                     MarkAllAsReadEvent(),
@@ -112,7 +113,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
 
     return ListView(
       physics: const BouncingScrollPhysics(),
-      padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
+      padding: EdgeInsets.fromLTRB(20.w, 8.h, 20.w, 24.h),
       children: [
         if (today.isNotEmpty) ...[
           _sectionHeader('TODAY'),
@@ -124,7 +125,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
           ),
         ],
         if (yesterday.isNotEmpty) ...[
-          const SizedBox(height: 8),
+          SizedBox(height: 8.h),
           _sectionHeader('YESTERDAY'),
           ...yesterday.map(
             (n) => NotificationTile(
@@ -134,7 +135,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
           ),
         ],
         if (earlier.isNotEmpty) ...[
-          const SizedBox(height: 8),
+          SizedBox(height: 8.h),
           _sectionHeader('EARLIER'),
           ...earlier.map(
             (n) => NotificationTile(
@@ -157,7 +158,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
 
   Widget _sectionHeader(String title) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
+      padding: EdgeInsets.symmetric(vertical: 10.h),
       child: Text(
         title,
         style: AppTextStyles.semibold(
@@ -175,17 +176,17 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(
+          Icon(
             Icons.notifications_none_rounded,
-            size: 72,
+            size: 72.w,
             color: AppColors.dotsColor,
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16.h),
           Text(
             'No Notifications Yet',
             style: AppTextStyles.bold(size: 18, color: AppColors.darkBlueIcon),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8.h),
           Text(
             'Updates about your orders and offers\nwill appear here.',
             textAlign: TextAlign.center,

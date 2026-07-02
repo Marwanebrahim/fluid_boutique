@@ -7,6 +7,7 @@ import 'package:fluid_boutique/features/auth/presentation/bloc/auth_state.dart';
 import 'package:fluid_boutique/features/auth/presentation/widgets/sign_up_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -39,7 +40,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         child: Form(
           key: _formKey,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 16),
+            padding: EdgeInsets.symmetric(horizontal: 22.w, vertical: 16.h),
             child: BlocListener<AuthBloc, AuthState>(
               listener: (context, state) {
                 if (state is AuthSuccessState) {
@@ -63,7 +64,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       confirmPasswordController: confirmPasswordController,
                       formKey: _formKey,
                     ),
-                    const SizedBox(height: 30),
+                    SizedBox(height: 30.h),
                     Text(
                       "FLUID  BOUTIQUE   EST. 2026",
                       style: AppTextStyles.bold(

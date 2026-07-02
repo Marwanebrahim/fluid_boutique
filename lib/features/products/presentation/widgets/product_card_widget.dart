@@ -7,6 +7,7 @@ import 'package:fluid_boutique/features/wishlist/presentation/bloc/wishlist_even
 import 'package:fluid_boutique/features/wishlist/presentation/bloc/wishlist_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProductCardWidget extends StatelessWidget {
   final ProductEntity product;
@@ -23,7 +24,7 @@ class ProductCardWidget extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: SizedBox(
-        width: 160,
+        width: 160.w,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -32,17 +33,17 @@ class ProductCardWidget extends StatelessWidget {
               children: [
                 // Product Image
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: BorderRadius.circular(16.r),
                   child: Image.network(
                     product.thumbnail,
-                    height: 200,
-                    width: 160,
+                    height: 200.h,
+                    width: double.infinity,
                     fit: BoxFit.cover,
                     errorBuilder: (_, _, _) => Container(
-                      height: 200,
-                      width: 160,
+                      height: 200.h,
+                      width: double.infinity,
                       color: AppColors.white.withValues(alpha: 0.1),
-                      child: const Icon(Icons.image_not_supported),
+                      child: Icon(Icons.image_not_supported, size: 24.w),
                     ),
                   ),
                 ),
@@ -52,13 +53,13 @@ class ProductCardWidget extends StatelessWidget {
                     top: 10,
                     left: 10,
                     child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8,
-                        vertical: 4,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 8.w,
+                        vertical: 4.h,
                       ),
                       decoration: BoxDecoration(
                         color: AppColors.primary.withValues(alpha: 0.85),
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(8.r),
                       ),
                       child: Text(
                         product.tags.first.toUpperCase(),
@@ -75,8 +76,8 @@ class ProductCardWidget extends StatelessWidget {
                   top: 8,
                   right: 8,
                   child: Container(
-                    height: 32,
-                    width: 32,
+                    height: 32.h,
+                    width: 32.w,
                     decoration: BoxDecoration(
                       color: AppColors.white.withValues(alpha: 0.9),
                       shape: BoxShape.circle,
@@ -120,7 +121,7 @@ class ProductCardWidget extends StatelessWidget {
                             color: isWishlisted
                                 ? AppColors.sale
                                 : AppColors.darkBlueIcon,
-                            size: 16,
+                            size: 16.w,
                           ),
                         );
                       },
@@ -129,7 +130,7 @@ class ProductCardWidget extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: 10.h),
             // Brand / Collection
             if (product.brand != null)
               Text(
@@ -140,7 +141,7 @@ class ProductCardWidget extends StatelessWidget {
                   font: AppFont.inter,
                 ),
               ),
-            const SizedBox(height: 2),
+            SizedBox(height: 2.h),
             // Product Title
             Text(
               product.title,
@@ -151,13 +152,15 @@ class ProductCardWidget extends StatelessWidget {
                 color: AppColors.darkBlueIcon,
               ),
             ),
-            const SizedBox(height: 4),
+            SizedBox(height: 4.h),
             // Price
-            Text(
-              '\$${product.price.toStringAsFixed(2)}',
-              style: AppTextStyles.bold(
-                size: 14,
-                color: AppColors.darkBlueIcon,
+            Expanded(
+              child: Text(
+                '\$${product.price.toStringAsFixed(2)}',
+                style: AppTextStyles.bold(
+                  size: 14,
+                  color: AppColors.darkBlueIcon,
+                ),
               ),
             ),
           ],

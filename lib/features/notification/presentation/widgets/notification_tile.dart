@@ -1,8 +1,9 @@
 import 'package:fluid_boutique/core/configs/app_colors.dart';
 import 'package:fluid_boutique/core/configs/app_text_styles.dart';
 import 'package:fluid_boutique/features/notification/domain/entity/notification_entity.dart';
-import 'package:fluid_boutique/features/notification/presentation/notification_tile_helper.dart';
+import 'package:fluid_boutique/features/notification/presentation/widgets/notification_tile_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class NotificationTile extends StatelessWidget {
   final NotificationEntity notification;
@@ -22,13 +23,13 @@ class NotificationTile extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: const EdgeInsets.only(bottom: 10),
-        padding: const EdgeInsets.all(14),
+        margin: EdgeInsets.only(bottom: 10.h),
+        padding: EdgeInsets.all(14.w),
         decoration: BoxDecoration(
           color: notification.isRead
               ? AppColors.white
               : AppColors.primary.withValues(alpha: 0.04),
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(16.r),
           border: notification.isRead
               ? null
               : Border.all(color: AppColors.primary.withValues(alpha: 0.15)),
@@ -38,15 +39,15 @@ class NotificationTile extends StatelessWidget {
           children: [
             // Icon
             Container(
-              width: 40,
-              height: 40,
+              width: 40.w,
+              height: 40.h,
               decoration: BoxDecoration(
                 color: color.withValues(alpha: 0.12),
                 shape: BoxShape.circle,
               ),
-              child: Icon(icon, size: 18, color: color),
+              child: Icon(icon, size: 18.w, color: color),
             ),
-            const SizedBox(width: 12),
+            SizedBox(width: 12.w),
 
             // Content
             Expanded(
@@ -76,7 +77,7 @@ class NotificationTile extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 4),
+                  SizedBox(height: 4.h),
                   Text(
                     notification.body,
                     maxLines: 2,
@@ -94,10 +95,10 @@ class NotificationTile extends StatelessWidget {
             // Unread dot
             if (!notification.isRead)
               Padding(
-                padding: const EdgeInsets.only(left: 8, top: 4),
+                padding: EdgeInsets.only(left: 8.w, top: 4.h),
                 child: Container(
-                  width: 8,
-                  height: 8,
+                  width: 8.w,
+                  height: 8.w,
                   decoration: const BoxDecoration(
                     color: AppColors.sale,
                     shape: BoxShape.circle,

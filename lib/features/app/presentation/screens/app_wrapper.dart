@@ -9,6 +9,7 @@ import 'package:fluid_boutique/features/wishlist/presentation/screens/wishlist_s
 import 'package:fluid_boutique/injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:liquid_glass_nav/liquid_glass_nav.dart';
 
 class AppWrapper extends StatefulWidget {
@@ -102,11 +103,11 @@ class _AppWrapperState extends State<AppWrapper> {
             activeColor: AppColors.navSelected,
             inactiveColor: AppColors.navIcon,
             shadowColor: AppColors.primary,
-            shadowOffset: const Offset(0, 12),
-            shadowBlurRadius: 32,
+            shadowOffset: Offset(0, 12),
+            shadowBlurRadius: 32.r,
             enableShadow: true,
             rippleColor: AppColors.primary,
-            borderRadius: 24,
+            borderRadius: 24.r,
             borderWidth: 1.5,
           ),
         ],

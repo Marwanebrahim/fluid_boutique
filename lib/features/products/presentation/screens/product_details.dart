@@ -13,6 +13,7 @@ import 'package:fluid_boutique/features/wishlist/presentation/bloc/wishlist_even
 import 'package:fluid_boutique/features/wishlist/presentation/bloc/wishlist_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   final ProductEntity product;
@@ -63,7 +64,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               // ===== Product Info =====
               SliverToBoxAdapter(
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 120),
+                  padding: EdgeInsets.fromLTRB(20.w, 20.h, 20.w, 120.h),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -81,7 +82,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                               ),
                             ),
                           ),
-                          const SizedBox(width: 12),
+                          SizedBox(width: 12.w),
                           // Price
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
@@ -108,16 +109,16 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 6),
+                      SizedBox(height: 6.h),
                       // Rating Row
                       Row(
                         children: [
-                          const Icon(
+                          Icon(
                             Icons.star_rounded,
                             color: AppColors.gold,
-                            size: 16,
+                            size: 16.w,
                           ),
-                          const SizedBox(width: 4),
+                          SizedBox(width: 4.w),
                           Text(
                             '${product.rating.toStringAsFixed(1)} (${product.reviewsNumber})',
                             style: AppTextStyles.semibold(
@@ -128,7 +129,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 4),
+                      SizedBox(height: 4.h),
                       // Brand / Subtitle
                       if (product.brand != null)
                         Text(
@@ -139,9 +140,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             font: AppFont.inter,
                           ),
                         ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20.h),
                       _divider(),
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20.h),
                       // ===== Description Section =====
                       GestureDetector(
                         onTap: () => setState(
@@ -169,7 +170,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       ),
 
                       if (_isDescriptionExpanded) ...[
-                        const SizedBox(height: 10),
+                        SizedBox(height: 10.h),
                         Text(
                           product.description,
                           style: AppTextStyles.regular(
@@ -178,13 +179,13 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             font: AppFont.inter,
                           ),
                         ),
-                        const SizedBox(height: 16),
+                        SizedBox(height: 16.h),
                         // Specs
                         SpecsGrid(productCategory: product.category),
                       ],
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20.h),
                       _divider(),
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20.h),
                       // ===== Select Palette =====
                       Text(
                         'SELECT PALETTE',
@@ -194,7 +195,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           font: AppFont.inter,
                         ),
                       ),
-                      const SizedBox(height: 12),
+                      SizedBox(height: 12.h),
                       Row(
                         children: List.generate(
                           _palette.length,
@@ -203,9 +204,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                 setState(() => _selectedColorIndex = index),
                             child: AnimatedContainer(
                               duration: const Duration(milliseconds: 200),
-                              margin: const EdgeInsets.only(right: 10),
-                              width: 32,
-                              height: 32,
+                              margin: EdgeInsets.only(right: 10.w),
+                              width: 32.w,
+                              height: 32.w,
                               decoration: BoxDecoration(
                                 color: _palette[index],
                                 shape: BoxShape.circle,
@@ -213,7 +214,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                   color: _selectedColorIndex == index
                                       ? AppColors.darkBlueIcon
                                       : Colors.transparent,
-                                  width: 2.5,
+                                  width: 2.5.w,
                                 ),
                                 boxShadow: _selectedColorIndex == index
                                     ? [
@@ -221,7 +222,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                           color: AppColors.primary.withValues(
                                             alpha: 0.3,
                                           ),
-                                          blurRadius: 6,
+                                          blurRadius: 6.r,
                                           offset: const Offset(0, 2),
                                         ),
                                       ]
@@ -231,9 +232,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20.h),
                       _divider(),
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20.h),
                       // ===== Size Canvas =====
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -256,7 +257,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 12),
+                      SizedBox(height: 12.h),
                       Row(
                         children: List.generate(
                           _sizes.length,
@@ -265,14 +266,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                 setState(() => _selectedSizeIndex = index),
                             child: AnimatedContainer(
                               duration: const Duration(milliseconds: 200),
-                              margin: const EdgeInsets.only(right: 10),
-                              width: 44,
-                              height: 44,
+                              margin: EdgeInsets.only(right: 10.w),
+                              width: 44.w,
+                              height: 44.w,
                               decoration: BoxDecoration(
                                 color: _selectedSizeIndex == index
                                     ? AppColors.primary
                                     : AppColors.white,
-                                borderRadius: BorderRadius.circular(10),
+                                borderRadius: BorderRadius.circular(10.r),
                                 border: Border.all(
                                   color: _selectedSizeIndex == index
                                       ? AppColors.primary
@@ -294,20 +295,20 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20.h),
                       _divider(),
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20.h),
                       // ===== Availability Badge =====
                       Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 6,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 12.w,
+                          vertical: 6.h,
                         ),
                         decoration: BoxDecoration(
                           color: product.availabilityStatus == 'In Stock'
                               ? AppColors.primary.withValues(alpha: 0.08)
                               : AppColors.cancelledBackground,
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius: BorderRadius.circular(8.r),
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
@@ -316,12 +317,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                               product.availabilityStatus == 'In Stock'
                                   ? Icons.check_circle_outline
                                   : Icons.cancel_outlined,
-                              size: 14,
+                              size: 14.w,
                               color: product.availabilityStatus == 'In Stock'
                                   ? AppColors.primary
                                   : AppColors.cancelled,
                             ),
-                            const SizedBox(width: 6),
+                            SizedBox(width: 6.w),
                             Text(
                               product.availabilityStatus,
                               style: AppTextStyles.semibold(
@@ -405,5 +406,5 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   }
 
   Widget _divider() =>
-      Container(height: 1, color: AppColors.dotsColor.withValues(alpha: 0.5));
+      Container(height: 1.h, color: AppColors.dotsColor.withValues(alpha: 0.5));
 }

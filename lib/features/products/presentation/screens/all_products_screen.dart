@@ -12,6 +12,7 @@ import 'package:fluid_boutique/features/wishlist/presentation/bloc/wishlist_bloc
 import 'package:fluid_boutique/shared/widgets/custom_error_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AllProductsScreen extends StatelessWidget {
   const AllProductsScreen({super.key, required this.category});
@@ -30,9 +31,13 @@ class AllProductsScreen extends StatelessWidget {
         centerTitle: true,
         // TODO: Filter
         actions: [
-          const Padding(
-            padding: EdgeInsets.only(right: 16),
-            child: Icon(Icons.filter_list, color: AppColors.darkBlueIcon),
+          Padding(
+            padding: EdgeInsets.only(right: 16.w),
+            child: Icon(
+              Icons.filter_list,
+              color: AppColors.darkBlueIcon,
+              size: 24.w,
+            ),
           ),
         ],
       ),
@@ -45,12 +50,12 @@ class AllProductsScreen extends StatelessWidget {
           // Success
           if (state is ProductSuccessState) {
             return GridView.builder(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
               physics: const BouncingScrollPhysics(),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 16,
+                crossAxisSpacing: 16.w,
+                mainAxisSpacing: 16.h,
                 childAspectRatio: 0.62,
               ),
               itemCount: state.products.length,

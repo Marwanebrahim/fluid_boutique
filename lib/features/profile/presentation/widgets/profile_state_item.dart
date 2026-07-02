@@ -1,6 +1,7 @@
 import 'package:fluid_boutique/core/configs/app_colors.dart';
 import 'package:fluid_boutique/core/configs/app_text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProfileStateItem extends StatelessWidget {
   final String value;
@@ -16,7 +17,7 @@ class ProfileStateItem extends StatelessWidget {
           value,
           style: AppTextStyles.bold(size: 18, color: AppColors.darkBlueIcon),
         ),
-        const SizedBox(height: 2),
+        SizedBox(height: 2.h),
         Text(
           label,
           style: AppTextStyles.regular(

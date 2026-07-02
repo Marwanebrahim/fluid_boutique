@@ -2,6 +2,7 @@ import 'package:fluid_boutique/core/configs/app_colors.dart';
 import 'package:fluid_boutique/core/configs/app_text_styles.dart';
 import 'package:fluid_boutique/features/orders/domain/entity/order_item_entity.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OrderItemRow extends StatelessWidget {
   final OrderItemEntity item;
@@ -10,29 +11,29 @@ class OrderItemRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 12),
+      padding: EdgeInsets.only(bottom: 12.h),
       child: Row(
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(10.r),
             child: Image.network(
               item.thumbnail,
-              width: 56,
-              height: 56,
+              width: 56.w,
+              height: 56.w,
               fit: BoxFit.cover,
               errorBuilder: (_, _, _) => Container(
-                width: 56,
-                height: 56,
+                width: 56.w,
+                height: 56.w,
                 color: AppColors.dotsColor,
-                child: const Icon(
+                child: Icon(
                   Icons.image_not_supported,
                   color: AppColors.textTertiary,
-                  size: 18,
+                  size: 18.w,
                 ),
               ),
             ),
           ),
-          const SizedBox(width: 12),
+          SizedBox(width: 12.w),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,7 +47,7 @@ class OrderItemRow extends StatelessWidget {
                     color: AppColors.darkBlueIcon,
                   ),
                 ),
-                const SizedBox(height: 2),
+                SizedBox(height: 2.h),
                 Text(
                   '${item.color}  •  Size ${item.size}',
                   style: AppTextStyles.regular(
@@ -55,7 +56,7 @@ class OrderItemRow extends StatelessWidget {
                     font: AppFont.inter,
                   ),
                 ),
-                const SizedBox(height: 2),
+                SizedBox(height: 2.h),
                 Text(
                   'Qty: ${item.quantity}',
                   style: AppTextStyles.regular(

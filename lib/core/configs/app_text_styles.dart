@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 enum AppFont { manrope, inter }
@@ -23,7 +24,7 @@ class AppTextStyles {
   }) {
     return _getFont(
       font,
-    ).copyWith(fontSize: fontSize, fontWeight: fontWeight, color: color);
+    ).copyWith(fontSize: fontSize.sp, fontWeight: fontWeight, color: color);
   }
 
   // ===== REGULAR =====

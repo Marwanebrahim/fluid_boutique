@@ -9,6 +9,7 @@ import 'package:fluid_boutique/features/products/presentation/widgets/product_li
 import 'package:fluid_boutique/injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -50,20 +51,20 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       child: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 6),
+          padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 6.h),
           child: Column(
             children: [
               HomeCarouselWidget(
                 images: carouselImages,
                 pageController: _pageController,
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16.h),
               const AllCategouriesWidget(),
-              const SizedBox(height: 16),
+              SizedBox(height: 16.h),
               const ProductListWidget(),
-              const SizedBox(height: 16),
+              SizedBox(height: 16.h),
               const NewArrivalWidget(),
-              const SizedBox(height: 90),
+              SizedBox(height: 90.h),
             ],
           ),
         ),

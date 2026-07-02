@@ -11,6 +11,7 @@ import 'package:fluid_boutique/features/products/presentation/widgets/product_ca
 import 'package:fluid_boutique/features/wishlist/presentation/bloc/wishlist_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class NewArrivalWidget extends StatelessWidget {
   const NewArrivalWidget({super.key});
@@ -79,10 +80,10 @@ class NewArrivalWidget extends StatelessWidget {
               return GridView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  crossAxisSpacing: 16,
-                  mainAxisSpacing: 16,
+                  crossAxisSpacing: 16.w,
+                  mainAxisSpacing: 16.h,
                   childAspectRatio: 0.62,
                 ),
                 itemCount: state.products.length > 6

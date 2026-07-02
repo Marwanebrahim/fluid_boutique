@@ -1,6 +1,7 @@
 import 'package:fluid_boutique/core/configs/app_colors.dart';
 import 'package:fluid_boutique/core/configs/app_text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProfileMenuTile extends StatelessWidget {
   final IconData icon;
@@ -28,27 +29,27 @@ class ProfileMenuTile extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: const EdgeInsets.only(bottom: 8),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        margin: EdgeInsets.only(bottom: 8.h),
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
         decoration: BoxDecoration(
           color: AppColors.white,
-          borderRadius: BorderRadius.circular(14),
+          borderRadius: BorderRadius.circular(14.r),
         ),
         child: Row(
           children: [
-            Icon(icon, size: 20, color: color),
-            const SizedBox(width: 14),
+            Icon(icon, size: 20.w, color: color),
+            SizedBox(width: 14.w),
             Expanded(
               child: Text(
                 title,
                 style: AppTextStyles.semibold(size: 14, color: color),
               ),
             ),
-            const SizedBox(width: 4),
+            SizedBox(width: 4.w),
             ?trailing,
             Icon(
               Icons.arrow_forward_ios_rounded,
-              size: 14,
+              size: 14.w,
               color: AppColors.textTertiary,
             ),
           ],

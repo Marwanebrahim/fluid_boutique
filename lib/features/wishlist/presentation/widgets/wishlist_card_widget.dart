@@ -6,6 +6,7 @@ import 'package:fluid_boutique/features/wishlist/presentation/bloc/wishlist_bloc
 import 'package:fluid_boutique/features/wishlist/presentation/bloc/wishlist_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class WishlistCardWidget extends StatelessWidget {
   const WishlistCardWidget({
@@ -45,7 +46,7 @@ class WishlistCardWidget extends StatelessWidget {
             child: Stack(
               children: [
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: BorderRadius.circular(16.r),
                   child: Image.network(
                     product.thumbnail,
                     width: double.infinity,
@@ -53,24 +54,25 @@ class WishlistCardWidget extends StatelessWidget {
                     fit: BoxFit.cover,
                     errorBuilder: (_, _, _) => Container(
                       color: AppColors.dotsColor.withValues(alpha: 0.3),
-                      child: const Icon(
+                      child: Icon(
                         Icons.image_not_supported,
                         color: AppColors.textTertiary,
+                        size: 24.w,
                       ),
                     ),
                   ),
                 ),
                 // Remove from Wishlist
                 Positioned(
-                  top: 8,
-                  right: 8,
+                  top: 8.h,
+                  right: 8.w,
                   child: GestureDetector(
                     onTap: () => context.read<WishlistBloc>().add(
                       RemoveFromWishlistEvent(productID: product.id),
                     ),
                     child: Container(
-                      height: 32,
-                      width: 32,
+                      height: 32.w,
+                      width: 32.w,
                       decoration: BoxDecoration(
                         color: AppColors.white.withValues(alpha: 0.92),
                         shape: BoxShape.circle,
@@ -81,9 +83,9 @@ class WishlistCardWidget extends StatelessWidget {
                           ),
                         ],
                       ),
-                      child: const Icon(
+                      child: Icon(
                         Icons.favorite,
-                        size: 16,
+                        size: 16.w,
                         color: AppColors.sale,
                       ),
                     ),
@@ -93,7 +95,7 @@ class WishlistCardWidget extends StatelessWidget {
             ),
           ),
 
-          const SizedBox(height: 10),
+          SizedBox(height: 10.h),
 
           // Title
           Text(
@@ -105,7 +107,7 @@ class WishlistCardWidget extends StatelessWidget {
               color: AppColors.darkBlueIcon,
             ),
           ),
-          const SizedBox(height: 4),
+          SizedBox(height: 4.h),
           // Price + Badge
           Row(
             children: [
@@ -116,7 +118,7 @@ class WishlistCardWidget extends StatelessWidget {
                   color: AppColors.darkBlueIcon,
                 ),
               ),
-              const SizedBox(width: 6),
+              SizedBox(width: 6.w),
               Text(
                 _badge,
                 style: AppTextStyles.bold(

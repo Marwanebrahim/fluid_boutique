@@ -11,6 +11,7 @@ import 'package:fluid_boutique/features/products/presentation/widgets/product_ca
 import 'package:fluid_boutique/features/wishlist/presentation/bloc/wishlist_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProductListWidget extends StatelessWidget {
   const ProductListWidget({super.key});
@@ -27,12 +28,14 @@ class ProductListWidget extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              "Hand-picked styles for your wardrobe.",
-              style: AppTextStyles.regular(
-                size: 14,
-                color: AppColors.textSecondary,
-                font: AppFont.inter,
+            Expanded(
+              child: Text(
+                "Hand-picked styles for your wardrobe.",
+                style: AppTextStyles.regular(
+                  size: 14,
+                  color: AppColors.textSecondary,
+                  font: AppFont.inter,
+                ),
               ),
             ),
             TextButton(
@@ -67,14 +70,14 @@ class ProductListWidget extends StatelessWidget {
           builder: (BuildContext context, ProductState state) {
             if (state is SpecificProductSuccessState) {
               return SizedBox(
-                height: 300,
+                height: 300.h,
                 child: ListView.separated(
                   scrollDirection: Axis.horizontal,
                   shrinkWrap: true,
                   physics: const BouncingScrollPhysics(),
-                  padding: const EdgeInsets.only(top: 16),
+                  padding: EdgeInsets.only(top: 16.h),
                   itemCount: state.products.length,
-                  separatorBuilder: (_, _) => const SizedBox(width: 16),
+                  separatorBuilder: (_, _) => SizedBox(width: 16),
                   itemBuilder: (context, index) {
                     return ProductCardWidget(
                       product: state.products[index],

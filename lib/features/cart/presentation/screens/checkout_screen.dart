@@ -12,6 +12,7 @@ import 'package:fluid_boutique/features/orders/presentation/bloc/orders_state.da
 import 'package:fluid_boutique/shared/widgets/custom_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CheckoutScreen extends StatefulWidget {
   final List<CartEntity> cartItems;
@@ -63,7 +64,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           Expanded(
             child: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
-              padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+              padding: EdgeInsets.fromLTRB(20.w, 0, 20.w, 20.h),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -75,7 +76,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       color: AppColors.darkBlueIcon,
                     ),
                   ),
-                  const SizedBox(height: 4),
+                  SizedBox(height: 4.h),
                   Text(
                     'Finalize your curated selection.',
                     style: AppTextStyles.regular(
@@ -84,7 +85,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       font: AppFont.inter,
                     ),
                   ),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24.h),
 
                   // ===== 1. Shipping Address =====
                   SectionHeader(
@@ -92,14 +93,14 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     step: 1,
                     action: 'Edit',
                   ),
-                  const SizedBox(height: 12),
+                  SizedBox(height: 12.h),
                   _addressCard(),
 
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24.h),
 
                   // ===== 2. Payment Method =====
                   SectionHeader(title: 'Payment Method', step: 2),
-                  const SizedBox(height: 12),
+                  SizedBox(height: 12.h),
                   ..._paymentMethods.asMap().entries.map(
                     (entry) => _paymentOption(
                       index: entry.key,
@@ -109,26 +110,26 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     ),
                   ),
 
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24.h),
 
                   // ===== 3. Review Items =====
                   SectionHeader(title: 'Review Items', step: 3),
-                  const SizedBox(height: 12),
+                  SizedBox(height: 12.h),
                   ...widget.cartItems.map((item) => ReviewItem(item: item)),
 
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20.h),
                   Container(height: 1, color: AppColors.dotsColor),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16.h),
 
                   // ===== Summary =====
                   _summaryRow('Subtotal', '\$${subtotal.toStringAsFixed(2)}'),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8.h),
                   _summaryRow('Shipping', 'Free', valueColor: AppColors.gold),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8.h),
                   _summaryRow('Tax', '\$${tax.toStringAsFixed(2)}'),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16.h),
                   Container(height: 1, color: AppColors.dotsColor),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -148,7 +149,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 32),
+                  SizedBox(height: 32.h),
                 ],
               ),
             ),
@@ -156,13 +157,13 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
 
           // ===== Place Order Button =====
           Container(
-            padding: const EdgeInsets.fromLTRB(20, 16, 20, 32),
+            padding: EdgeInsets.fromLTRB(20.w, 16.h, 20.w, 32.h),
             decoration: BoxDecoration(
               color: AppColors.background,
               boxShadow: [
                 BoxShadow(
                   color: AppColors.primary.withValues(alpha: 0.08),
-                  blurRadius: 16,
+                  blurRadius: 16.r,
                   offset: const Offset(0, -4),
                 ),
               ],
@@ -173,7 +174,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   listener: (context, state) {
                     if (state is OrderPlacedSuccessState) {
                       context.read<CartBloc>().add(ClearCartEvent());
-                      Navigator.pushNamed(context, AppRoutes.orders);
+                      Navigator.pushReplacementNamed(context, AppRoutes.orders);
                     }
                     if (state is OrderPlacedErrorState) {
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -207,26 +208,26 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                             color: AppColors.white,
                           ),
                         ),
-                        const SizedBox(width: 8),
-                        const Icon(
+                        SizedBox(width: 8.w),
+                        Icon(
                           Icons.arrow_forward_rounded,
                           color: AppColors.white,
-                          size: 18,
+                          size: 18.w,
                         ),
                       ],
                     ),
                   ),
                 ),
-                const SizedBox(height: 12),
+                SizedBox(height: 12.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(
+                    Icon(
                       Icons.lock_outline,
-                      size: 12,
+                      size: 12.w,
                       color: AppColors.textTertiary,
                     ),
-                    const SizedBox(width: 4),
+                    SizedBox(width: 4.w),
                     Text(
                       'SECURE SSL ENCRYPTED CHECKOUT',
                       style: AppTextStyles.regular(
@@ -248,28 +249,28 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   // ===== Address Card =====
   Widget _addressCard() {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
         color: AppColors.white,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(16.r),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            width: 36,
-            height: 36,
+            width: 36.w,
+            height: 36.h,
             decoration: BoxDecoration(
               color: AppColors.gold.withValues(alpha: 0.15),
               shape: BoxShape.circle,
             ),
-            child: const Icon(
+            child: Icon(
               Icons.location_on_outlined,
               color: AppColors.gold,
-              size: 18,
+              size: 18.w,
             ),
           ),
-          const SizedBox(width: 12),
+          SizedBox(width: 12.w),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -281,7 +282,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     color: AppColors.darkBlueIcon,
                   ),
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4.h),
                 Text(
                   '742 Evergreen Terrace\nSpringfield, IL 62704\nUnited States\n+1 (555) 012-3456',
                   style: AppTextStyles.regular(
@@ -309,20 +310,20 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     return GestureDetector(
       onTap: () => setState(() => _selectedPayment = index),
       child: Container(
-        margin: const EdgeInsets.only(bottom: 10),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        margin: EdgeInsets.only(bottom: 10.h),
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
         decoration: BoxDecoration(
           color: AppColors.white,
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
             color: isSelected ? AppColors.primary : Colors.transparent,
-            width: 1.5,
+            width: 1.5.w,
           ),
         ),
         child: Row(
           children: [
-            Icon(icon, size: 20, color: AppColors.primary),
-            const SizedBox(width: 12),
+            Icon(icon, size: 20.w, color: AppColors.primary),
+            SizedBox(width: 12.w),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -347,18 +348,18 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               ),
             ),
             Container(
-              width: 20,
-              height: 20,
+              width: 20.w,
+              height: 20.h,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(
                   color: isSelected ? AppColors.primary : AppColors.dotsColor,
-                  width: 2,
+                  width: 2.w,
                 ),
                 color: isSelected ? AppColors.primary : Colors.transparent,
               ),
               child: isSelected
-                  ? const Icon(Icons.check, size: 12, color: AppColors.white)
+                  ? Icon(Icons.check, size: 12.w, color: AppColors.white)
                   : null,
             ),
           ],

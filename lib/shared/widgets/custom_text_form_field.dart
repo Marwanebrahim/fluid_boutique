@@ -1,5 +1,6 @@
 import 'package:fluid_boutique/core/configs/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomTextFormField extends StatefulWidget {
   const CustomTextFormField({
@@ -29,29 +30,29 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         filled: true,
         fillColor: Colors.transparent,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(6),
+          borderRadius: BorderRadius.circular(6.r),
           borderSide: BorderSide(
             color: AppColors.dotsColor.withValues(alpha: 0.2),
           ),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(6),
+          borderRadius: BorderRadius.circular(6.r),
           borderSide: BorderSide(
             color: AppColors.dotsColor.withValues(alpha: 0.2),
           ),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(6),
+          borderRadius: BorderRadius.circular(6.r),
           borderSide: BorderSide(
             color: AppColors.dotsColor.withValues(alpha: 0.2),
           ),
         ),
         errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(6),
+          borderRadius: BorderRadius.circular(6.r),
           borderSide: BorderSide(color: AppColors.red.withValues(alpha: 0.2)),
         ),
         focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(6),
+          borderRadius: BorderRadius.circular(6.r),
           borderSide: BorderSide(
             color: AppColors.dotsColor.withValues(alpha: 0.2),
           ),

@@ -1,6 +1,7 @@
 import 'package:fluid_boutique/core/configs/app_colors.dart';
 import 'package:fluid_boutique/core/configs/app_text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SpecsGrid extends StatelessWidget {
   const SpecsGrid({super.key, required this.productCategory});
@@ -17,11 +18,11 @@ class SpecsGrid extends StatelessWidget {
     return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         childAspectRatio: 4,
-        crossAxisSpacing: 8,
-        mainAxisSpacing: 6,
+        crossAxisSpacing: 8.w,
+        mainAxisSpacing: 6.h,
       ),
       itemCount: specs.length,
       itemBuilder: (context, index) {
@@ -29,10 +30,10 @@ class SpecsGrid extends StatelessWidget {
           children: [
             Icon(
               specs[index]['icon'] as IconData,
-              size: 14,
+              size: 14.w,
               color: AppColors.textTertiary,
             ),
-            const SizedBox(width: 6),
+            SizedBox(width: 6.w),
             Expanded(
               child: Text(
                 specs[index]['text'] as String,

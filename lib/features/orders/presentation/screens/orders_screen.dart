@@ -8,6 +8,7 @@ import 'package:fluid_boutique/features/orders/presentation/widgets/active_order
 import 'package:fluid_boutique/shared/widgets/custom_error_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OrdersScreen extends StatelessWidget {
   const OrdersScreen({super.key});
@@ -68,7 +69,7 @@ class OrdersScreen extends StatelessWidget {
         // Header
         SliverToBoxAdapter(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
+            padding: EdgeInsets.fromLTRB(20.w, 8.h, 20.w, 24.h),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -79,7 +80,7 @@ class OrdersScreen extends StatelessWidget {
                     color: AppColors.darkBlueIcon,
                   ),
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4.h),
                 Text(
                   'Track your luxury acquisitions and history.',
                   style: AppTextStyles.regular(
@@ -97,18 +98,18 @@ class OrdersScreen extends StatelessWidget {
         if (state.activeOrder != null) ...[
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
               child: ActiveOrderCard(order: state.activeOrder!),
             ),
           ),
 
-          const SliverToBoxAdapter(child: SizedBox(height: 32)),
+          SliverToBoxAdapter(child: SizedBox(height: 32.h)),
         ],
         // Recent History Header
         if (state.recentOrders.isNotEmpty) ...[
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
               child: Text(
                 'Recent History',
                 style: AppTextStyles.bold(
@@ -119,20 +120,20 @@ class OrdersScreen extends StatelessWidget {
             ),
           ),
 
-          const SliverToBoxAdapter(child: SizedBox(height: 12)),
+          SliverToBoxAdapter(child: SizedBox(height: 12.h)),
         ],
         // Recent Orders List
         SliverList(
           delegate: SliverChildBuilderDelegate(
             (context, index) => Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
+              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 6.h),
               child: RecentOrderCard(order: state.recentOrders[index]),
             ),
             childCount: state.recentOrders.length,
           ),
         ),
 
-        const SliverToBoxAdapter(child: SizedBox(height: 32)),
+        SliverToBoxAdapter(child: SizedBox(height: 32.h)),
       ],
     );
   }
@@ -143,17 +144,17 @@ class OrdersScreen extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(
+          Icon(
             Icons.receipt_long_outlined,
-            size: 72,
+            size: 72.w,
             color: AppColors.dotsColor,
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16.h),
           Text(
             'No Orders Yet',
             style: AppTextStyles.bold(size: 18, color: AppColors.darkBlueIcon),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8.h),
           Text(
             'Your order history will appear here.',
             style: AppTextStyles.regular(

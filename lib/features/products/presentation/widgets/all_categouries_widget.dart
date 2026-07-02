@@ -10,6 +10,7 @@ import 'package:fluid_boutique/features/products/presentation/bloc/product_bloc/
 import 'package:fluid_boutique/features/wishlist/presentation/bloc/wishlist_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AllCategouriesWidget extends StatelessWidget {
   const AllCategouriesWidget({super.key});
@@ -23,11 +24,11 @@ class AllCategouriesWidget extends StatelessWidget {
       builder: (context, state) {
         if (state is CategorySuccessState) {
           return SizedBox(
-            height: 120,
+            height: 120.h,
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               itemCount: 10,
-              separatorBuilder: (_, _) => const SizedBox(width: 24),
+              separatorBuilder: (_, _) => SizedBox(width: 24.w),
               itemBuilder: (context, index) {
                 final category = state.categories[index];
                 return Column(
@@ -49,16 +50,16 @@ class AllCategouriesWidget extends StatelessWidget {
                         );
                       },
                       child: CircleAvatar(
-                        radius: 32,
+                        radius: 32.r,
                         backgroundColor: AppColors.white.withValues(alpha: 0.7),
                         foregroundColor: AppColors.primary,
                         child: Icon(
                           CategoryIcons.getIcon(category.slug),
-                          size: 20,
+                          size: 20.w,
                         ),
                       ),
                     ),
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12.h),
                     Text(
                       category.name,
                       style: AppTextStyles.semibold(
