@@ -15,6 +15,9 @@ import 'package:fluid_boutique/core/routing/args/product_details_args.dart';
 import 'package:fluid_boutique/features/cart/presentation/bloc/cart_bloc.dart';
 import 'package:fluid_boutique/features/cart/presentation/bloc/cart_event.dart';
 import 'package:fluid_boutique/features/cart/presentation/screens/checkout_screen.dart';
+import 'package:fluid_boutique/features/notification/presentation/bloc/notification_bloc.dart';
+import 'package:fluid_boutique/features/notification/presentation/bloc/notification_event.dart';
+import 'package:fluid_boutique/features/notification/presentation/screens/notification_screen.dart';
 import 'package:fluid_boutique/features/orders/presentation/bloc/orders_bloc.dart';
 import 'package:fluid_boutique/features/orders/presentation/bloc/orders_event.dart';
 import 'package:fluid_boutique/features/orders/presentation/screens/orders_screen.dart';
@@ -121,6 +124,13 @@ Route<dynamic> onGenerateRoute(RouteSettings setting) {
         builder: (_) => BlocProvider(
           create: (_) => sl<OrdersBloc>()..add(GetUserOrdersEvent()),
           child: const OrdersScreen(),
+        ),
+      );
+    case AppRoutes.notifications:
+      return MaterialPageRoute(
+        builder: (_) => BlocProvider(
+          create: (_) => sl<NotificationBloc>()..add(GetNotificationsEvent()),
+          child: const NotificationsScreen(),
         ),
       );
     default:

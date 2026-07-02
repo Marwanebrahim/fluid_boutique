@@ -23,7 +23,6 @@ class NotificationBloc extends Bloc<NotificationsEvent, NotificationsState> {
     GetNotificationsEvent event,
     Emitter<NotificationsState> emit,
   ) async {
-    emit(NotificationsLoadingState());
     final result = await getNotificationsUseCase();
     result.fold(
       (failure) => emit(NotificationsErrorState(message: failure.message)),
@@ -43,7 +42,7 @@ class NotificationBloc extends Bloc<NotificationsEvent, NotificationsState> {
     final result = await markAsReadUseCase(event.notificationId);
     result.fold(
       (failure) => emit(NotificationsErrorState(message: failure.message)),
-      (success) => emit(NotificationsMarkAsReadState()),
+      (_) => add(GetNotificationsEvent()),
     );
   }
 
@@ -55,7 +54,7 @@ class NotificationBloc extends Bloc<NotificationsEvent, NotificationsState> {
     final result = await markAllAsReadUseCase();
     result.fold(
       (failure) => emit(NotificationsErrorState(message: failure.message)),
-      (success) => emit(NotificationsMarkAllAsReadState()),
+      (_) => add(GetNotificationsEvent()),
     );
   }
 }

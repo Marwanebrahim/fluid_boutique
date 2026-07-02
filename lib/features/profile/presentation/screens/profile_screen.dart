@@ -1,6 +1,9 @@
 import 'package:fluid_boutique/core/configs/app_colors.dart';
 import 'package:fluid_boutique/core/configs/app_text_styles.dart';
 import 'package:fluid_boutique/core/routing/app_routes.dart';
+import 'package:fluid_boutique/features/notification/presentation/bloc/notification_bloc.dart';
+import 'package:fluid_boutique/features/notification/presentation/bloc/notification_event.dart';
+import 'package:fluid_boutique/features/notification/presentation/bloc/notification_state.dart';
 import 'package:fluid_boutique/features/orders/presentation/bloc/orders_bloc.dart';
 import 'package:fluid_boutique/features/orders/presentation/bloc/orders_state.dart';
 import 'package:fluid_boutique/features/profile/presentation/bloc/profile_bloc.dart';
@@ -10,6 +13,7 @@ import 'package:fluid_boutique/features/profile/presentation/widgets/profile_men
 import 'package:fluid_boutique/features/profile/presentation/widgets/profile_state_item.dart';
 import 'package:fluid_boutique/features/wishlist/presentation/bloc/wishlist_bloc.dart';
 import 'package:fluid_boutique/features/wishlist/presentation/bloc/wishlist_state.dart';
+import 'package:fluid_boutique/injection_container.dart';
 import 'package:fluid_boutique/shared/widgets/custom_error_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -265,10 +269,42 @@ class _ProfileScreenState extends State<ProfileScreen> {
             title: 'Wishlist',
             onTap: widget.onGoToWishlist,
           ),
-          ProfileMenuTile(
-            icon: Icons.notifications_outlined,
-            title: 'Notifications',
-            onTap: () => Navigator.pushNamed(context, AppRoutes.notifications),
+          BlocProvider(
+            create: (_) => sl<NotificationBloc>()..add(GetNotificationsEvent()),
+            child: BlocBuilder<NotificationBloc, NotificationsState>(
+              builder: (context, state) {
+                final unreadCount = state is NotificationsSuccessState
+                    ? state.unreadCount
+                    : 0;
+
+                return ProfileMenuTile(
+                  icon: Icons.notifications_outlined,
+                  title: 'Notifications',
+                  trailing: unreadCount > 0
+                      ? Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 2,
+                          ),
+                          margin: const EdgeInsets.only(right: 8),
+                          decoration: BoxDecoration(
+                            color: AppColors.sale,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Text(
+                            '$unreadCount',
+                            style: AppTextStyles.bold(
+                              size: 11,
+                              color: AppColors.white,
+                            ),
+                          ),
+                        )
+                      : null,
+                  onTap: () =>
+                      Navigator.pushNamed(context, AppRoutes.notifications),
+                );
+              },
+            ),
           ),
 
           const SizedBox(height: 24),

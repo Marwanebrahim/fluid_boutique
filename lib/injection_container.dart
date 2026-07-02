@@ -19,6 +19,13 @@ import 'package:fluid_boutique/features/cart/domain/use_cases/clear_cart_use_cas
 import 'package:fluid_boutique/features/cart/domain/use_cases/get_cart_use_case.dart';
 import 'package:fluid_boutique/features/cart/domain/use_cases/remove_from_cart_use_case.dart';
 import 'package:fluid_boutique/features/cart/presentation/bloc/cart_bloc.dart';
+import 'package:fluid_boutique/features/notification/data/datasource/notification_remote_data_source.dart';
+import 'package:fluid_boutique/features/notification/data/repository/notification_repository_imp.dart';
+import 'package:fluid_boutique/features/notification/domain/repository/notification_repository.dart';
+import 'package:fluid_boutique/features/notification/domain/use_case/get_notification_use_case.dart';
+import 'package:fluid_boutique/features/notification/domain/use_case/mark_all_as_read_use_case.dart';
+import 'package:fluid_boutique/features/notification/domain/use_case/mark_as_read_use_case.dart';
+import 'package:fluid_boutique/features/notification/presentation/bloc/notification_bloc.dart';
 import 'package:fluid_boutique/features/orders/data/datasource/orders_remote_data_source.dart';
 import 'package:fluid_boutique/features/orders/data/repository/orders_repository_imp.dart';
 import 'package:fluid_boutique/features/orders/domain/repository/order_repository.dart';
@@ -232,10 +239,7 @@ Future<void> initDependencies() async {
 
   /// Profile feature
   sl.registerLazySingleton<ProfileRemoteDataSource>(
-    () => ProfileRemoteDataSourceImpl(
-      firebaseAuth: sl(),
-      googleSignIn: sl(), 
-    ),
+    () => ProfileRemoteDataSourceImpl(firebaseAuth: sl(), googleSignIn: sl()),
   );
   sl.registerLazySingleton<ProfileRepository>(
     () => ProfileRepositoryImpl(profileRemoteDataSource: sl()),
@@ -248,5 +252,30 @@ Future<void> initDependencies() async {
   );
   sl.registerFactory<ProfileBloc>(
     () => ProfileBloc(getProfileUseCase: sl(), logOutUseCase: sl()),
+  );
+
+  /// Notifications feature
+  sl.registerLazySingleton<NotificationsRemoteDataSource>(
+    () =>
+        NotificationsRemoteDataSourceImpl(firestore: sl(), firebaseAuth: sl()),
+  );
+  sl.registerLazySingleton<NotificationsRepository>(
+    () => NotificationsRepositoryImpl(notificationsRemoteDataSource: sl()),
+  );
+  sl.registerLazySingleton<GetNotificationsUseCase>(
+    () => GetNotificationsUseCase(notificationsRepository: sl()),
+  );
+  sl.registerLazySingleton<MarkAsReadUseCase>(
+    () => MarkAsReadUseCase(notificationsRepository: sl()),
+  );
+  sl.registerLazySingleton<MarkAllAsReadUseCase>(
+    () => MarkAllAsReadUseCase(notificationsRepository: sl()),
+  );
+  sl.registerFactory<NotificationBloc>(
+    () => NotificationBloc(
+      getNotificationsUseCase: sl(),
+      markAsReadUseCase: sl(),
+      markAllAsReadUseCase: sl(),
+    ),
   );
 }

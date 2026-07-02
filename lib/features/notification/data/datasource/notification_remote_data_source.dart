@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fluid_boutique/core/app%20strings/app_string.dart';
 import 'package:fluid_boutique/core/error/exeptions.dart';
 import 'package:fluid_boutique/features/notification/data/model/notification_model.dart';
 
@@ -21,18 +22,15 @@ class NotificationsRemoteDataSourceImpl
 
   String get _uId => firebaseAuth.currentUser!.uid;
 
-  // ✅ subcollection لكل يوزر — نفس النمط اللي استخدمناه في Orders
-  // users/{uId}/notifications/{notificationId}
-  CollectionReference get _notificationsCollection =>
-      firestore.collection('users').doc(_uId).collection('notifications');
+  CollectionReference get _notificationsCollection => firestore
+      .collection(AppString.notificationCollection)
+      .doc(_uId)
+      .collection('notifications');
 
   @override
   Future<List<NotificationModel>> getNotifications() async {
     try {
-      final snapshot = await _notificationsCollection
-          .orderBy('createdAt', descending: true)
-          .get();
-
+      final snapshot = await _notificationsCollection.get();
       return snapshot.docs
           .map(
             (doc) => NotificationModel.fromMap(
@@ -64,7 +62,6 @@ class NotificationsRemoteDataSourceImpl
           .where('isRead', isEqualTo: false)
           .get();
 
-      // ✅ batch write — تحديث كل الـ unread في عملية واحدة
       final batch = firestore.batch();
       for (final doc in snapshot.docs) {
         batch.update(doc.reference, {'isRead': true});

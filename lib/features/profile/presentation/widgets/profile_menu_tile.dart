@@ -8,7 +8,7 @@ class ProfileMenuTile extends StatelessWidget {
   final VoidCallback onTap;
   final Color? iconColor;
   final bool isDanger;
-
+  final Widget? trailing;
   const ProfileMenuTile({
     super.key,
     required this.icon,
@@ -16,6 +16,7 @@ class ProfileMenuTile extends StatelessWidget {
     required this.onTap,
     this.iconColor,
     this.isDanger = false,
+    this.trailing,
   });
 
   @override
@@ -44,6 +45,7 @@ class ProfileMenuTile extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 4),
+            ?trailing,
             Icon(
               Icons.arrow_forward_ios_rounded,
               size: 14,
