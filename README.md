@@ -32,9 +32,9 @@ A luxury e-commerce Flutter app built with Clean Architecture and BLoC — portf
 | :-------------------------------------------------: | :-----------------------------------------------------: | :-----------------------------------------------------: | :---------------------------------------------------: |
 | <img src="assets/screenshots/cart.png" width="180"> | <img src="assets/screenshots/checkout.png" width="180"> | <img src="assets/screenshots/wishlist.png" width="180"> | <img src="assets/screenshots/orders.png" width="180"> |
 
-|                        Notifications                        |                        Profile                         |     |     |
-| :---------------------------------------------------------: | :----------------------------------------------------: | --- | --- |
-| <img src="assets/screenshots/notification.png" width="180"> | <img src="assets/screenshots/profile.png" width="180"> |     |     |
+|                        Notifications                        |                        Profile                         | 
+| :---------------------------------------------------------: | :----------------------------------------------------: |
+| <img src="assets/screenshots/notification.png" width="180"> | <img src="assets/screenshots/profile.png" width="180"> |
 
 ---
 
