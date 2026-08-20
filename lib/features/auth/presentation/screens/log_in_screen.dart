@@ -7,6 +7,7 @@ import 'package:fluid_boutique/features/auth/presentation/bloc/auth_state.dart';
 import 'package:fluid_boutique/features/auth/presentation/widgets/login_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LogInScreen extends StatefulWidget {
   const LogInScreen({super.key});
@@ -37,7 +38,7 @@ class _LogInScreenState extends State<LogInScreen> {
           if (state is AuthSuccessState) {
             Navigator.pushNamedAndRemoveUntil(
               context,
-              AppRoutes.home,
+              AppRoutes.appWrapper,
               (route) => false,
             );
           }
@@ -53,7 +54,7 @@ class _LogInScreenState extends State<LogInScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const SizedBox(height: 36),
+                    SizedBox(height: 36.h),
                     Text(
                       "Fluid Boutique",
                       style: AppTextStyles.bold(
@@ -63,18 +64,18 @@ class _LogInScreenState extends State<LogInScreen> {
                     ),
                     Divider(
                       color: AppColors.goldBrown,
-                      thickness: 4,
-                      radius: BorderRadius.circular(20),
-                      indent: 148,
-                      endIndent: 146,
+                      thickness: 4.w,
+                      radius: BorderRadius.circular(20.r),
+                      indent: 148.w,
+                      endIndent: 146.w,
                     ),
-                    const SizedBox(height: 14),
+                    SizedBox(height: 14.h),
                     LoginContainer(
                       emailController: emailController,
                       passwordController: passwordController,
                       formKey: _formKey,
                     ),
-                    const SizedBox(height: 24),
+                    SizedBox(height: 24.h),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -104,7 +105,7 @@ class _LogInScreenState extends State<LogInScreen> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16.h),
                     Text(
                       "Privacy Policy   Terms of Service   Contact Us",
                       style: AppTextStyles.regular(
@@ -113,7 +114,7 @@ class _LogInScreenState extends State<LogInScreen> {
                         color: AppColors.textSecondary.withValues(alpha: 0.4),
                       ),
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16.h),
                     Text(
                       "© 2024 FLUID BOUTIQUE LUXURY E-COMMERCE",
                       style: AppTextStyles.regular(

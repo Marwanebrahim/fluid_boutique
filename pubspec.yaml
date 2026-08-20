@@ -2,7 +2,7 @@ name: fluid_boutique
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -28,40 +28,62 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  cupertino_icons: ^1.0.8
-  dartz: ^0.10.1
-  equatable: ^2.0.8
   flutter:
     sdk: flutter
-  flutter_bloc: ^9.1.1
-  get_it: ^9.2.1
+  cupertino_icons: ^1.0.8
+  # ui packages
+  flutter_native_splash: ^2.4.7
   google_fonts: ^8.0.2
+  smooth_page_indicator: ^2.0.1
+  flutter_svg: ^2.2.4
+  liquid_glass_nav: ^1.0.1
+  flutter_screenutil: ^5.9.3
+  # state management packages
+  flutter_bloc: ^9.1.1
+  equatable: ^2.0.8
+  # Network packages
+  dio: ^5.9.2
+  # functional programming packages
+  dartz: ^0.10.1
+  # dependency injection
+  get_it: ^9.2.1
+  # local storage packages
   hive: ^2.2.3
   hive_flutter: ^1.1.0
-  smooth_page_indicator: ^2.0.1
+  # firebase packages
   firebase_core: ^4.7.0
   firebase_auth: ^6.4.0
   cloud_firestore: ^6.3.0
+  # social media packages
   google_sign_in: ^7.2.0
-  flutter_svg: ^2.2.4
+  # utils packages
+  rxdart: ^0.28.0
+  intl: ^0.20.3
+  uuid: ^4.5.3
 dev_dependencies:
   flutter_lints: ^6.0.0
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.14.4
 
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/logo.png"
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter packages.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
   assets:
+    - assets/
     - assets/onBoarding images/
     - assets/Icons/
+    - assets/carousel/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
   # For details regarding adding assets from package dependencies, see

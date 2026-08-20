@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -153,13 +152,10 @@ class AuthRemoteDataSourceImplWithFireBase implements AuthRemoteDataSource {
   @override
   Future<void> forgetPassword({required String email}) async {
     try {
-      log("1");
       await auth.sendPasswordResetEmail(email: email);
-      log("2");
     } on FirebaseAuthException {
       throw ServerException();
     } catch (e) {
-      log(e.toString());
       throw ServerException();
     }
   }

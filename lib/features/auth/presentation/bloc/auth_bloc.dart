@@ -47,7 +47,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     LogInWithGoogleEvent event,
     Emitter<AuthState> emit,
   ) async {
-    emit(AuthLoadingState());
     final result = await authRepository.logInWithGoogle();
     result.fold(
       (failure) => emit(AuthFailureState(message: failure.message)),

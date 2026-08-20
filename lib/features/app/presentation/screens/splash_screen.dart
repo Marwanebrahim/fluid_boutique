@@ -6,6 +6,7 @@ import 'package:fluid_boutique/features/app/presentation/bloc/app_event.dart';
 import 'package:fluid_boutique/features/app/presentation/bloc/app_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -37,7 +38,7 @@ class _SplashScreenState extends State<SplashScreen> {
           }
         } else if (state is IsLoggedIn) {
           if (state.isLoggedIn) {
-            Navigator.pushReplacementNamed(context, AppRoutes.home);
+            Navigator.pushReplacementNamed(context, AppRoutes.appWrapper);
           } else {
             Navigator.pushReplacementNamed(context, AppRoutes.login);
           }
@@ -48,24 +49,23 @@ class _SplashScreenState extends State<SplashScreen> {
         body: Container(
           decoration: BoxDecoration(gradient: AppColors.darkBlueGradient),
           child: Column(
-            spacing: 4,
+            spacing: 4.h,
             children: [
               const Spacer(),
-              //logo
               Container(
-                height: 96,
-                width: 96,
+                height: 96.h,
+                width: 96.w,
                 decoration: BoxDecoration(
                   gradient: AppColors.goldGradient,
-                  borderRadius: BorderRadius.circular(32),
+                  borderRadius: BorderRadius.circular(32.r),
                 ),
                 child: Icon(
                   Icons.water_drop_rounded,
                   color: AppColors.darkBlueIcon,
-                  size: 50,
+                  size: 50.w,
                 ),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20.h),
               Text(
                 "Fluid Boutique",
                 style: AppTextStyles.bold(
@@ -81,9 +81,9 @@ class _SplashScreenState extends State<SplashScreen> {
               const Spacer(),
               // progress indicator
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 40),
+                padding: EdgeInsets.symmetric(horizontal: 40.w),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(99),
+                  borderRadius: BorderRadius.circular(99.r),
                   child: LinearProgressIndicator(
                     backgroundColor: AppColors.textTertiary.withValues(
                       alpha: 0.15,
@@ -91,16 +91,19 @@ class _SplashScreenState extends State<SplashScreen> {
                     valueColor: AlwaysStoppedAnimation<Color>(
                       AppColors.goldBrown,
                     ),
-                    minHeight: 2,
+                    minHeight: 2.h,
                   ),
                 ),
               ),
-              const SizedBox(height: 10),
+              SizedBox(height: 10.h),
               Row(
-                spacing: 5,
+                spacing: 5.w,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CircleAvatar(backgroundColor: AppColors.goldBrown, radius: 4),
+                  CircleAvatar(
+                    backgroundColor: AppColors.goldBrown,
+                    radius: 4.r,
+                  ),
                   Text(
                     "INITIALISING EXPERIENCE",
                     style: AppTextStyles.regular(size: 10).copyWith(
@@ -116,7 +119,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   color: AppColors.textTertiary.withValues(alpha: 0.4),
                 ),
               ),
-              const SizedBox(height: 22),
+              SizedBox(height: 22.h),
             ],
           ),
         ),

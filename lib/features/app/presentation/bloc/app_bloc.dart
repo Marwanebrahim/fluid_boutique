@@ -44,6 +44,4 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       (result) => IsSeenOnBoarding(isSeenOnBoarding: result),
     );
   }
-
- 
 }

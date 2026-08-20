@@ -9,6 +9,7 @@ import 'package:fluid_boutique/shared/widgets/custom_button_widget.dart';
 import 'package:fluid_boutique/shared/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 class LoginContainer extends StatelessWidget {
@@ -24,12 +25,12 @@ class LoginContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
+      padding: EdgeInsets.symmetric(horizontal: 24.w),
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 32, horizontal: 32),
+        padding: EdgeInsets.symmetric(vertical: 32.h, horizontal: 32.w),
         decoration: BoxDecoration(
           color: AppColors.white,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(12.r),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,7 +50,7 @@ class LoginContainer extends StatelessWidget {
                 color: AppColors.textSecondary,
               ),
             ),
-            const SizedBox(height: 28),
+            SizedBox(height: 28.h),
             Text(
               "EMAIL ADDRESS",
               style: AppTextStyles.semibold(
@@ -58,14 +59,14 @@ class LoginContainer extends StatelessWidget {
                 font: AppFont.inter,
               ),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8.h),
             CustomTextFormField(
               hintWidget: Row(
-                spacing: 4,
+                spacing: 4.w,
                 children: [
                   Icon(
                     Icons.email_outlined,
-                    size: 20,
+                    size: 20.w,
                     color: AppColors.dotsColor,
                   ),
                   Text(
@@ -93,7 +94,7 @@ class LoginContainer extends StatelessWidget {
                 return null;
               },
             ),
-            const SizedBox(height: 18),
+            SizedBox(height: 18.h),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -124,14 +125,14 @@ class LoginContainer extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8.h),
             CustomTextFormField(
               hintWidget: Row(
-                spacing: 4,
+                spacing: 4.w,
                 children: [
                   Icon(
                     Icons.lock_outline,
-                    size: 20,
+                    size: 20.w,
                     color: AppColors.dotsColor,
                   ),
                   Text(
@@ -156,10 +157,10 @@ class LoginContainer extends StatelessWidget {
                 return null;
               },
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: 24.h),
             CustomButtonWidget(
               hieght: 56,
-              width: 278,
+              width: double.infinity,
               borderRadius: 8,
               gradient: AppColors.darkBlueGradient,
               onTap: () {
@@ -171,36 +172,42 @@ class LoginContainer extends StatelessWidget {
                   ),
                 );
               },
-              child: BlocBuilder<AuthBloc, AuthState>(
-                builder: (context, state) {
-                  if (state is AuthLoadingState) {
-                    return CircularProgressIndicator(
-                      color: AppColors.white,
-                      strokeWidth: 2,
-                    );
-                  }
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    spacing: 4,
-                    children: [
-                      Text(
-                        "Login",
-                        style: AppTextStyles.bold(
-                          size: 16,
+              child: Center(
+                child: BlocBuilder<AuthBloc, AuthState>(
+                  builder: (context, state) {
+                    if (state is AuthLoadingState) {
+                      return SizedBox(
+                        height: 24.h,
+                        width: 24.w,
+                        child: const CircularProgressIndicator(
+                          strokeWidth: 2,
                           color: AppColors.white,
                         ),
-                      ),
-                      Icon(
-                        Icons.arrow_forward,
-                        size: 10,
-                        color: AppColors.white,
-                      ),
-                    ],
-                  );
-                },
+                      );
+                    }
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      spacing: 4.w,
+                      children: [
+                        Text(
+                          "Login",
+                          style: AppTextStyles.bold(
+                            size: 16,
+                            color: AppColors.white,
+                          ),
+                        ),
+                        Icon(
+                          Icons.arrow_forward,
+                          size: 10.w,
+                          color: AppColors.white,
+                        ),
+                      ],
+                    );
+                  },
+                ),
               ),
             ),
-            const SizedBox(height: 30),
+            SizedBox(height: 30.h),
             Center(
               child: Text(
                 "OR CONTINUE WITH",
@@ -211,13 +218,13 @@ class LoginContainer extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 30),
+            SizedBox(height: 30.h),
             Row(
               children: [
                 Expanded(
                   child: CustomButtonWidget(
                     hieght: 56,
-                    width: 278,
+                    width: double.infinity,
                     borderRadius: 8,
                     backgroundColor: AppColors.background,
                     onTap: () {
@@ -225,7 +232,7 @@ class LoginContainer extends StatelessWidget {
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      spacing: 4,
+                      spacing: 4.w,
                       children: [
                         SvgPicture.asset(ImageHelper.googleIcon),
                         Text(

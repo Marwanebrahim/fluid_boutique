@@ -7,7 +7,7 @@ abstract class AppRemoteDataSource {
 
 class AppRemoteDataSourceImplWithFireBase implements AppRemoteDataSource {
   final FirebaseAuth auth;
-  AppRemoteDataSourceImplWithFireBase({required this.auth});
+  const AppRemoteDataSourceImplWithFireBase({required this.auth});
   @override
   Future<bool> isLoggedIn() {
     try {

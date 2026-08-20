@@ -13,7 +13,10 @@ abstract class AppRepository {
 class AppRepositoryImpl implements AppRepository {
   final AppLocalDataSource appLocalDataSource;
   final AppRemoteDataSource appRemoteDataSource;
-  AppRepositoryImpl({required this.appLocalDataSource, required this.appRemoteDataSource});
+  const AppRepositoryImpl({
+    required this.appLocalDataSource,
+    required this.appRemoteDataSource,
+  });
 
   @override
   Future<Either<Failure, bool>> isLoggedIn() async {
